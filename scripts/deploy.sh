@@ -4,7 +4,6 @@
 print_purple() {
   local PURPLE='\033[0;35m'
   local NC='\033[0m' # No Color
-
   echo -e "${PURPLE}$1${NC}"
 }
 
@@ -17,17 +16,18 @@ rm -rf dist
 rm -rf node_modules
 print_purple "cleaned dist and node_modules\n"
 print_purple "-----------------------------------\n"
+
 print_purple "installing npm packages\n"
 npm install
 print_purple "installed npm packages\n"
 print_purple "-----------------------------------\n"
+
 print_purple "building dist\n"
 npm run build
 print_purple "built dist\n"
 print_purple "-----------------------------------\n"
+
 print_purple "deploying to gh-pages\n"
-git config user.email "circleci@sendbird.com"
-git config user.name "CircleCI Job"
 git checkout --orphan gh-pages
 git --work-tree dist add --all
 git --work-tree dist commit -m "Deploy to GitHub Pages"
@@ -35,6 +35,7 @@ git push origin HEAD:gh-pages --force
 rm -r dist
 git checkout -f "$current_branch"
 git branch -D gh-pages
+
 print_purple "deployed to gh-pages\n"
 print_purple "-----------------------------------\n"
 print_purple "visit: https://sendbird.github.io/ai-bot-url-webdemo/"
