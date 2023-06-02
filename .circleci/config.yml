@@ -6,9 +6,18 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - npm-cache-{{ checksum "package-lock.json" }}
+
       - run:
           name: Install dependencies
           command: npm install
+
+      - save_cache:
+          key: npm-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
 
       - run:
           name: Build the app
@@ -17,8 +26,8 @@ jobs:
       - run:
           name: Deploy to GitHub Pages
           command: |
-            git config user.email "circleci@example.com"
-            git config user.name "CircleCI"
+            git config user.email "circleci@sendbird.com"
+            git config user.name "CircleCI Job"
             git checkout --orphan gh-pages
             git --work-tree dist add --all
             git --work-tree dist commit -m "Deploy to GitHub Pages"
