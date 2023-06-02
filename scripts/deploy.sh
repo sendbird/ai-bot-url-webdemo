@@ -32,7 +32,6 @@ git checkout --orphan gh-pages
 git --work-tree dist add --all
 git --work-tree dist commit -m "Deploy to GitHub Pages"
 git push origin HEAD:gh-pages --force
-rm -r dist
 git checkout -f "$current_branch"
 git branch -D gh-pages
 
