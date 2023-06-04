@@ -44,7 +44,7 @@ const parseCode = (code: string): CodeSnippetToken => {
   }
 }
 
-export function tokenizer(inputString: string): Token[] {
+export function MessageTextParser(inputString: string): Token[] {
   const snippetRegex = /(```[^`]+```)/g;
   const parts = inputString.split(snippetRegex);
 

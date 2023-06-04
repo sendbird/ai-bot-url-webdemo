@@ -1,7 +1,7 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
 import {CopyBlock} from "react-code-blocks";
-import {Token, tokenizer, TokenType} from "./MessageFragment/tokenizer";
+import {Token, MessageTextParser, TokenType} from "./MessageTextParser";
 
 const Root = styled.div`
   display: flex;
@@ -36,9 +36,9 @@ type Props = {
  * @param props
  * @constructor
  */
-export default function ParsedBotMessageText(props: Props) {
+export default function ParsedBotMessageBody(props: Props) {
   const { text } = props;
-  const tokens: Token[] = tokenizer(text);
+  const tokens: Token[] = MessageTextParser(text);
 
   return <Root>
     <Title>Code snippet</Title>
