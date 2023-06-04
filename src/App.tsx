@@ -5,6 +5,7 @@ import SBProvider from "@sendbird/uikit-react/SendbirdProvider";
 
 function App() {
   const hashedKey: string = TEST_HASHED_KEY;
+
   return <SBProvider
     appId={APP_ID}
     userId={USER_ID}
@@ -16,4 +17,4 @@ function App() {
   </SBProvider>;
 }
 
-export default App
+export default App;

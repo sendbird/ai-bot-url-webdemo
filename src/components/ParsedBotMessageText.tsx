@@ -1,6 +1,7 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
-import { CopyBlock } from "react-code-blocks";
+import {CopyBlock} from "react-code-blocks";
+import {Token, tokenizer, TokenType} from "./MessageFragment/tokenizer";
 
 const Root = styled.div`
   display: flex;
@@ -30,18 +31,31 @@ type Props = {
   text: string;
 }
 
-export default function CodeSnippetMessageBody(props: Props) {
+/**
+ * Parses bot message text to process code snippets within the text.
+ * @param props
+ * @constructor
+ */
+export default function ParsedBotMessageText(props: Props) {
   const { text } = props;
-  const language = '';
-  const code = '';
+  const tokens: Token[] = tokenizer(text);
 
   return <Root>
     <Title>Code snippet</Title>
     <Text>
-      <CopyBlock
-        text={code}
-        language={language}
-      />
+      {
+        tokens.map((token: Token) => {
+          if (token.type === TokenType.string) {
+            return <div>{token.value}</div>;
+          }
+          return (
+            <CopyBlock
+              text={token.value}
+              language={token.type}
+            />
+          )
+        })
+      }
     </Text>
   </Root>;
 }
