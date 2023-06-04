@@ -11,19 +11,24 @@ export const HASHED_KEY_QUERY_PARAMETER_NAME = 'hashedKey';
 export const TEST_HASHED_KEY = '90ecefd7558b7698bc430394300676ca33f7b00afb05c63129520ecde6785e52';
 
 export interface SuggestedReply {
-  key: string;
-  value: string;
-  type?: string;
+  title: string;
+  text: string;
+  buttonText: string;
+  link: string;
 }
 
 export const SUGGESTED_REPLIES: SuggestedReply[] = [
   {
-    key: 'That helped 👍',
-    value: ''
+    title: 'That helped 👍',
+    text: 'Thank you for your feedback! You can also build your own chatbot through the Sendbird dashboard.',
+    buttonText: 'Try free trial',
+    link: '',
   },
   {
-    key: 'Get more help 💬',
-    value: ''
+    title: 'Get more help 💬',
+    text: 'It sounds like you may need to speak with one of my teammates to solve your issue.',
+    buttonText: 'Talk to an expert',
+    link: '',
   },
 ];
 
@@ -40,3 +45,8 @@ export const TYPE_FACE = {
   gellix:
     "Gellix, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif",
 };
+
+export const SOURCE = {
+  title: 'Conversations chat API Group& direct messaging Sendbird',
+  link: '',
+}

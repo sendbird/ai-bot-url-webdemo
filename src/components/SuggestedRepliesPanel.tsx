@@ -39,15 +39,11 @@ const SuggestedReplyItem = styled.div<SuggestedReplyItemProps>`
 
 interface SuggestedRepliesPanelProps {
   isMessageSendDisabled: boolean;
-  setIsMessageSendDisabled: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsMessageSent: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SuggestedRepliesPanel = (props: SuggestedRepliesPanelProps) => {
   const {
-    isMessageSendDisabled,
-    setIsMessageSendDisabled,
-    setIsMessageSent,
+    isMessageSendDisabled
   } = props;
   const [suggestedReplies, setSuggestedReplies] = useState<SuggestedReply[]>(SUGGESTED_REPLIES);
 
@@ -64,16 +60,16 @@ const SuggestedRepliesPanel = (props: SuggestedRepliesPanelProps) => {
     const oldSuggestedReplies: SuggestedReply[] = [...suggestedReplies];
     const copied: SuggestedReply[] = [...oldSuggestedReplies];
     const removedReply: SuggestedReply = copied.splice(indexToRemove, 1)[0];
+    addSuggestedReplyMessageToView(removedReply);
     setSuggestedReplies(copied);
   };
 
+  const getSuggestedReplyMessageBody = (suggestedReply: SuggestedReply) => {
+
+  }
+
   return suggestedReplies && suggestedReplies.length > 0
     ? <div className="suggested-replies-container">
-      {
-        channel?.name == "FAQ Channel"
-          ? <div className="suggested-replies-title">Suggested file</div>
-          : <div className="suggested-replies-title">Suggested replies</div>
-      }
       <div className="suggested-replies-panel">
         {
           suggestedReplies.map((suggestedReply: SuggestedReply, i: number) => {
@@ -83,7 +79,7 @@ const SuggestedRepliesPanel = (props: SuggestedRepliesPanelProps) => {
               onClick={!isMessageSendDisabled ? onClickSuggestedReply : undefined}
               isActive={!isMessageSendDisabled}
             >{
-              suggestedReply.key
+              suggestedReply.title
             }</SuggestedReplyItem>
           })
         }
