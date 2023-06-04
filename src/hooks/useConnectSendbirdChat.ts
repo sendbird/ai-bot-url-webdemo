@@ -7,10 +7,12 @@ export function useConnectSendbirdChat(userId: string): User {
   const store = useSendbirdStateContext();
   const sb: SendbirdChat = store.stores.sdkStore.sdk;
 
-  useEffect(() => {
-    sb.connect(userId).then((user: User) => {
-      setUser(user);
-    });
-  }, [sb]);
+  console.log('## sb: ', sb);
+
+  // useEffect(() => {
+  //   sb.connect(userId).then((user: User) => {
+  //     setUser(user);
+  //   });
+  // }, [sb]);
   return user;
 }

@@ -3,6 +3,7 @@ import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {User} from "@sendbird/chat";
 import {GroupChannelCreateParams} from "@sendbird/chat/lib/__definition";
+import {useChannelListContext} from "@sendbird/uikit-react/ChannelList/context";
 
 export function useCreateGroupChannel(currentUser: User, botUser: User): GroupChannel {
   const [channel, setChannel] = useState<GroupChannel>(null);
@@ -23,5 +24,23 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): GroupCh
         });
     }
   }, [currentUser, botUser]);
+  return channel;
+}
+
+export function useCreateGroupChannelTemp(): GroupChannel {
+  const [channel, setChannel] = useState<GroupChannel>(null);
+  const store = useSendbirdStateContext();
+  const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
+  console.log('## sb: ', sb);
+  const channelListContext = useChannelListContext();
+  console.log('## allChannels: ', channelListContext);
+
+  // useEffect(() => {
+  //   if (sb) {
+  //     if (allChannels && allChannels.length > 0) {
+  //       setChannel(allChannels[0]);
+  //     }
+  //   }
+  // }, [sb]);
   return channel;
 }
