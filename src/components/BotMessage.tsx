@@ -1,6 +1,6 @@
 import Channel from '@sendbird/uikit-react/Channel';
 import {GroupChannel} from "@sendbird/chat/groupChannel";
-import {useCreateGroupChannelTemp} from "../hooks/useCreateGroupChannel";
+import {useCreateGroupChannel} from "../hooks/useCreateGroupChannel";
 import {User} from "@sendbird/chat";
 import {useGetBotUser} from "../hooks/useGetBotUser";
 import LoadingScreen from "./LoadingScreen";
@@ -18,15 +18,15 @@ export default function BotMessage(props: Props) {
   const currentUserId: string = uuid();
   const currentUser: User = useConnectSendbirdChat(currentUserId);
   // const botUser: User = useGetBotUser(currentUser, hashedKey);
-  const channel: GroupChannel = useCreateGroupChannelTemp(currentUser);
+  // const channel: GroupChannel = useCreateGroupChannel(currentUser);
 
-  if (!channel) return <LoadingScreen/>;
-  return <Channel
-    channelUrl={channel.url}
-    renderChannelHeader={
-      <ChannelHeader></ChannelHeader>
-    }
-    // renderMessageInput={} // TODO
-    // renderMessage={} // TODO
-  />;
+  // if (!channel) return <LoadingScreen/>;
+  // return <Channel
+  //   channelUrl={channel.url}
+  //   renderChannelHeader={
+  //     <ChannelHeader></ChannelHeader>
+  //   }
+  //   // renderMessageInput={} // TODO
+  //   // renderMessage={} // TODO
+  // />;
 }

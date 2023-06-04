@@ -1,0 +1,26 @@
+.suggested-replies-container {
+    font-family: var(--sendbird-font-family-default);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 2px 24px 12px;
+    font-size: 12px;
+}
+.suggested-replies-title {
+    color: #6C32D5;
+}
+.suggested-replies-panel {
+    /*position: absolute;*/
+    /*top: -50px;*/
+    z-index: 5;
+    display: flex;
+    height: 30px;
+    width: calc(100% - 48px);
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    row-gap: 8px;
+    margin-top: 8px;
+}

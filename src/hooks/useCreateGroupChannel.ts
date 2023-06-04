@@ -3,7 +3,7 @@ import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {User} from "@sendbird/chat";
 import {GroupChannelCreateParams} from "@sendbird/chat/lib/__definition";
-import {useChannelListContext} from "@sendbird/uikit-react/ChannelList/context";
+import {CREATE_GROUP_CHANNEL_PARAMS} from "../const";
 
 export function useCreateGroupChannel(currentUser: User, botUser: User): GroupChannel {
   const [channel, setChannel] = useState<GroupChannel>(null);
@@ -13,10 +13,10 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): GroupCh
   useEffect(() => {
     if (currentUser && botUser) {
       const params: GroupChannelCreateParams = {
-        name: 'AI Assistant',
+        name: CREATE_GROUP_CHANNEL_PARAMS.name,
         invitedUserIds: [currentUser.userId, botUser.userId],
         isDistinct: false,
-        coverUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+        coverUrl: CREATE_GROUP_CHANNEL_PARAMS.coverUrl,
       };
       sb.groupChannel.createChannel(params)
         .then((channel: GroupChannel) => {
@@ -24,23 +24,5 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): GroupCh
         });
     }
   }, [currentUser, botUser]);
-  return channel;
-}
-
-export function useCreateGroupChannelTemp(): GroupChannel {
-  const [channel, setChannel] = useState<GroupChannel>(null);
-  const store = useSendbirdStateContext();
-  const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
-  console.log('## sb: ', sb);
-  const channelListContext = useChannelListContext();
-  console.log('## allChannels: ', channelListContext);
-
-  // useEffect(() => {
-  //   if (sb) {
-  //     if (allChannels && allChannels.length > 0) {
-  //       setChannel(allChannels[0]);
-  //     }
-  //   }
-  // }, [sb]);
   return channel;
 }
