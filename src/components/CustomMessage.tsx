@@ -1,6 +1,6 @@
 import Message from '@sendbird/uikit-react/Channel/components/Message';
 import { EveryMessage } from 'SendbirdUIKitGlobal';
-import typingIndicatorLogo from '../assets/message-typing-indicator.gif';
+import typingIndicatorLogo from '../icons/message-typing-indicator.gif';
 
 type Props = {
   message: EveryMessage;

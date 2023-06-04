@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import typingIndicatorLogo from '../assets/message-typing-indicator.gif';
+import typingIndicatorLogo from '../icons/message-typing-indicator.gif';
 
 const Container = styled.div`
   width: 100vw;

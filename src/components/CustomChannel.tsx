@@ -11,6 +11,7 @@ import SuggestedRepliesPanel from "./SuggestedRepliesPanel";
 import MessageInput from "@sendbird/uikit-react/Channel/components/MessageInput";
 import CustomMessage from "./CustomMessage";
 import CustomSpinner from "./CustomSpinner";
+import BottomTextContainer from "./BottomTextContainer";
 
 type Props = {
   hashedKey: string;
@@ -34,23 +35,33 @@ export default function CustomChannel(props: Props) {
   return <Channel
     channelUrl={channel.url}
     renderChannelHeader={() => {
-      return <div style={{ position: 'relative' }}>
-        <CustomSpinner
-          setActiveSpinnerId={setActiveSpinnerId}
-          isMessageSent={isMessageSent}
-        />
-        <ChannelHeader/>
-      </div>
+      // return <div style={{ position: 'relative' }}>
+      //   <CustomSpinner
+      //     setActiveSpinnerId={setActiveSpinnerId}
+      //     isMessageSent={isMessageSent}
+      //   />
+      //   <ChannelHeader/>
+      // </div>
+      return <ChannelHeader/>;
     }}
-    renderMessageInput={() => <div>
-      <SuggestedRepliesPanel
-        setIsMessageSent={setIsMessageSent}
-      />
-      <MessageInput
+    renderMessageInput={() => {
+      // return <div>
+      //   <SuggestedRepliesPanel
+      //     setIsMessageSent={setIsMessageSent}
+      //   />
+      //   <>
+      //     <MessageInput
+      //       renderVoiceMessageIcon={() => <></>}
+      //       renderFileUploadIcon={() => <></>}
+      //     />
+      //     <BottomTextContainer/>
+      //   </>
+      // </div>
+      return <MessageInput
         renderVoiceMessageIcon={() => <></>}
         renderFileUploadIcon={() => <></>}
-      />
-    </div>}
+      />;
+    }}
     renderMessage={(message) => {
       return <CustomMessage
         message={message}

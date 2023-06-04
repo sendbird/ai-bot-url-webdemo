@@ -32,3 +32,11 @@ export const CREATE_GROUP_CHANNEL_PARAMS = {
   coverUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ix' +
     'lib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
 };
+
+export const TYPE_FACE = {
+  avenir: "'Avenir Next', 'Helvetica Neue', helvetica, Arial, sans-serif",
+  robotoMono:
+    "'Roboto Mono', 'Andale Mono', Consolas, Monaco, 'Ubuntu Mono', monospace",
+  gellix:
+    "Gellix, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif",
+};
