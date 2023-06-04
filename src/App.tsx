@@ -2,6 +2,7 @@ import {APP_ID, CUSTOM_API_HOST, CUSTOM_WEBSOCKET_HOST, NICKNAME, TEST_HASHED_KE
 import {useGetHashedKey} from "./hooks/useGetHashedKey";
 import CustomChannel from "./components/CustomChannel";
 import SBProvider from "@sendbird/uikit-react/SendbirdProvider";
+import '@sendbird/uikit-react/dist/index.css';
 
 function App() {
   const hashedKey: string = TEST_HASHED_KEY;

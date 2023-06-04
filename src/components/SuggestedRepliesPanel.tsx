@@ -1,9 +1,4 @@
 import {useState} from 'react';
-import '../css/suggested-replies-panel.css';
-import {GroupChannel} from '@sendbird/chat/groupChannel';
-import sendBirdSelectors from "@sendbird/uikit-react/sendbirdSelectors";
-import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
-import { useChannelContext } from "@sendbird/uikit-react/Channel/context";
 import styled  from 'styled-components'
 import {SUGGESTED_REPLIES, SuggestedReply} from "../const";
 
@@ -37,21 +32,37 @@ const SuggestedReplyItem = styled.div<SuggestedReplyItemProps>`
   }
 `;
 
+const Root = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 2px 24px 12px;
+  font-size: 12px;
+`;
+
+const Panel = styled.div`
+  z-index: 5;
+  display: flex;
+  height: 30px;
+  width: calc(100% - 48px);
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 8px;
+  margin-top: 8px;
+`;
+
 interface SuggestedRepliesPanelProps {
-  isMessageSendDisabled: boolean;
+  addSuggestedReplyMessageToView: (suggestedReply: SuggestedReply) => void;
 }
 
 const SuggestedRepliesPanel = (props: SuggestedRepliesPanelProps) => {
   const {
-    isMessageSendDisabled
+    addSuggestedReplyMessageToView
   } = props;
   const [suggestedReplies, setSuggestedReplies] = useState<SuggestedReply[]>(SUGGESTED_REPLIES);
-
-  const store = useSendbirdStateContext();
-  const sendUserMessage = sendBirdSelectors.getSendUserMessage(store);
-  const sendFileMessage = sendBirdSelectors.getSendFileMessage(store);
-  const channelStore = useChannelContext();
-  const channel: GroupChannel | undefined = channelStore?.currentGroupChannel;
 
   const onClickSuggestedReply = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -64,27 +75,23 @@ const SuggestedRepliesPanel = (props: SuggestedRepliesPanelProps) => {
     setSuggestedReplies(copied);
   };
 
-  const getSuggestedReplyMessageBody = (suggestedReply: SuggestedReply) => {
-
-  }
-
   return suggestedReplies && suggestedReplies.length > 0
-    ? <div className="suggested-replies-container">
-      <div className="suggested-replies-panel">
+    ? <Root>
+      <Panel>
         {
           suggestedReplies.map((suggestedReply: SuggestedReply, i: number) => {
             return <SuggestedReplyItem
               id={i + ''}
               key={i}
-              onClick={!isMessageSendDisabled ? onClickSuggestedReply : undefined}
-              isActive={!isMessageSendDisabled}
+              onClick={onClickSuggestedReply}
+              isActive={true}
             >{
               suggestedReply.title
             }</SuggestedReplyItem>
           })
         }
-      </div>
-    </div>
+      </Panel>
+    </Root>
     : null;
 }
 

@@ -5,8 +5,8 @@ import {User} from "@sendbird/chat";
 import {GroupChannelCreateParams} from "@sendbird/chat/lib/__definition";
 import {CREATE_GROUP_CHANNEL_PARAMS} from "../const";
 
-export function useCreateGroupChannel(currentUser: User, botUser: User): GroupChannel {
-  const [channel, setChannel] = useState<GroupChannel>(null);
+export function useCreateGroupChannel(currentUser: User, botUser: User): GroupChannel | null {
+  const [channel, setChannel] = useState<GroupChannel | null>(null);
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
 

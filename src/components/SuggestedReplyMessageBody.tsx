@@ -7,10 +7,15 @@ const Root = styled.div`
   align-items: flex-start;
   padding: 6px 12px 12px;
   gap: 8px;
-
   width: 100%;
   background: #EEEEEE;
   border-radius: 16px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LinkButton = styled.a`
@@ -40,12 +45,14 @@ export default function SuggestedReplyMessageBody(props: Props) {
   const { suggestedReply } = props;
   return <Root>
     <Text>{suggestedReply.text}</Text>
-    <LinkButton
-      href={suggestedReply.link}
-      id={suggestedReply.buttonText}
-      target="_blank"
-    >
-      {suggestedReply.buttonText}
-    </LinkButton>
+    <ButtonContainer>
+      <LinkButton
+        href={suggestedReply.link}
+        id={suggestedReply.buttonText}
+        target="_blank"
+      >
+        {suggestedReply.buttonText}
+      </LinkButton>
+    </ButtonContainer>
   </Root>;
 }

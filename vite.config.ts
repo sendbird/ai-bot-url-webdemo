@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // to point to correct path for gh-pages
-  base: 'ai-bot-url-webdemo',
+  base: '/ai-bot-url-webdemo',
   // https://github.com/rajinwonderland/react-code-blocks/issues/75
   // https://github.com/vitejs/vite/discussions/5912#discussioncomment-2908994
   // for code-blocks
