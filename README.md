@@ -12,3 +12,7 @@ It is for the Sendbird Chat AI bot demo that works like the one by [Intercom](ht
 ```bash
 npm run deploy
 ```
+## Run locally
+```bash
+npm run dev
+```
