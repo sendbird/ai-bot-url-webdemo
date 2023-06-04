@@ -1,7 +1,8 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
 import {CopyBlock} from "react-code-blocks";
-import {Token, MessageTextParser, TokenType} from "./MessageTextParser";
+import {MessageTextParser, Token, TokenType} from "./MessageTextParser";
+import CopyIcon from '../icons/copy-icon.svg';
 
 const Root = styled.div`
   display: flex;
@@ -13,9 +14,9 @@ const Root = styled.div`
   border-radius: 8px;
 `;
 
-const Title = styled.div`
+const TitleContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   padding: 0px 8px 0px 16px;
   width: 100%;
@@ -39,23 +40,36 @@ type Props = {
 export default function ParsedBotMessageBody(props: Props) {
   const { text } = props;
   const tokens: Token[] = MessageTextParser(text);
+  const codeSnippetTokens: Token[] = tokens.filter((token: Token) => {
+    return token.type === TokenType.codeSnippet;
+  });
 
-  return <Root>
-    <Title>Code snippet</Title>
-    <Text>
-      {
-        tokens.map((token: Token) => {
-          if (token.type === TokenType.string) {
-            return <div>{token.value}</div>;
-          }
-          return (
-            <CopyBlock
-              text={token.value}
-              language={token.type}
-            />
-          )
-        })
-      }
-    </Text>
-  </Root>;
+  if (tokens.length > 0) {
+    return <Root>
+      <TitleContainer>
+        <div>Code snippet</div>
+        <div onClick={() => {
+          navigator.clipboard.writeText(codeSnippetTokens.join('\n\n'));
+        }}>
+          <CopyIcon/>
+        </div>
+      </TitleContainer>
+      <Text>
+        {
+          tokens.map((token: Token) => {
+            if (token.type === TokenType.string) {
+              return <div>{token.value}</div>;
+            }
+            return (
+              <CopyBlock
+                text={token.value}
+                language={token.type}
+              />
+            )
+          })
+        }
+      </Text>
+    </Root>;
+  }
+  return <Text>{text}</Text>;
 }
