@@ -23,6 +23,6 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): GroupCh
           setChannel(channel);
         });
     }
-  }, [currentUser, botUser]);
+  }, [currentUser, botUser, sb]);
   return channel;
 }
