@@ -42,7 +42,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 2px 24px 12px;
+  padding: 2px 24px 0px;
   font-size: 15px;
 `;
 

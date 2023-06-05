@@ -20,10 +20,11 @@ import {scrollUtil} from "../utils";
 import BotMessageWithBodyInput from "./BotMessageWithBodyInput";
 import SuggestedReplyMessageBody from "./SuggestedReplyMessageBody";
 import {useSendLocalMessage} from "../hooks/useSendLocalMessage";
+import CustomMessageInput from "./CustomMessageInput";
 
 const Root = styled.div`
   height: 100vh;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 `;
 
 type CustomChannelUIProps = {
@@ -68,12 +69,12 @@ function CustomChannelUI(props: CustomChannelUIProps) {
       renderMessageInput={() => {
         return <div>
           <SuggestedRepliesPanel botUser={botUser}/>
-          <MessageInput
-            renderVoiceMessageIcon={() => <></>}
-            renderFileUploadIcon={() => <></>}
-            renderSendMessageIcon={() => <></>}
-            onCh
-          />
+          {/*<MessageInput*/}
+          {/*  renderVoiceMessageIcon={() => <></>}*/}
+          {/*  renderFileUploadIcon={() => <></>}*/}
+          {/*  renderSendMessageIcon={() => <></>}*/}
+          {/*/>*/}
+          <CustomMessageInput/>
           <BottomTextContainer/>
         </div>
       }}
