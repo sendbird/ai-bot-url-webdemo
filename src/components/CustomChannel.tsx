@@ -98,7 +98,7 @@ export default function CustomChannel(props: CustomChannelProps) {
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
   const botUser: User = useGetBotUser(sb.currentUser, hashedKey);
   const [channel, createGroupChannel]: [GroupChannel | null, () => void] = useCreateGroupChannel(sb.currentUser, botUser);
-  
+
   console.log('## currentUser: ', sb.currentUser);
   console.log('## botUser: ', botUser);
   console.log('## channel: ', channel);
