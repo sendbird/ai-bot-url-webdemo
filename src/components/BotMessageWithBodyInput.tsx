@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as BotMessageImage } from '../icons/bot-message-image.svg';
+import botMessageImage from '../icons/bot-message-image.png';
 import {formatCreatedAtToAMPM} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";
 import SuggestedReplyMessageBody from "./SuggestedReplyMessageBody";
@@ -49,13 +49,14 @@ export default function BotMessageWithBodyInput(props: Props) {
 
   return <Root>
     <ImageContainer>
-      <BotMessageImage height={'28px'} width={'28px'}/>
+      <img src={botMessageImage} alt="botProfileImage" style={{
+        height: "28px"
+      }}/>
+      <image src height={'28px'} width={'28px'}/>
     </ImageContainer>
     <BodyContainer>
       <Sender>{message.sender.nickname}</Sender>
-      <div>
-        <SuggestedReplyMessageBody message={message}/>
-      </div>
+      <SuggestedReplyMessageBody message={message}/>
     </BodyContainer>
     <SentTime>
       {formatCreatedAtToAMPM(message.createdAt)}

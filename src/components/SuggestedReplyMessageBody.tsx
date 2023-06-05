@@ -23,7 +23,7 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-const LinkButton = styled.div`
+const LinkButton = styled.a`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,6 +36,7 @@ const LinkButton = styled.div`
   color: white;
   cursor: pointer;
   margin: 4px 0;
+  text-decoration: none;
 `;
 
 const Text = styled.div`

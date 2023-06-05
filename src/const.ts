@@ -22,13 +22,13 @@ export const SUGGESTED_REPLIES: SuggestedReply[] = [
     title: 'That helped 👍',
     text: 'Thank you for your feedback! You can also build your own chatbot through the Sendbird dashboard.',
     buttonText: 'Try free trial',
-    link: '',
+    link: 'https://dashboard.sendbird.com/auth/signup',
   },
   {
     title: 'Get more help 💬',
     text: 'It sounds like you may need to speak with one of my teammates to solve your issue.',
     buttonText: 'Talk to an expert',
-    link: '',
+    link: 'https://sendbird.com/contact-sales',
   },
 ];
 

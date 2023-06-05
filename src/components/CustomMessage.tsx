@@ -4,6 +4,7 @@ import typingIndicatorLogo from '../icons/message-typing-indicator.gif';
 import {LOCAL_MESSAGE_CUSTOM_TYPE} from "../const";
 import BotMessageWithBodyInput from "./BotMessageWithBodyInput";
 import {MessageType} from "@sendbird/chat/message";
+import PendingMessage from "./PendingMessage";
 
 type Props = {
   message: EveryMessage;
@@ -27,15 +28,7 @@ export default function CustomMessage(props: Props) {
       }
       {
         activeSpinnerId === message.messageId &&
-        <div style={{
-          height: '60px',
-          // marginTop: '24px',
-        }}>
-          <img src={typingIndicatorLogo} alt="pending..." style={{
-            marginLeft: '40px',
-            height: "inherit"
-          }}/>
-        </div>
+        <PendingMessage/>
       }
     </div>
   )

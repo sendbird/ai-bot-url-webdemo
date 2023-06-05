@@ -10,7 +10,7 @@ import SuggestedRepliesPanel from "./SuggestedRepliesPanel";
 import MessageInput from "@sendbird/uikit-react/Channel/components/MessageInput";
 import CustomMessage from "./CustomMessage";
 import BottomTextContainer from "./BottomTextContainer";
-import CustomHeader from "./CustomHeader";
+import CustomChannelHeader from "./CustomChannelHeader";
 import styled from "styled-components";
 import {ChannelProvider, useChannelContext} from "@sendbird/uikit-react/Channel/context";
 import {ClientUserMessage} from "SendbirdUIKitGlobal";
@@ -62,7 +62,7 @@ function CustomChannelUI(props: CustomChannelUIProps) {
   return <Root>
     <ChannelUI
       renderChannelHeader={() => {
-        return <CustomHeader channel={channel} isTyping={activeSpinnerId > -1}/>;
+        return <CustomChannelHeader channel={channel} isTyping={activeSpinnerId > -1}/>;
       }}
       renderMessageInput={() => {
         return <div>
@@ -71,6 +71,7 @@ function CustomChannelUI(props: CustomChannelUIProps) {
             renderVoiceMessageIcon={() => <></>}
             renderFileUploadIcon={() => <></>}
             renderSendMessageIcon={() => <></>}
+            onCh
           />
           <BottomTextContainer/>
         </div>
