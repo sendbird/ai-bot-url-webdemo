@@ -2,7 +2,7 @@ import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
 import {CopyBlock} from "react-code-blocks";
 import {MessageTextParser, Token, TokenType} from "./MessageTextParser";
-import CopyIcon from '../icons/copy-icon.svg';
+import { ReactComponent as CopyIcon } from '../icons/copy-icon.svg';
 import BotMessageBottom from "./BotMessageBottom";
 
 const Root = styled.div`

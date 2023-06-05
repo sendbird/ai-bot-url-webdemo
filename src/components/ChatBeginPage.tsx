@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {TYPE_FACE} from "../const";
-import SendbirdLogo from '../icons/sendbird-logo-widget.svg';
+import { ReactComponent as SendbirdLogo } from '../icons/sendbird-logo-widget.svg';
 
 const StyledWidgetTopWrapper = styled.div`
   background: linear-gradient(

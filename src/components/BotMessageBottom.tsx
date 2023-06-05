@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import ChatGptIcon from '../icons/chat-gpt-icon.svg';
-import InfoIcon from '../icons/info-icon.svg';
+import { ReactComponent as ChatGptIcon } from '../icons/chat-gpt-icon.svg';
+import { ReactComponent as InfoIcon } from '../icons/info-icon.svg';
 
 const Text = styled.div`
   color: rgba(0, 0, 0, 0.5);

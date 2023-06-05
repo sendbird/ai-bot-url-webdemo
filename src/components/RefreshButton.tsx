@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import RefreshIcon from '../icons/refresh-icon.svg';
+import { ReactComponent as RefreshIcon } from '../icons/refresh-icon.svg';
 
 const Root = styled.div`
   display: flex;

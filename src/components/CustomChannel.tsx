@@ -22,7 +22,7 @@ import SuggestedReplyMessageBody from "./SuggestedReplyMessageBody";
 
 const Root = styled.div`
   height: 100vh;
-  font-family: 'SF Pro Text';
+  font-family: "Roboto", sans-serif;
 `;
 
 type Props = {
@@ -35,8 +35,9 @@ export default function CustomChannel(props: Props) {
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
   const botUser: User = useGetBotUser(sb.currentUser, hashedKey);
   const channel: GroupChannel | null = useCreateGroupChannel(sb.currentUser, botUser);
-  const { allMessages } = useChannelContext();
-  const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
+  // const channelContext = useChannelContext();
+  // console.log('## channelContext: ', channelContext); // this is undefined
+  // const lastMessage: ClientUserMessage = channelContext.allMessages?.[channelContext.allMessages?.length - 1] as ClientUserMessage;
 
   const [activeSpinnerId, setActiveSpinnerId] = useState(-1);
   // TODO: when count is 10, show suggested replies.
@@ -50,17 +51,17 @@ export default function CustomChannel(props: Props) {
    * If the updated last message is sent by the current user, activate spinner for the sent message.
    * If the updated last message is pending or failed by the current user or sent by the bot, deactivate spinner.
    */
-  useEffect(() => {
-    if(lastMessage
-      && lastMessage.sender?.userId === USER_ID
-      && lastMessage.sendingStatus === SendingStatus.SUCCEEDED
-    ) {
-      setActiveSpinnerId(lastMessage.messageId);
-      scrollUtil();
-    } else {
-      setActiveSpinnerId(-1);
-    }
-  }, [lastMessage?.messageId]);
+  // useEffect(() => {
+  //   if(lastMessage
+  //     && lastMessage.sender?.userId === USER_ID
+  //     && lastMessage.sendingStatus === SendingStatus.SUCCEEDED
+  //   ) {
+  //     setActiveSpinnerId(lastMessage.messageId);
+  //     scrollUtil();
+  //   } else {
+  //     setActiveSpinnerId(-1);
+  //   }
+  // }, [lastMessage?.messageId]);
 
   function addSuggestedReplyMessageToView(suggestedReply: SuggestedReply): void {
     // TODO:

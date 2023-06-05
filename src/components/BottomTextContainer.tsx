@@ -7,12 +7,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background: #F7F7F7;
+  color: rgba(0, 0, 0, 0.5);
 `;
 
 export default function BottomTextContainer() {
   return <Container>
-    <div style={{ color: 'rgba(0, 0, 0, 0.5)' }}>
-      Add an <div style={{ color: '#742DDD' }}>AI chatbot</div> to your product by Sendbird
-    </div>
+    <div>Add an </div><div style={{ color: '#742DDD' }}> AI chatbot</div> to your product by Sendbird
   </Container>;
 };

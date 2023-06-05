@@ -7,13 +7,13 @@ interface SuggestedReplyItemProps {
 }
 const SuggestedReplyItem = styled.div<SuggestedReplyItemProps>`
   white-space: nowrap;
-  height: calc(100% - 2px);
-  padding: 0 14px;
+  height: calc(100% - 8px);
+  padding: 3px 14px;
   display: flex;
   align-items: center;
   color: ${(props: SuggestedReplyItemProps) => (props.isActive ? '#6C32D5' : '#EEEEEE')};
   border: ${(props: SuggestedReplyItemProps) => (props.isActive ? '1px solid #6C32D5' : '1px solid #EEEEEE')};
-  border-radius: 24px;
+  border-radius: 18px;
   background-color: #FFFFFF;
   cursor: ${(props: SuggestedReplyItemProps) => (props.isActive ? 'pointer' : 'not-allowed')};
   &:hover {
@@ -37,19 +37,19 @@ const Root = styled.div`
   flex-direction: column;
   align-items: flex-end;
   padding: 2px 24px 12px;
-  font-size: 12px;
+  font-size: 15px;
 `;
 
 const Panel = styled.div`
   z-index: 5;
   display: flex;
-  height: 30px;
+  height: 37px;
   width: calc(100% - 48px);
   justify-content: flex-end;
   align-items: center;
   overflow: hidden;
   flex-wrap: wrap;
-  column-gap: 8px;
+  column-gap: 10px;
   row-gap: 8px;
   margin-top: 8px;
 `;

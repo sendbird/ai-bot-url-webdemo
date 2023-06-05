@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BotMessageImage from '../icons/bot-message-image.svg';
+import { ReactComponent as BotMessageImage } from '../icons/bot-message-image.svg';
 import {ReactNode} from "react";
 import {formatCreatedAtToAMPM} from "../utils";
 
