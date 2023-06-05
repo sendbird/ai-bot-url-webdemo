@@ -1,6 +1,12 @@
 import {useState} from 'react';
 import styled  from 'styled-components'
-import {SUGGESTED_REPLIES, SuggestedReply} from "../const";
+import {LOCAL_MESSAGE_CUSTOM_TYPE, SUGGESTED_REPLIES, SuggestedReply} from "../const";
+import {MessageType, SendingStatus, UserMessage} from "@sendbird/chat/message";
+import {ChannelType, User} from "@sendbird/chat";
+import {useSendLocalMessage} from "../hooks/useSendLocalMessage";
+import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
+import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
+import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
 
 interface SuggestedReplyItemProps {
   isActive: boolean;
@@ -54,15 +60,19 @@ const Panel = styled.div`
   margin-top: 8px;
 `;
 
-interface SuggestedRepliesPanelProps {
-  addSuggestedReplyMessageToView: (suggestedReply: SuggestedReply) => void;
+interface Props {
+  botUser: User;
 }
 
-const SuggestedRepliesPanel = (props: SuggestedRepliesPanelProps) => {
-  const {
-    addSuggestedReplyMessageToView
-  } = props;
+const SuggestedRepliesPanel = (props: Props) => {
+
+  const { botUser } = props;
   const [suggestedReplies, setSuggestedReplies] = useState<SuggestedReply[]>(SUGGESTED_REPLIES);
+  const store = useSendbirdStateContext();
+  const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
+  const { currentGroupChannel } = useChannelContext();
+  const channel: GroupChannel | undefined = currentGroupChannel;
+  const sendLocalMessage = useSendLocalMessage();
 
   const onClickSuggestedReply = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -71,7 +81,26 @@ const SuggestedRepliesPanel = (props: SuggestedRepliesPanelProps) => {
     const oldSuggestedReplies: SuggestedReply[] = [...suggestedReplies];
     const copied: SuggestedReply[] = [...oldSuggestedReplies];
     const removedReply: SuggestedReply = copied.splice(indexToRemove, 1)[0];
-    addSuggestedReplyMessageToView(removedReply);
+
+    // TODO:
+    // 1. Create a sent suggested reply user message and then add it to the message list.
+    const createdAt: number = Date.now();
+    const localMessage: UserMessage = sb.message.buildMessageFromSerializedData({
+      messageId: createdAt,
+      channelUrl: channel?.url,
+      channelType: ChannelType.GROUP,
+      createdAt, // FIXME: ms? or seconds? sorted by this or id?
+      sender: botUser.serialize(),
+      sendingStatus: SendingStatus.SUCCEEDED,
+      messageType: MessageType.USER,
+      message: removedReply.text,
+      customType: LOCAL_MESSAGE_CUSTOM_TYPE.linkSuggestion,
+      reactions: [],
+      plugins: [],
+      data: JSON.stringify(removedReply),
+    }) as UserMessage;
+
+    sendLocalMessage(localMessage);
     setSuggestedReplies(copied);
   };
 

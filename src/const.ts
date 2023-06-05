@@ -49,4 +49,9 @@ export const TYPE_FACE = {
 export const SOURCE = {
   title: 'Conversations chat API Group& direct messaging Sendbird',
   link: '',
-}
+};
+
+export const LOCAL_MESSAGE_CUSTOM_TYPE = {
+  linkSuggestion: 'linkSuggestion',
+  confirmation: 'confirmation',
+};

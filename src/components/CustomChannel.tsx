@@ -19,6 +19,7 @@ import {MessageType, SendingStatus, UserMessage} from "@sendbird/chat/message";
 import {scrollUtil} from "../utils";
 import BotMessageWithBodyInput from "./BotMessageWithBodyInput";
 import SuggestedReplyMessageBody from "./SuggestedReplyMessageBody";
+import {useSendLocalMessage} from "../hooks/useSendLocalMessage";
 
 const Root = styled.div`
   height: 100vh;
@@ -36,6 +37,7 @@ function CustomChannelUI(props: CustomChannelUIProps) {
   const { allMessages, currentGroupChannel } = useChannelContext();
   const channel: GroupChannel | undefined = currentGroupChannel;
   const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
+  console.log('#### allMessages: ', allMessages);
 
   const [activeSpinnerId, setActiveSpinnerId] = useState(-1);
   // TODO: when count is 10, show suggested replies.
@@ -44,38 +46,17 @@ function CustomChannelUI(props: CustomChannelUIProps) {
    * If the updated last message is sent by the current user, activate spinner for the sent message.
    * If the updated last message is pending or failed by the current user or sent by the bot, deactivate spinner.
    */
-  // useEffect(() => {
-  //   if(lastMessage
-  //     && lastMessage.sender?.userId === USER_ID
-  //     && lastMessage.sendingStatus === SendingStatus.SUCCEEDED
-  //   ) {
-  //     setActiveSpinnerId(lastMessage.messageId);
-  //     scrollUtil();
-  //   } else {
-  //     setActiveSpinnerId(-1);
-  //   }
-  // }, [lastMessage?.messageId]);
-
-  function addSuggestedReplyMessageToView(suggestedReply: SuggestedReply): void {
-    // TODO:
-    // 1. Create a sent suggested reply user message and then add it to the message list.
-    const createdAt: number = Date.now();
-    const newMessage: UserMessage = sb.message.buildMessageFromSerializedData({
-      channelUrl: channel?.url,
-      channelType: ChannelType.GROUP,
-      createdAt, // FIXME: ms? or seconds? sorted by this or id?
-      sender: botUser.serialize(),
-      sendingStatus: SendingStatus.SUCCEEDED,
-      messageType: MessageType.USER,
-      message: suggestedReply.text,
-    }) as UserMessage;
-    // 2. Then create a suggested reply message component and then add it to the view.
-    const newMessageComponent = <BotMessageWithBodyInput
-      bodyComponent={<SuggestedReplyMessageBody suggestedReply={suggestedReply}/>}
-      createdAt={createdAt}
-      senderName={botUser.nickname}
-    />;
-  }
+  useEffect(() => {
+    if(lastMessage
+      && lastMessage.sender?.userId === USER_ID
+      && lastMessage.sendingStatus === SendingStatus.SUCCEEDED
+    ) {
+      setActiveSpinnerId(lastMessage.messageId);
+      scrollUtil();
+    } else {
+      setActiveSpinnerId(-1);
+    }
+  }, [lastMessage?.messageId]);
 
   if (!channel) return <LoadingScreen/>;
   return <Root>
@@ -85,7 +66,7 @@ function CustomChannelUI(props: CustomChannelUIProps) {
       }}
       renderMessageInput={() => {
         return <div>
-          <SuggestedRepliesPanel addSuggestedReplyMessageToView={addSuggestedReplyMessageToView}/>
+          <SuggestedRepliesPanel botUser={botUser}/>
           <MessageInput
             renderVoiceMessageIcon={() => <></>}
             renderFileUploadIcon={() => <></>}
@@ -94,8 +75,7 @@ function CustomChannelUI(props: CustomChannelUIProps) {
           <BottomTextContainer/>
         </div>
       }}
-      renderMessage={(message) => {
-        // TODO: Custom message for bot message should parse bot message body and should be BotMessageWithBodyInput.
+      renderMessage={({ message }) => {
         return <CustomMessage
           message={message}
           activeSpinnerId={activeSpinnerId}

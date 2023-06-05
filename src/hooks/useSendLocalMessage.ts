@@ -18,28 +18,22 @@ type OnMessageRecivedDispatcher = ({
   payload: OnMessageRecivedPayload,
 }) => void;
 
-export function useSendLocalMessage(botUser: User) {
+export function useSendLocalMessage() {
   const channelStore = useChannelContext();
   const currentGroupChannel = channelStore.currentGroupChannel;
   // this is the magic function that adds the message to channelStore
   // @ts-expect-error no-unused-vars
   const messagesDispatcher = channelStore.messagesDispatcher as OnMessageRecivedDispatcher;
-  const useSendLocalMessage = useCallback((message: string) => {
+  const useSendLocalMessage = useCallback((message: UserMessage) => {
     if (currentGroupChannel) {
       messagesDispatcher({
         type: 'ON_MESSAGE_RECEIVED',
         payload: {
           channel: currentGroupChannel,
-          message: {
-            message,
-            sender: botUser,
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
-            channelUrl: currentGroupChannel.url,
-          } as UserMessage,
+          message,
         },
       });
     }
-  } , [currentGroupChannel, botUser, messagesDispatcher]);
+  } , [currentGroupChannel, messagesDispatcher]);
   return useSendLocalMessage;
 }

@@ -7,11 +7,16 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background: #F7F7F7;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.88);
+`;
+
+const Highlighter = styled.div`
+  text-decoration: underline;
+  color: white;
 `;
 
 export default function BottomTextContainer() {
   return <Container>
-    <div>Add an </div><div style={{ color: '#742DDD' }}> AI chatbot</div> to your product by Sendbird
+    <div>Add an </div><Highlighter>AI chatbot</Highlighter> to your product by Sendbird
   </Container>;
 };

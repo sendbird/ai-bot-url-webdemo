@@ -3,6 +3,7 @@ import {useGetHashedKey} from "./hooks/useGetHashedKey";
 import CustomChannel from "./components/CustomChannel";
 import SBProvider from "@sendbird/uikit-react/SendbirdProvider";
 import '@sendbird/uikit-react/dist/index.css';
+import './css/index.css';
 
 function App() {
   const hashedKey: string = TEST_HASHED_KEY;

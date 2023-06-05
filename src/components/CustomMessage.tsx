@@ -1,6 +1,9 @@
 import Message from '@sendbird/uikit-react/Channel/components/Message';
-import { EveryMessage } from 'SendbirdUIKitGlobal';
+import {EveryMessage} from 'SendbirdUIKitGlobal';
 import typingIndicatorLogo from '../icons/message-typing-indicator.gif';
+import {LOCAL_MESSAGE_CUSTOM_TYPE} from "../const";
+import BotMessageWithBodyInput from "./BotMessageWithBodyInput";
+import {MessageType} from "@sendbird/chat/message";
 
 type Props = {
   message: EveryMessage;
@@ -15,15 +18,13 @@ export default function CustomMessage(props: Props) {
 
   return (
     <div>
-      <Message
-        message={message}
-        // will remove this in next release
-        handleScroll={() => {
-          // if you have issue with last message not scrolling to bottom
-          // use scrollRef?.scrollIntoView()
-          // scrollRef is from channel ctxt
-        }}
-      />
+      {
+        message.messageType === MessageType.USER
+        && message.customType
+        && message.customType === LOCAL_MESSAGE_CUSTOM_TYPE.linkSuggestion
+          ? <BotMessageWithBodyInput message={message}/>
+          : <Message message={message}/>
+      }
       {
         activeSpinnerId === message.messageId &&
         <div style={{
