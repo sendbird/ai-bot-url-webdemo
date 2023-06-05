@@ -5,12 +5,12 @@ import {User} from "@sendbird/chat";
 import {GroupChannelCreateParams} from "@sendbird/chat/lib/__definition";
 import {CREATE_GROUP_CHANNEL_PARAMS} from "../const";
 
-export function useCreateGroupChannel(currentUser: User, botUser: User): GroupChannel | null {
+export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupChannel | null, () => void] {
   const [channel, setChannel] = useState<GroupChannel | null>(null);
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
 
-  useEffect(() => {
+  function createAndSetNewChannel() {
     if (currentUser && botUser) {
       const params: GroupChannelCreateParams = {
         name: CREATE_GROUP_CHANNEL_PARAMS.name,
@@ -23,6 +23,11 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): GroupCh
           setChannel(channel);
         });
     }
+  }
+
+  useEffect(() => {
+    createAndSetNewChannel();
   }, [currentUser, botUser, sb]);
-  return channel;
+
+  return [channel, createAndSetNewChannel];
 }

@@ -49,7 +49,7 @@ type Props = {
   isTyping: boolean;
 }
 
-export default function CustomHeader(props: Props) {
+export default function CustomInput(props: Props) {
   const { channel, isTyping } = props;
 
   return <Root>
@@ -60,7 +60,7 @@ export default function CustomHeader(props: Props) {
         <TypingIndicator>{ isTyping ? 'Thinking...' : 'AI Chatbot' }</TypingIndicator>
       </div>
     </SubContainer>
-    <RenewButton>
+    <RenewButton onClick={}>
       <div>Renew</div>
       <RefreshIcon height='20px' width='20px'/>
     </RenewButton>

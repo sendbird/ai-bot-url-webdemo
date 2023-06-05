@@ -48,10 +48,15 @@ const RenewButton = styled.div`
 type Props = {
   channel: GroupChannel;
   isTyping: boolean;
+  createGroupChannel: () => void;
 }
 
 export default function CustomChannelHeader(props: Props) {
-  const { channel, isTyping } = props;
+  const { channel, isTyping, createGroupChannel } = props;
+
+  function onClickRenewButton() {
+    createGroupChannel();
+  }
 
   return <Root>
     <SubContainer>
@@ -63,7 +68,7 @@ export default function CustomChannelHeader(props: Props) {
         <TypingIndicator>{ isTyping ? 'Thinking...' : 'AI Chatbot' }</TypingIndicator>
       </div>
     </SubContainer>
-    <RenewButton>
+    <RenewButton onClick={onClickRenewButton}>
       <div>Renew</div>
       <RefreshIcon height='20px' width='20px'/>
     </RenewButton>

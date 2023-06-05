@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styled  from 'styled-components'
 import {LOCAL_MESSAGE_CUSTOM_TYPE, SUGGESTED_REPLIES, SuggestedReply} from "../const";
 import {MessageType, SendingStatus, UserMessage} from "@sendbird/chat/message";
@@ -73,6 +73,10 @@ const SuggestedRepliesPanel = (props: Props) => {
   const { currentGroupChannel } = useChannelContext();
   const channel: GroupChannel | undefined = currentGroupChannel;
   const sendLocalMessage = useSendLocalMessage();
+
+  useEffect(() => {
+    setSuggestedReplies(SUGGESTED_REPLIES);
+  }, [channel]);
 
   const onClickSuggestedReply = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();

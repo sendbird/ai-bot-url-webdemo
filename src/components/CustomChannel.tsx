@@ -28,10 +28,11 @@ const Root = styled.div`
 
 type CustomChannelUIProps = {
   botUser: User;
+  createGroupChannel: () => void;
 }
 
 function CustomChannelUI(props: CustomChannelUIProps) {
-  const { botUser } = props;
+  const { botUser, createGroupChannel } = props;
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
   const { allMessages, currentGroupChannel } = useChannelContext();
@@ -62,7 +63,7 @@ function CustomChannelUI(props: CustomChannelUIProps) {
   return <Root>
     <ChannelUI
       renderChannelHeader={() => {
-        return <CustomChannelHeader channel={channel} isTyping={activeSpinnerId > -1}/>;
+        return <CustomChannelHeader channel={channel} isTyping={activeSpinnerId > -1} createGroupChannel={createGroupChannel}/>;
       }}
       renderMessageInput={() => {
         return <div>
@@ -96,7 +97,7 @@ export default function CustomChannel(props: CustomChannelProps) {
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
   const botUser: User = useGetBotUser(sb.currentUser, hashedKey);
-  const channel: GroupChannel | null = useCreateGroupChannel(sb.currentUser, botUser);
+  const [channel, createGroupChannel]: [GroupChannel | null, () => void] = useCreateGroupChannel(sb.currentUser, botUser);
   
   console.log('## currentUser: ', sb.currentUser);
   console.log('## botUser: ', botUser);
@@ -104,7 +105,7 @@ export default function CustomChannel(props: CustomChannelProps) {
   if (!channel) return <LoadingScreen/>;
   return (
     <ChannelProvider channelUrl={channel?.url}>
-      <CustomChannelUI {...props} botUser={botUser} />
+      <CustomChannelUI {...props} botUser={botUser} createGroupChannel={createGroupChannel} />
     </ChannelProvider>
   )
 }
