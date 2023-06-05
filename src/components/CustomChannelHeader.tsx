@@ -60,7 +60,7 @@ export default function CustomChannelHeader(props: Props) {
 
   return <Root>
     <SubContainer>
-      <img src={channelHeaderImage} alt="channelHeaderImage" style={{
+      <image src={channelHeaderImage} alt="channelHeaderImage" style={{
         height: "36px"
       }}/>
       <div>

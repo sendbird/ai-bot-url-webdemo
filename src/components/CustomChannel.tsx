@@ -21,6 +21,7 @@ import BotMessageWithBodyInput from "./BotMessageWithBodyInput";
 import SuggestedReplyMessageBody from "./SuggestedReplyMessageBody";
 import {useSendLocalMessage} from "../hooks/useSendLocalMessage";
 import CustomMessageInput from "./CustomMessageInput";
+import PendingMessage from "./PendingMessage";
 
 const Root = styled.div`
   height: 100vh;
@@ -82,8 +83,16 @@ function CustomChannelUI(props: CustomChannelUIProps) {
         return <CustomMessage
           message={message}
           activeSpinnerId={activeSpinnerId}
+          botUser={botUser}
         />
       }}
+      // renderMessage={({ message }) => {
+      //   return <CustomMessage
+      //     message={message}
+      //     activeSpinnerId={activeSpinnerId}
+      //     botUser={botUser}
+      //   />;
+      // }}
       renderTypingIndicator={() => <></>}
     />
   </Root>;

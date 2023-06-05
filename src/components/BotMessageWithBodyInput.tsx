@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import botMessageImage from '../icons/bot-message-image.png';
-import {formatCreatedAtToAMPM} from "../utils";
-import {UserMessage} from "@sendbird/chat/message";
+import {formatCreatedAtToAMPM, MessageTextParser, Token, TokenType} from "../utils";
+import {MessageType, UserMessage} from "@sendbird/chat/message";
 import SuggestedReplyMessageBody from "./SuggestedReplyMessageBody";
+import {LOCAL_MESSAGE_CUSTOM_TYPE} from "../const";
+import ParsedBotMessageBody from "./ParsedBotMessageBody";
+import Message from '@sendbird/uikit-react/Channel/components/Message';
+import {ReactNode} from "react";
 
 const Root = styled.div`
   display: flex;
@@ -24,8 +28,12 @@ const BodyContainer = styled.div`
   font-size: 14px;
   color: rgba(0, 0, 0, 0.88);
   width: fit-content;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
 `;
-
 
 const SentTime = styled.div`
   width: 70px;
@@ -38,6 +46,7 @@ const SentTime = styled.div`
 
 type Props = {
   message: UserMessage;
+  bodyComponent: ReactNode;
 }
 
 const ImageContainer = styled.div`
@@ -45,18 +54,18 @@ const ImageContainer = styled.div`
 `;
 
 export default function BotMessageWithBodyInput(props: Props) {
-  const { message } = props;
+  const { message, bodyComponent } = props;
 
   return <Root>
     <ImageContainer>
-      <img src={botMessageImage} alt="botProfileImage" style={{
+      <image src={botMessageImage} alt="botProfileImage" style={{
         height: "28px"
       }}/>
       <image src height={'28px'} width={'28px'}/>
     </ImageContainer>
     <BodyContainer>
       <Sender>{message.sender.nickname}</Sender>
-      <SuggestedReplyMessageBody message={message}/>
+      {bodyComponent}
     </BodyContainer>
     <SentTime>
       {formatCreatedAtToAMPM(message.createdAt)}

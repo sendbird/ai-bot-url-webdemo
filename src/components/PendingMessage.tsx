@@ -15,13 +15,13 @@ const ImageContainer = styled.div`
 
 export default function PendingMessage() {
   return <Container>
-    <ImageContainer>
-      <img src={profileImage} alt="profileImage" style={{
-        height: "28px"
+      <ImageContainer>
+        <img src={profileImage} alt="profileImage" style={{
+          height: "28px"
+        }}/>
+      </ImageContainer>
+      <img src={typingIndicatorLogo} alt="pending..." style={{
+        height: "52px"
       }}/>
-    </ImageContainer>
-    <img src={typingIndicatorLogo} alt="pending..." style={{
-      height: "52px"
-    }}/>
-  </Container>;
-};
+    </Container>;
+}

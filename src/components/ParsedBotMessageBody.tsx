@@ -1,27 +1,24 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
-import {CopyBlock} from "react-code-blocks";
-import {MessageTextParser, Token, TokenType} from "./MessageTextParser";
+import {CopyBlock, irBlack } from "react-code-blocks";
 import { ReactComponent as CopyIcon } from '../icons/copy-icon.svg';
 import BotMessageBottom from "./BotMessageBottom";
+import {MessageTextParser, Token, TokenType} from "../utils";
+import {UserMessage} from "@sendbird/chat/message";
 
 const Root = styled.div`
+  background-color: #eeeeee;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
-  width: 100%;
-  background: #ECECEC;
-  border-radius: 8px;
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 8px 0px 16px;
-  width: 100%;
-  color: #5E5E5E;
+  padding: 8px 12px;
+  gap: 12px;
+  border-radius: 16px;
+  white-space: pre-wrap;
 `;
 
 const Text = styled.div`
@@ -30,7 +27,8 @@ const Text = styled.div`
 `;
 
 type Props = {
-  text: string;
+  message: UserMessage;
+  tokens: Token[];
 }
 
 /**
@@ -39,39 +37,29 @@ type Props = {
  * @constructor
  */
 export default function ParsedBotMessageBody(props: Props) {
-  const { text } = props;
-  const tokens: Token[] = MessageTextParser(text);
-  const codeSnippetTokens: Token[] = tokens.filter((token: Token) => {
-    return token.type === TokenType.codeSnippet;
-  });
+  const { message, tokens } = props;
 
+  console.log('## tokens: ', tokens);
   if (tokens.length > 0) {
     return <Root>
-      <TitleContainer>
-        <div>Code snippet</div>
-        <div onClick={() => {
-          navigator.clipboard.writeText(codeSnippetTokens.join('\n\n'));
-        }}>
-          <CopyIcon/>
-        </div>
-      </TitleContainer>
-      <Text>
         {
-          tokens.map((token: Token) => {
+          tokens.map((token: Token, i) => {
             if (token.type === TokenType.string) {
-              return <div>{token.value}</div>;
+              return <div key={'token' + i}>{token.value}</div>;
             }
             return (
               <CopyBlock
+                key={'token' + i}
                 text={token.value}
                 language={token.type}
+                theme={irBlack}
+                showLineNumbers={true}
               />
             )
           })
         }
-      </Text>
       <BotMessageBottom/>
     </Root>;
   }
-  return <Text>{text}</Text>;
+  return <Text>{message.message}</Text>;
 }
