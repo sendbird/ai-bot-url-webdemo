@@ -1,4 +1,4 @@
-import Channel from '@sendbird/uikit-react/Channel';
+import ChannelUI from '@sendbird/uikit-react/Channel/components/ChannelUI';
 import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
 import {useCreateGroupChannel} from "../hooks/useCreateGroupChannel";
 import {ChannelType, User} from "@sendbird/chat";
@@ -12,7 +12,7 @@ import CustomMessage from "./CustomMessage";
 import BottomTextContainer from "./BottomTextContainer";
 import CustomHeader from "./CustomHeader";
 import styled from "styled-components";
-import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
+import {ChannelProvider, useChannelContext} from "@sendbird/uikit-react/Channel/context";
 import {ClientUserMessage} from "SendbirdUIKitGlobal";
 import {SuggestedReply, USER_ID} from "../const";
 import {MessageType, SendingStatus, UserMessage} from "@sendbird/chat/message";
@@ -25,28 +25,21 @@ const Root = styled.div`
   font-family: "Roboto", sans-serif;
 `;
 
-type Props = {
-  hashedKey: string;
+type CustomChannelUIProps = {
+  botUser: User;
 }
 
-export default function CustomChannel(props: Props) {
-  const { hashedKey } = props;
+function CustomChannelUI(props: CustomChannelUIProps) {
+  const { botUser } = props;
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
-  const botUser: User = useGetBotUser(sb.currentUser, hashedKey);
-  const channel: GroupChannel | null = useCreateGroupChannel(sb.currentUser, botUser);
-  // const channelContext = useChannelContext();
-  // console.log('## channelContext: ', channelContext); // this is undefined
-  // const lastMessage: ClientUserMessage = channelContext.allMessages?.[channelContext.allMessages?.length - 1] as ClientUserMessage;
+  const { allMessages, currentGroupChannel } = useChannelContext();
+  const channel: GroupChannel | undefined = currentGroupChannel;
+  const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
 
   const [activeSpinnerId, setActiveSpinnerId] = useState(-1);
   // TODO: when count is 10, show suggested replies.
   const [totalReceivedMessagesCount, setTotalReceivedMessagesCount] = useState(0);
-
-  console.log('## currentUser: ', sb.currentUser);
-  console.log('## botUser: ', botUser);
-  console.log('## channel: ', channel);
-
   /**
    * If the updated last message is sent by the current user, activate spinner for the sent message.
    * If the updated last message is pending or failed by the current user or sent by the bot, deactivate spinner.
@@ -86,8 +79,7 @@ export default function CustomChannel(props: Props) {
 
   if (!channel) return <LoadingScreen/>;
   return <Root>
-    <Channel
-      channelUrl={channel.url}
+    <ChannelUI
       renderChannelHeader={() => {
         return <CustomHeader channel={channel} isTyping={activeSpinnerId > -1}/>;
       }}
@@ -112,4 +104,26 @@ export default function CustomChannel(props: Props) {
       renderTypingIndicator={() => <></>}
     />
   </Root>;
+}
+
+type CustomChannelProps = {
+  hashedKey: string;
+}
+
+export default function CustomChannel(props: CustomChannelProps) {
+  const { hashedKey } = props;
+  const store = useSendbirdStateContext();
+  const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
+  const botUser: User = useGetBotUser(sb.currentUser, hashedKey);
+  const channel: GroupChannel | null = useCreateGroupChannel(sb.currentUser, botUser);
+  
+  console.log('## currentUser: ', sb.currentUser);
+  console.log('## botUser: ', botUser);
+  console.log('## channel: ', channel);
+  if (!channel) return <LoadingScreen/>;
+  return (
+    <ChannelProvider channelUrl={channel?.url}>
+      <CustomChannelUI {...props} botUser={botUser} />
+    </ChannelProvider>
+  )
 }
