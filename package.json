@@ -13,8 +13,10 @@
   "dependencies": {
     "@sendbird/chat": "^4.9.0",
     "@sendbird/uikit-react": "^3.4.9",
+    "highlight.js": "^11.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-highlight": "^0.15.0",
     "styled-components": "^5.3.11",
     "vite-plugin-svgr": "^3.2.0"
   },

@@ -1,4 +1,10 @@
 import styled from "styled-components";
+import Highlight from 'react-highlight'
+
+// themes are in node_modules/highlight.js/styles
+// see: https://highlightjs.org/static/demo/
+import 'highlight.js/styles/atom-one-dark.css';
+
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
 // import {CopyBlock, irBlack } from "react-code-blocks";
 import BotMessageBottom from "./BotMessageBottom";
@@ -53,15 +59,19 @@ export default function ParsedBotMessageBody(props: Props) {
             if (token.type === TokenType.string) {
               return <TextComponent key={'token' + i}>{token.value}</TextComponent>;
             }
+            // move to seperate component and add copy feature
+            // add numbering to code blocks https://github.com/wcoder/highlightjs-line-numbers.js/
             return (
-              <>{token.value}</>
-              // <CopyBlock
-              //   key={'token' + i}
-              //   text={token.value}
-              //   language={token.type}
-              //   theme={irBlack}
-              //   showLineNumbers={true}
-              // />
+              <div key={'token' + i} style={{ width: '100%', overflowX: 'scroll' }}>
+                <Highlight
+                  // must be correct language name such as 'javascript' or 'python'
+                  // https://highlightjs.org/static/demo/
+                  // className='language-name-of-snippet'
+                >
+                  { token.value }
+                </Highlight>
+              </div>
+
             )
           })
         }
