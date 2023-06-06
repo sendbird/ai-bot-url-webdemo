@@ -27,6 +27,10 @@ const Text = styled.div`
   text-align: left;
 `;
 
+const TextComponent = styled.div`
+  white-space: pre-line;
+`;
+
 type Props = {
   message: UserMessage;
   tokens: Token[];
@@ -39,15 +43,16 @@ type Props = {
  */
 export default function ParsedBotMessageBody(props: Props) {
   const { message, tokens } = props;
-  const sources: Source[] = JSON.parse((message as UserMessage).data);
+  const data: object = JSON.parse((message as UserMessage).data);
+  const sources: Source[] = Array.isArray(data) ? data as Source[] : [];
 
-  console.log('## tokens11: ', tokens);
+  console.log('## sources: ', sources);
   if (tokens.length > 0) {
     return <Root>
         {
           tokens.map((token: Token, i) => {
             if (token.type === TokenType.string) {
-              return <div key={'token' + i}>{token.value}</div>;
+              return <TextComponent key={'token' + i}>{token.value}</TextComponent>;
             }
             return (
               <CopyBlock
@@ -60,7 +65,11 @@ export default function ParsedBotMessageBody(props: Props) {
             )
           })
         }
-      data ? <SourceContainer sources={sources}/>
+      {
+        sources.length > 0
+          ? <SourceContainer sources={sources}/>
+          : null
+      }
       <BotMessageBottom/>
     </Root>;
   }

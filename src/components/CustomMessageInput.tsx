@@ -68,6 +68,12 @@ export default function CustomMessageInput() {
     }
   };
 
+  function auto_grow() {
+    const element = inputRef.current;
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+  }
+
   function handleMessageChange(event) {
     const value = event.target.value;
     setMessage(value);
@@ -109,7 +115,8 @@ export default function CustomMessageInput() {
           ref={inputRef}
           value={message}
           onChange={handleMessageChange}
-          oninput={handleInput}
+          onInput={handleInput}
+          rows={1}
         />
         {
           showSendButton

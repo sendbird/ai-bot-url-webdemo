@@ -20,7 +20,7 @@ const Root = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 8px 0;
+  padding-top: 8px;
 `;
 
 const Delimiter = styled.div`
@@ -37,19 +37,14 @@ const InfoIconButton = styled.div`
 const InfoBox = styled.div`
   padding: 8px 12px;
   position: absolute;
-  width: 326px;
-  left: calc(50% - 326px/2);
-  top: -100%;
+  width: 340px;
+  left: calc(50% - 170px - 12px);
+  top: calc(100% + 12px);
   background: #000000;
   opacity: 0.8;
   border-radius: 8px;
+  color: rgba(255, 255, 255, 0.88);
 `;
-
-export interface Source {
-  title: string;
-  link: string;
-}
-
 
 export default function BotMessageBottom() {
 
@@ -66,10 +61,12 @@ export default function BotMessageBottom() {
         <InfoIcon height={'28px'} width={'28px'}/>
       </InfoIconButton>
     </Root>
-    showInfoBox && <InfoBox>
-      This answer is based only on content
-      specified by Docs assistant. It is AI generated so
-      may not be fully correct.
-    </InfoBox>
+    {
+      showInfoBox && <InfoBox>
+        This answer is based only on content
+        specified by Docs assistant. It is AI generated so
+        may not be fully correct.
+      </InfoBox>
+    }
   </TheRealRoot>
 }

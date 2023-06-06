@@ -9,6 +9,7 @@ const Container = styled.div`
   align-items: center;
   background: linear-gradient(273.73deg, #4DCD90 -0.83%, #6210CC 48.04%, #6210CC 75.45%);
   color: rgba(255, 255, 255, 0.88);
+  flex-wrap: wrap;
 `;
 
 const Highlighter = styled.div`

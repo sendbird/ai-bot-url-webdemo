@@ -89,6 +89,7 @@ function CustomChannelUI(props: CustomChannelUIProps) {
           message={message}
           activeSpinnerId={activeSpinnerId}
           botUser={botUser}
+          messagesCount={allMessages?.length ?? 0}
         />
       }}
       // renderMessage={({ message }) => {

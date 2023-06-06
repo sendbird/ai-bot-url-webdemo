@@ -5,10 +5,9 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px 16px 16px;
+  padding: 0px;
   gap: 4px;
   width: 100%;
-  height: 80px;
 `;
 
 const RootTitle = styled.div`
@@ -27,8 +26,18 @@ const SourceTitle = styled.div`
 const SourceItem = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
-  padding: 8px 0;
+  padding: 4px 0;
+`;
+
+
+const IconLink = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
 `;
 
 export interface Source {
@@ -54,9 +63,11 @@ export default function SourceContainer(props: Props) {
             <a href={source.source} id="openLinkText" target="_blank">
               <SourceTitle>{source.title}</SourceTitle>
             </a>
-            <a href={source.source} id="openLinkIcon" target="_blank">
-              <OpenLinkIcon/>
-            </a>
+            <IconLink>
+              <a href={source.source} id="openLinkIcon" target="_blank">
+                <OpenLinkIcon width={'100%'} height={'100%'}/>
+              </a>
+            </IconLink>
           </SourceItem>
         </>
       })

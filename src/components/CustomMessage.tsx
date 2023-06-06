@@ -15,6 +15,7 @@ type Props = {
   message: EveryMessage;
   activeSpinnerId: number;
   botUser: User;
+  messagesCount: number;
 }
 
 export default function CustomMessage(props: Props) {
@@ -22,7 +23,12 @@ export default function CustomMessage(props: Props) {
     message,
     activeSpinnerId,
     botUser,
+    messagesCount,
   } = props;
+
+  if (messagesCount === 1) {
+    return <Message message={message}/>;
+  }
 
   if ((message as UserMessage).sender.userId !== botUser.userId) {
     return <div>
@@ -45,7 +51,6 @@ export default function CustomMessage(props: Props) {
   }
   const tokens: Token[] = MessageTextParser((message as UserMessage).message);
   console.log('## tokens: ', tokens);
-  if (tokens.length >= 2) {
     return <div>
       <BotMessageWithBodyInput
         message={message}
@@ -59,5 +64,4 @@ export default function CustomMessage(props: Props) {
         bodyComponent={<ConfirmationMessageBody/>}
       />
     </div>;
-  }
 }
