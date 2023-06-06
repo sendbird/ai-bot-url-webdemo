@@ -19,7 +19,12 @@ import {StartingPage} from "./StartingPage";
 const Root = styled.div`
   height: 100vh;
   font-family: 'Roboto', sans-serif;
+  z-index: 0;
 `;
+
+export interface StartingPageAnimatorProps {
+  isStartingPage: boolean;
+}
 
 type CustomChannelComponentProps = {
   botUser: User;
@@ -56,8 +61,11 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
     <StartingPage isStartingPage={allMessages.length === 1}/>
     <ChannelUI
       renderChannelHeader={() => {
-        return <CustomChannelHeader channel={channel} isTyping={activeSpinnerId > -1}
-                                    createGroupChannel={createGroupChannel}/>;
+        return <CustomChannelHeader
+          channel={channel}
+          isTyping={activeSpinnerId > -1}
+          createGroupChannel={createGroupChannel}
+        />;
       }}
       renderMessageInput={() => {
         return <div>

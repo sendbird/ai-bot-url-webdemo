@@ -12,12 +12,20 @@ import {User} from "@sendbird/chat";
 import CustomMessageBody from "./CustomMessageBody";
 import CurrentUserMessage from "./CurrentUserMessage";
 import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
+import {StartingPageAnimatorProps} from "./CustomChannelComponent";
+import styled from "styled-components";
 
 type Props = {
   message: EveryMessage;
   activeSpinnerId: number;
   botUser: User;
 }
+
+const StartingBlock = styled.div`
+  height: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '98px' : '0')};
+  width: 100%;
+  transition: height 0.5s ease;
+`;
 
 export default function CustomMessage(props: Props) {
   const {
@@ -44,11 +52,16 @@ export default function CustomMessage(props: Props) {
   }
 
   if (message.messageId === firstMessageId) {
-    return <BotMessageWithBodyInput
-      message={message}
-      bodyComponent={<CustomMessageBody message={(message as UserMessage).message}/>}
-      messageCount={allMessages.length}
-    />;
+    return <div>
+      <StartingBlock isStartingPage={allMessages.length === 1}/>
+      <BotMessageWithBodyInput
+        message={message}
+        bodyComponent={
+          <CustomMessageBody style={{ maxWidth: '270px' }} message={(message as UserMessage).message}/>
+        }
+        messageCount={allMessages.length}
+      />
+    </div>;
   }
 
   // Sent by bot

@@ -24,10 +24,13 @@ const Text = styled.div`
 
 interface Props {
   message: string;
+  style: object;
 }
 
 export default function CustomMessageBody(props: Props) {
-  return <Root>
-    <Text>{props.message}</Text>
+  const { message, style } = props;
+
+  return <Root style={style}>
+    <Text>{message}</Text>
   </Root>;
 }

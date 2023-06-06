@@ -1,52 +1,29 @@
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 import { ReactComponent as BackgroundImage } from '../icons/starting-page-background.svg';
 import { ReactComponent as SendbirdLogo } from '../icons/sendbird-logo-starting-page.svg';
+import {StartingPageAnimatorProps} from "./CustomChannelComponent";
 
-interface RootProps {
-  isStartingPage: boolean;
-}
-
-const moveUp = keyframes`
-0%{
-  transform: translateY(0%);
-}
-50%{
-  transform: translateY(-50%);
-}
-100%{
-  transform: translateY(-100%);
-}
-`;
-
-const BackgroundContainer = styled.div<RootProps>`
+const BackgroundContainer = styled.div<StartingPageAnimatorProps>`
   position: absolute;
-  z-index: 10;
-  //transform: translateY(-100%);
-  // opacity: 
-  //transition: transform 0.5s;
-  //transition-timing-function: ease;
-  ${(props: RootProps) => (props.isStartingPage ? '' : 'animation: ${moveUp} 1s ease;')};
 `;
 
 const TitleContainer = styled.div`
   position: absolute;
-  z-index: 20;
   padding: 24px;
-
 `;
 
-const Root = styled.div<RootProps>`
+const Root = styled.div<StartingPageAnimatorProps>`
   position: relative;
-  z-index: 0;
-  // opacity: ${(props: RootProps) => (props.isStartingPage ? 1 : 0)};
-  // transition: opacity 0.5s;
-  // transition-timing-function: ease;
-  overflow-y: hidden;
+  top: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '0' : '-250px')};
+  opacity: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '1' : '0')};
+  z-index: 20;
+  width: 100%;
+  transition: all 0.5s ease;
 `;
 
 const HeaderOne = styled.div`
-  font-weight: 600;
-  font-size: 30px;
+  //font-weight: 600;
+  font-size: 24px;
   line-height: 36px;
   color: #FFFFFF;
   opacity: 0.8;
@@ -55,10 +32,10 @@ const HeaderOne = styled.div`
 
 const HeaderTwo = styled.div`
   font-weight: 700;
-  font-size: 36px;
+  font-size: 32px;
   line-height: 48px;
   color: #FFFFFF;
-  margin-top: 8px;
+  //margin-top: 8px;
 `;
 
 interface Props {
@@ -66,8 +43,10 @@ interface Props {
 }
 
 export function StartingPage(props: Props) {
+  const { isStartingPage } = props;
+  console.log('## StartingPage: ', isStartingPage);
   return (
-    <Root isStartingPage={props.isStartingPage}>
+    <Root isStartingPage={isStartingPage}>
       <BackgroundContainer>
         <BackgroundImage width={'400px'}/>
       </BackgroundContainer>

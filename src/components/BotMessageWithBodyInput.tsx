@@ -3,6 +3,7 @@ import botMessageImage from '../icons/bot-message-image.png';
 import {formatCreatedAtToAMPM} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";
 import {ReactNode} from "react";
+import {StartingPageAnimatorProps} from "./CustomChannelComponent";
 
 const Root = styled.div`
   display: flex;
@@ -10,17 +11,16 @@ const Root = styled.div`
   margin-bottom: 6px;
   flex-wrap: wrap;
   gap: 8px;
+  z-index: 30;
+  position: relative;
 `;
 
-interface SenderProps {
-  isStartingPage: boolean;
-}
-const Sender = styled.div<SenderProps>`
+const Sender = styled.div<StartingPageAnimatorProps>`
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 12px;
-  color: ${(props: SenderProps) => (props.isStartingPage ? '#FFFFFF' : 'rgba(0, 0, 0, 0.5)')};
+  color: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '#FFFFFF' : 'rgba(0, 0, 0, 0.5)')};
   transition: color 0.5s;
   transition-timing-function: ease;
   margin: 0 0 4px 12px;
