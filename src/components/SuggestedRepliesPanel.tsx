@@ -49,7 +49,8 @@ const Root = styled.div`
 `;
 
 const Panel = styled.div`
-  z-index: 5;
+  position: relative;
+  z-index: 50;
   display: flex;
   height: 37px;
   width: calc(100% - 48px);

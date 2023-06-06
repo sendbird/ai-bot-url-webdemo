@@ -10,8 +10,8 @@ const Text = styled.div`
 `;
 
 const TheRealRoot = styled.div`
-  position: relative;
   width: 100%;
+  position: relative;
 `;
 
 const Root = styled.div`
@@ -41,13 +41,15 @@ const InfoIconButton = styled.div`
 const InfoBox = styled.div`
   padding: 8px 12px;
   position: absolute;
-  width: 340px;
-  left: calc(50% - 170px - 12px);
+  max-width: 300px;
+  width: 100%;
+  left: calc(50% - 150px);
   top: calc(100% + 12px);
   background: #000000;
   opacity: 0.8;
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.88);
+  z-index: 40;
 `;
 
 export default function BotMessageBottom() {

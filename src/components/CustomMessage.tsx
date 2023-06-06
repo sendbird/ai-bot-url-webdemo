@@ -60,6 +60,7 @@ export default function CustomMessage(props: Props) {
           <CustomMessageBody style={{ maxWidth: '270px' }} message={(message as UserMessage).message}/>
         }
         messageCount={allMessages.length}
+        zIndex={30}
       />
     </div>;
   }

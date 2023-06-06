@@ -3,7 +3,12 @@ import { ReactComponent as SendbirdLogo } from '../icons/sendbird-logo-widget.sv
 
 const Container = styled.div`
   width: 100%;
-  height: 40px;
+`;
+
+const InnerContainer = styled.div`
+  padding: 0 8px;
+  width: calc(100% - 16px);
+  min-height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +25,8 @@ const Highlighter = styled.div`
 
 export default function ChatBottom() {
   return <Container>
-    Add an &nbsp;<Highlighter>AI chatbot</Highlighter>&nbsp;with your very own content by&nbsp;<SendbirdLogo width={'80px'}/>
+    <InnerContainer>
+      Add an &nbsp;<Highlighter>AI chatbot</Highlighter>&nbsp;with your very own content by&nbsp;<SendbirdLogo width={'80px'}/>
+    </InnerContainer>
   </Container>;
 }
