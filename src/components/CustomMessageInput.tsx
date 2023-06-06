@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import sendbirdSelectors from "@sendbird/uikit-react/sendbirdSelectors";
 import { useChannelContext } from "@sendbird/uikit-react/Channel/context";

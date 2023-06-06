@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as RefreshIcon } from '../icons/refresh-icon.svg';
 import {GroupChannel} from "@sendbird/chat/groupChannel";
 import channelHeaderImage from '../icons/bot-message-image.png';
-import botMessageImage from "../icons/bot-message-image.png";
+import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
 
 const Root = styled.div`
   display: flex;
@@ -45,6 +45,17 @@ const RenewButton = styled.div`
   cursor: pointer;
 `;
 
+interface StartingPageAnimatorProps {
+  isStartingPage: boolean;
+}
+
+const StartingPageAnimator = styled.div<StartingPageAnimatorProps>`
+  width: 100%;
+  height: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '200px' : '0px')};
+  transition: height 0.5s;
+  transition-timing-function: ease;
+`;
+
 type Props = {
   channel: GroupChannel;
   isTyping: boolean;
@@ -53,6 +64,8 @@ type Props = {
 
 export default function CustomChannelHeader(props: Props) {
   const { channel, isTyping, createGroupChannel } = props;
+
+  const {allMessages} = useChannelContext();
 
   function onClickRenewButton() {
     createGroupChannel();
