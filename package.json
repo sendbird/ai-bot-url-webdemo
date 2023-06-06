@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc-silent -p './tsconfig.json' --suppress @ && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "deploy": "./scripts/deploy.sh"
@@ -14,7 +14,6 @@
     "@sendbird/chat": "^4.9.0",
     "@sendbird/uikit-react": "^3.4.9",
     "react": "^18.2.0",
-    "react-code-blocks": "^0.0.9-0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.11",
     "vite-plugin-svgr": "^3.2.0"
