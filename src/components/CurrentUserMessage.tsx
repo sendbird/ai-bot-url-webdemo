@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {formatCreatedAtToAMPM} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";
-import {ReactNode} from "react";
 
 const Root = styled.div`
   display: flex;

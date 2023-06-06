@@ -1,9 +1,8 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
-import {CopyBlock, irBlack,dracula } from "react-code-blocks";
-import { ReactComponent as CopyIcon } from '../icons/copy-icon.svg';
+import {CopyBlock, irBlack } from "react-code-blocks";
 import BotMessageBottom from "./BotMessageBottom";
-import {MessageTextParser, Token, TokenType} from "../utils";
+import {Token, TokenType} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";
 import SourceContainer, {Source} from "./SourceContainer";
 

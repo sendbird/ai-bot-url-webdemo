@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import botMessageImage from '../icons/bot-message-image.png';
-import {formatCreatedAtToAMPM, MessageTextParser, Token, TokenType} from "../utils";
-import {MessageType, UserMessage} from "@sendbird/chat/message";
-import SuggestedReplyMessageBody from "./SuggestedReplyMessageBody";
-import {LOCAL_MESSAGE_CUSTOM_TYPE} from "../const";
-import ParsedBotMessageBody from "./ParsedBotMessageBody";
-import Message from '@sendbird/uikit-react/Channel/components/Message';
+import {formatCreatedAtToAMPM} from "../utils";
+import {UserMessage} from "@sendbird/chat/message";
 import {ReactNode} from "react";
 
 const Root = styled.div`

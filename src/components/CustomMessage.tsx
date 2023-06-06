@@ -26,7 +26,7 @@ export default function CustomMessage(props: Props) {
     botUser,
   } = props;
 
-  const {allMessages, currentGroupChannel} = useChannelContext();
+  const {allMessages} = useChannelContext();
   const firstMessage: UserMessage = allMessages[0] as UserMessage;
   const firstMessageId = firstMessage?.messageId ?? -1;
 

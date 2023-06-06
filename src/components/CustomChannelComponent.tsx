@@ -1,7 +1,6 @@
 import {User} from "@sendbird/chat";
-import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
-import {SendingStatus, UserMessage} from "@sendbird/chat/message";
+import {SendingStatus} from "@sendbird/chat/message";
 import {GroupChannel} from "@sendbird/chat/groupChannel";
 import {ClientUserMessage} from "SendbirdUIKitGlobal";
 import {useEffect, useState} from "react";
