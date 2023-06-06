@@ -19,14 +19,14 @@ export interface SuggestedReply {
 
 export const SUGGESTED_REPLIES: SuggestedReply[] = [
   {
-    title: 'That helped 👍',
-    text: 'Thank you for your feedback! You can also build your own chatbot through the Sendbird dashboard.',
+    title: 'Problem solved! 👍',
+    text: 'Thank you for your feedback! You can also build your own AI chatbot in Sendbird.',
     buttonText: 'Try free trial',
     link: 'https://dashboard.sendbird.com/auth/signup',
   },
   {
-    title: 'Get more help 💬',
-    text: 'It sounds like you may need to speak with one of my teammates to solve your issue.',
+    title: 'Nope, still lost 💬',
+    text: 'I\'m sorry, we couldn\'t help you. Let us know how we can improve by talking to one of our teammates',
     buttonText: 'Talk to an expert',
     link: 'https://sendbird.com/contact-sales',
   },

@@ -20,6 +20,6 @@ const Highlighter = styled.div`
 
 export default function ChatBottom() {
   return <Container>
-    Add an &nbsp;<Highlighter>AI chatbot</Highlighter> &nbsp;to your product by &nbsp;<SendbirdLogo width={'80px'}/>
+    Add an &nbsp;<Highlighter>AI chatbot</Highlighter>&nbsp;with your very own content by&nbsp;<SendbirdLogo width={'80px'}/>
   </Container>;
 }

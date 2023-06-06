@@ -86,7 +86,7 @@ export default function CustomMessage(props: Props) {
       />
       <BotMessageWithBodyInput
         message={message}
-        bodyComponent={<CustomMessageBody message={'Did that answer your question?'}/>}
+        bodyComponent={<CustomMessageBody message={'Did that help?'}/>}
       />
     </div>;
 }
