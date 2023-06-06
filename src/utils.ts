@@ -73,7 +73,7 @@ type CodeSnippetToken = {
 
 export type Token = StringToken | CodeSnippetToken;
 const parseCode = (code: string): CodeSnippetToken => {
-  const snippetRegex = /```([a-zA-Z]+)([\s\S]*)```/;
+  const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
   const match = code.match(snippetRegex);
   if (match) {
     return {
@@ -90,12 +90,48 @@ const parseCode = (code: string): CodeSnippetToken => {
   }
 }
 
-export function MessageTextParser(inputString: string): Token[] {
-  const snippetRegex = /```(.*)```/g;
-  // const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
-  const parts = inputString.split(snippetRegex);
-  console.log('## parts: ', parts);
+export function splitText(inputString: string) {
+  const delimiter = "```";
+  const result = [];
+  let currentWord = "";
+  let inDelimiter = false;
 
+  for (let i = 0; i < inputString.length; i++) {
+    const char = inputString[i];
+
+    if (inDelimiter) {
+      currentWord += char;
+      if (char === "`") {
+        if (inputString.substr(i, delimiter.length) === delimiter) {
+          result.push(currentWord);
+          currentWord = "";
+          inDelimiter = false;
+          i += delimiter.length - 1;
+        }
+      }
+    } else {
+      if (inputString.substr(i, delimiter.length) === delimiter) {
+        result.push(currentWord);
+        currentWord = delimiter;
+        inDelimiter = true;
+        i += delimiter.length - 1;
+      } else {
+        currentWord += char;
+      }
+    }
+  }
+
+  result.push(currentWord);
+  return result;
+}
+
+export function MessageTextParser(inputString: string): Token[] {
+  // const snippetRegex = /```(.*)```/g;
+  // const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
+  // debugger
+  // const parts = inputString.split(snippetRegex);
+  const parts = splitText(inputString);
+  console.log('## parts: ', parts);
   const result = parts.map((part) => {
     if (part.startsWith('```') && part.endsWith('```')) {
       // Code snippet part

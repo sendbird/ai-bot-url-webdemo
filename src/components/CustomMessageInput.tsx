@@ -66,7 +66,7 @@ export default function CustomMessageInput() {
       inputRef.current.style.height = 'auto';
       inputRef.current.style.height = `${e.target.scrollHeight - 16}px`;
     }
-  };
+  }
 
   function auto_grow() {
     const element = inputRef.current;
@@ -78,7 +78,7 @@ export default function CustomMessageInput() {
     const value = event.target.value;
     setMessage(value);
     setShowSendButton(value.length > 0 ? true : false);
-  };
+  }
 
   function onPressEnter(event) {
     const key = event.charCode;
