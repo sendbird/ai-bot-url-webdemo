@@ -73,7 +73,7 @@ export default function CustomChannelHeader(props: Props) {
   }
 
   return <Root>
-    <StartingPageAnimator isStartingPage={allMessages.length === 1}/>
+    {/*<StartingPageAnimator isStartingPage={allMessages.length === 1}/>*/}
     <SubContainer>
       <img src={channelHeaderImage} alt="channelHeaderImage" style={{
         height: "36px"
