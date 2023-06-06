@@ -5,6 +5,7 @@ import { ReactComponent as CopyIcon } from '../icons/copy-icon.svg';
 import BotMessageBottom from "./BotMessageBottom";
 import {MessageTextParser, Token, TokenType} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";
+import SourceContainer, {Source} from "./SourceContainer";
 
 const Root = styled.div`
   background-color: #eeeeee;
@@ -38,8 +39,9 @@ type Props = {
  */
 export default function ParsedBotMessageBody(props: Props) {
   const { message, tokens } = props;
+  const sources: Source[] = JSON.parse((message as UserMessage).data);
 
-  console.log('## tokens: ', tokens);
+  console.log('## tokens11: ', tokens);
   if (tokens.length > 0) {
     return <Root>
         {
@@ -58,6 +60,7 @@ export default function ParsedBotMessageBody(props: Props) {
             )
           })
         }
+      data ? <SourceContainer sources={sources}/>
       <BotMessageBottom/>
     </Root>;
   }

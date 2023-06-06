@@ -32,8 +32,10 @@ const SourceItem = styled.div`
 `;
 
 export interface Source {
+  source: string
   title: string;
-  link: string;
+  description: string;
+  language: string;
 }
 
 type Props = {
@@ -49,10 +51,10 @@ export default function SourceContainer(props: Props) {
       sources.map((source: Source) => {
         return <>
           <SourceItem>
-            <a href={source.link} id="openLinkText" target="_blank">
+            <a href={source.source} id="openLinkText" target="_blank">
               <SourceTitle>{source.title}</SourceTitle>
             </a>
-            <a href={source.link} id="openLinkIcon" target="_blank">
+            <a href={source.source} id="openLinkIcon" target="_blank">
               <OpenLinkIcon/>
             </a>
           </SourceItem>
