@@ -4,6 +4,9 @@ import CustomChannel from "./components/CustomChannel";
 import SBProvider from "@sendbird/uikit-react/SendbirdProvider";
 import '@sendbird/uikit-react/dist/index.css';
 import './css/index.css';
+import {DUMMIES} from "./dummy";
+import {MessageTextParser, Token} from "./utils";
+import {UserMessage} from "@sendbird/chat/message";
 
 function App() {
   const hashedKey: string = TEST_HASHED_KEY;
@@ -15,7 +18,13 @@ function App() {
     customApiHost={CUSTOM_API_HOST}
     customWebSocketHost={CUSTOM_WEBSOCKET_HOST}
   >
-    <CustomChannel hashedKey={hashedKey}/>
+    {/*<CustomChannel hashedKey={hashedKey}/>*/}
+    {
+      DUMMIES.map((dummy) => {
+        const tokens: Token[] = MessageTextParser(dummy);
+        return JSON.stringify();
+      })
+    }
   </SBProvider>;
 }
 

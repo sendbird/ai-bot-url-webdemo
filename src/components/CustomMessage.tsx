@@ -49,6 +49,7 @@ export default function CustomMessage(props: Props) {
       />;
     }
   }
+
   const tokens: Token[] = MessageTextParser((message as UserMessage).message);
   console.log('## tokens: ', tokens);
     return <div>

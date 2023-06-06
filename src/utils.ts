@@ -73,7 +73,7 @@ type CodeSnippetToken = {
 
 export type Token = StringToken | CodeSnippetToken;
 const parseCode = (code: string): CodeSnippetToken => {
-  const snippetRegex = /```([a-zA-Z]+)([\s\S]*)```/;
+  const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
   const match = code.match(snippetRegex);
   if (match) {
     return {
@@ -91,8 +91,8 @@ const parseCode = (code: string): CodeSnippetToken => {
 }
 
 export function MessageTextParser(inputString: string): Token[] {
-  const snippetRegex = /```(.*)```/g;
-  // const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
+  // const snippetRegex = /```(.*)```/g;
+  const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
   const parts = inputString.split(snippetRegex);
   console.log('## parts: ', parts);
 
