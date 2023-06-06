@@ -12,6 +12,8 @@ const Root = styled.div`
   display: flex;
   align-items: flex-end;
   margin-bottom: 6px;
+  flex-wrap: wrap;
+  gap: 8px;
 `;
 
 const Sender = styled.div`
@@ -24,7 +26,7 @@ const Sender = styled.div`
 `;
 
 const BodyContainer = styled.div`
-  max-width: 760px;
+  max-width: 600px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.88);
   width: fit-content;
@@ -37,7 +39,6 @@ const BodyContainer = styled.div`
 
 const SentTime = styled.div`
   width: 70px;
-  margin-left: 4px;
   color: rgba(0, 0, 0, 0.50);
   font-size: 12px;
   line-height: 1;
@@ -50,7 +51,6 @@ type Props = {
 }
 
 const ImageContainer = styled.div`
-  min-width: 40px;
 `;
 
 export default function BotMessageWithBodyInput(props: Props) {

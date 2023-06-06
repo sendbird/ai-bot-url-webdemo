@@ -5,22 +5,27 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
+  padding: 8px 0;
   gap: 4px;
   width: 100%;
 `;
 
 const RootTitle = styled.div`
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
   color: rgba(0, 0, 0, 0.5);
+  padding-bottom: 4px;
 `;
 
-const SourceTitle = styled.div`
+const SourceTitle = styled.a`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: -0.1px;
-  text-decoration-line: underline;
   color: rgba(0, 0, 0, 0.88);
+  width: fit-content;
+  block-size: fit-content;
 `;
 
 const SourceItem = styled.div`
@@ -28,16 +33,16 @@ const SourceItem = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 4px 0;
+  gap: 16px;
 `;
 
 
-const IconLink = styled.div`
+const IconLink = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  padding: 0 1px;
 `;
 
 export interface Source {
@@ -53,24 +58,17 @@ type Props = {
 
 export default function SourceContainer(props: Props) {
   const { sources } = props;
+  const source: Source = sources[sources.length - 1];
 
   return <Root>
     <RootTitle>Source</RootTitle>
-    {
-      sources.map((source: Source) => {
-        return <>
-          <SourceItem>
-            <a href={source.source} id="openLinkText" target="_blank">
-              <SourceTitle>{source.title}</SourceTitle>
-            </a>
-            <IconLink>
-              <a href={source.source} id="openLinkIcon" target="_blank">
-                <OpenLinkIcon width={'100%'} height={'100%'}/>
-              </a>
-            </IconLink>
-          </SourceItem>
-        </>
-      })
-    }
+    <SourceItem>
+      <div>
+          <SourceTitle href={source.source} id="openLinkText" target="_blank">{source.title}</SourceTitle>
+      </div>
+      <IconLink href={source.source} id="openLinkIcon" target="_blank">
+        <OpenLinkIcon width={'100%'} height={'100%'}/>
+      </IconLink>
+    </SourceItem>
   </Root>
 }

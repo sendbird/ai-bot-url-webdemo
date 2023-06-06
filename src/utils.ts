@@ -73,7 +73,7 @@ type CodeSnippetToken = {
 
 export type Token = StringToken | CodeSnippetToken;
 const parseCode = (code: string): CodeSnippetToken => {
-  const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
+  const snippetRegex = /```([a-zA-Z]+)([\s\S]*)```/;
   const match = code.match(snippetRegex);
   if (match) {
     return {
@@ -91,38 +91,46 @@ const parseCode = (code: string): CodeSnippetToken => {
 }
 
 export function splitText(inputString: string) {
-  const delimiter = "```";
+  const delimiter = '```';
   const result = [];
-  let currentWord = "";
+  let currentWord = '';
   let inDelimiter = false;
 
   for (let i = 0; i < inputString.length; i++) {
     const char = inputString[i];
 
     if (inDelimiter) {
-      currentWord += char;
-      if (char === "`") {
-        if (inputString.substr(i, delimiter.length) === delimiter) {
-          result.push(currentWord);
-          currentWord = "";
-          inDelimiter = false;
-          i += delimiter.length - 1;
-        }
+      if (isDelimiterIndex(i, inputString, delimiter)) {
+        currentWord += delimiter;
+        result.push(currentWord);
+        currentWord = '';
+        inDelimiter = false;
+        i += delimiter.length - 1;
+      } else {
+        currentWord += char;
       }
     } else {
-      if (inputString.substr(i, delimiter.length) === delimiter) {
+      if (isDelimiterIndex(i, inputString, delimiter)) {
+        console.log('## isDelimiterIndex: ', isDelimiterIndex(i, inputString, delimiter));
+
         result.push(currentWord);
         currentWord = delimiter;
         inDelimiter = true;
-        i += delimiter.length - 1;
+        i += (delimiter.length - 1); // -1 is because of i++;
       } else {
         currentWord += char;
       }
     }
   }
-
   result.push(currentWord);
+  console.log('## result: ', result);
   return result;
+}
+
+function isDelimiterIndex(index: number, inputString: string, delimiter: string) {
+
+
+  return inputString.substring(index, index + delimiter.length) === delimiter;
 }
 
 export function MessageTextParser(inputString: string): Token[] {
@@ -140,7 +148,7 @@ export function MessageTextParser(inputString: string): Token[] {
       // String part
       return {
         type: 'String',
-        value: part,
+        value: part.trim(),
       } as StringToken;
     }
   });

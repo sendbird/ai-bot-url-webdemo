@@ -11,7 +11,7 @@ const Root = styled.div`
   &:hover {
     background-color: #e0e0e0;
   }
-  max-width: 480px;
+  max-width: 600px;
 `;
 
 const Text = styled.div`
@@ -22,8 +22,12 @@ const Text = styled.div`
   line-height: 1.43;
 `;
 
-export default function ConfirmationMessageBody() {
+interface Props {
+  message: string;
+}
+
+export default function CustomMessageBody(props: Props) {
   return <Root>
-    <Text>Did that answer your question?</Text>
+    <Text>{props.message}</Text>
   </Root>;
 }

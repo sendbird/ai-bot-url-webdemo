@@ -26,6 +26,11 @@ export function useSendLocalMessage() {
   const messagesDispatcher = channelStore.messagesDispatcher as OnMessageRecivedDispatcher;
   const useSendLocalMessage = useCallback((message: UserMessage) => {
     if (currentGroupChannel) {
+      // https://github.com/sendbird/sendbird-uikit-react/blob/main/src/modules/Channel/context/dux/actionTypes.js
+      // dispatcher({
+      //   type: channelActions.ON_MESSAGE_DELETED,
+      //   payload: messageId,
+      // }); // For deleting local message
       messagesDispatcher({
         type: 'ON_MESSAGE_RECEIVED',
         payload: {

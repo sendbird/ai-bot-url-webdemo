@@ -59,7 +59,7 @@ const Panel = styled.div`
   flex-wrap: wrap;
   column-gap: 10px;
   row-gap: 8px;
-  margin-top: 8px;
+  margin-top: 4px;
 `;
 
 interface Props {
@@ -76,7 +76,6 @@ const SuggestedRepliesPanel = (props: Props) => {
   const channel: GroupChannel | undefined = currentGroupChannel;
   const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
   const sendLocalMessage = useSendLocalMessage();
-
 
   useEffect(() => {
     if (lastMessage

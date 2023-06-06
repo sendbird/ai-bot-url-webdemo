@@ -20,7 +20,7 @@ const Root = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-top: 8px;
+  padding: 16px 0 8px;
 `;
 
 const Delimiter = styled.div`
@@ -31,6 +31,10 @@ const Delimiter = styled.div`
 `;
 
 const InfoIconButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
   cursor: pointer;
 `;
 

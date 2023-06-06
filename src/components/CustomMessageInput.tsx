@@ -5,6 +5,7 @@ import { useChannelContext } from "@sendbird/uikit-react/Channel/context";
 import { UserMessageCreateParams } from "@sendbird/chat/message";
 import styled from "styled-components";
 import { ReactComponent as SendIcon } from '../icons/send-icon.svg';
+import {useThrottle} from "../hooks/useThrottle";
 
 interface InputProps {
   isActive: boolean;
@@ -61,12 +62,13 @@ export default function CustomMessageInput() {
     }
   }, [message]);
 
-  function handleInput(e: ChangeEvent<HTMLTextAreaElement>) {
+  const throttledIncrement = useThrottle((e) => {
     if (inputRef.current) {
       inputRef.current.style.height = 'auto';
       inputRef.current.style.height = `${e.target.scrollHeight - 16}px`;
     }
-  }
+  }, 10);
+
 
   function auto_grow() {
     const element = inputRef.current;
@@ -115,7 +117,7 @@ export default function CustomMessageInput() {
           ref={inputRef}
           value={message}
           onChange={handleMessageChange}
-          onInput={handleInput}
+          onInput={throttledIncrement}
           rows={1}
         />
         {

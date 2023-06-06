@@ -55,3 +55,5 @@ export const LOCAL_MESSAGE_CUSTOM_TYPE = {
   linkSuggestion: 'linkSuggestion',
   confirmation: 'confirmation',
 };
+
+export const FIRST_MESSAGE_TEXT = 'Hey, this is Clark from Sendbird. How can I help you today?';

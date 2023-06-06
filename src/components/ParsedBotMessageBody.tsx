@@ -1,6 +1,6 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
-import {CopyBlock, irBlack } from "react-code-blocks";
+import {CopyBlock, irBlack,dracula } from "react-code-blocks";
 import { ReactComponent as CopyIcon } from '../icons/copy-icon.svg';
 import BotMessageBottom from "./BotMessageBottom";
 import {MessageTextParser, Token, TokenType} from "../utils";
@@ -8,12 +8,12 @@ import {UserMessage} from "@sendbird/chat/message";
 import SourceContainer, {Source} from "./SourceContainer";
 
 const Root = styled.div`
+  display: flex;
   background-color: #eeeeee;
   &:hover {
     background-color: #e0e0e0;
   }
-  max-width: 480px;
-  display: flex;
+  max-width: 600px;
   flex-direction: column;
   align-items: flex-start;
   padding: 8px 12px;

@@ -13,7 +13,7 @@ const Root = styled.div`
   &:hover {
     background-color: #e0e0e0;
   }
-  max-width: 480px;
+  max-width: 340px;
 `;
 
 const ButtonContainer = styled.div`
