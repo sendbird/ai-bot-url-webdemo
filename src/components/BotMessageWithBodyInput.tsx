@@ -16,17 +16,22 @@ const Root = styled.div`
   gap: 8px;
 `;
 
-const Sender = styled.div`
+interface SenderProps {
+  isStartingPage: boolean;
+}
+const Sender = styled.div<SenderProps>`
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 12px;
-  color: rgba(0, 0, 0, 0.5);
+  color: ${(props: SenderProps) => (props.isStartingPage ? '#FFFFFF' : 'rgba(0, 0, 0, 0.5)')};
+  transition: color 0.5s;
+  transition-timing-function: ease;
   margin: 0 0 4px 12px;
 `;
 
 const BodyContainer = styled.div`
-  max-width: 600px;
+  max-width: 300px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.88);
   width: fit-content;
@@ -48,13 +53,14 @@ const SentTime = styled.div`
 type Props = {
   message: UserMessage;
   bodyComponent: ReactNode;
+  messageCount: number;
 }
 
 const ImageContainer = styled.div`
 `;
 
 export default function BotMessageWithBodyInput(props: Props) {
-  const { message, bodyComponent } = props;
+  const { message, bodyComponent, messageCount } = props;
 
   return <Root>
     <ImageContainer>
@@ -63,7 +69,7 @@ export default function BotMessageWithBodyInput(props: Props) {
       }}/>
     </ImageContainer>
     <BodyContainer>
-      <Sender>{message.sender.nickname}</Sender>
+      <Sender isStartingPage={messageCount === 1}>{message.sender.nickname}</Sender>
       {bodyComponent}
     </BodyContainer>
     <SentTime>

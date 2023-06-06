@@ -11,12 +11,12 @@ import Message from "@sendbird/uikit-react/Channel/components/Message";
 import {User} from "@sendbird/chat";
 import CustomMessageBody from "./CustomMessageBody";
 import CurrentUserMessage from "./CurrentUserMessage";
+import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
 
 type Props = {
   message: EveryMessage;
   activeSpinnerId: number;
   botUser: User;
-  firstMessageId: number;
 }
 
 export default function CustomMessage(props: Props) {
@@ -24,8 +24,11 @@ export default function CustomMessage(props: Props) {
     message,
     activeSpinnerId,
     botUser,
-    firstMessageId,
   } = props;
+
+  const {allMessages, currentGroupChannel} = useChannelContext();
+  const firstMessage: UserMessage = allMessages[0] as UserMessage;
+  const firstMessageId = firstMessage?.messageId ?? -1;
 
   // Sent by current user
   if ((message as UserMessage).sender.userId !== botUser.userId) {
@@ -44,6 +47,7 @@ export default function CustomMessage(props: Props) {
     return <BotMessageWithBodyInput
       message={message}
       bodyComponent={<CustomMessageBody message={(message as UserMessage).message}/>}
+      messageCount={allMessages.length}
     />;
   }
 
