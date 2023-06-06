@@ -39,7 +39,7 @@ const RenewButton = styled.div`
   display: flex;
   gap: 2px;
   align-items: center;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 12px;
   color: #6210CC;
   cursor: pointer;
@@ -60,7 +60,7 @@ export default function CustomChannelHeader(props: Props) {
 
   return <Root>
     <SubContainer>
-      <image src={channelHeaderImage} alt="channelHeaderImage" style={{
+      <img src={channelHeaderImage} alt="channelHeaderImage" style={{
         height: "36px"
       }}/>
       <div>
@@ -70,7 +70,7 @@ export default function CustomChannelHeader(props: Props) {
     </SubContainer>
     <RenewButton onClick={onClickRenewButton}>
       <div>Renew</div>
-      <RefreshIcon height='20px' width='20px'/>
+      <RefreshIcon height='18px' width='18px'/>
     </RenewButton>
   </Root>;
 }

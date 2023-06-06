@@ -9,7 +9,7 @@ import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateConte
 import SuggestedRepliesPanel from "./SuggestedRepliesPanel";
 import MessageInput from "@sendbird/uikit-react/Channel/components/MessageInput";
 import CustomMessage from "./CustomMessage";
-import BottomTextContainer from "./BottomTextContainer";
+import ChatBottom from "./ChatBottom";
 import CustomChannelHeader from "./CustomChannelHeader";
 import styled from "styled-components";
 import {ChannelProvider, useChannelContext} from "@sendbird/uikit-react/Channel/context";
@@ -69,14 +69,19 @@ function CustomChannelUI(props: CustomChannelUIProps) {
       }}
       renderMessageInput={() => {
         return <div>
-          <SuggestedRepliesPanel botUser={botUser}/>
+          {
+            allMessages
+            && allMessages.length > 2
+            && lastMessage.sender.userId === botUser.userId
+            && <SuggestedRepliesPanel botUser={botUser}/>
+          }
           {/*<MessageInput*/}
           {/*  renderVoiceMessageIcon={() => <></>}*/}
           {/*  renderFileUploadIcon={() => <></>}*/}
           {/*  renderSendMessageIcon={() => <></>}*/}
           {/*/>*/}
           <CustomMessageInput/>
-          <BottomTextContainer/>
+          <ChatBottom/>
         </div>
       }}
       renderMessage={({ message }) => {

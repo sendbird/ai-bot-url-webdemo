@@ -11,7 +11,7 @@ const Container = styled.div`
 
 export default function LoadingScreen() {
   return <Container>
-    <image
+    <img
       src={typingIndicatorLogo}
       alt="pending..."
       style={{

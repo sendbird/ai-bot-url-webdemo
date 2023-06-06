@@ -58,10 +58,9 @@ export default function BotMessageWithBodyInput(props: Props) {
 
   return <Root>
     <ImageContainer>
-      <image src={botMessageImage} alt="botProfileImage" style={{
+      <img src={botMessageImage} alt="botProfileImage" style={{
         height: "28px"
       }}/>
-      <image src height={'28px'} width={'28px'}/>
     </ImageContainer>
     <BodyContainer>
       <Sender>{message.sender.nickname}</Sender>

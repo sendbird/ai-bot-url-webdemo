@@ -7,6 +7,8 @@ import {useSendLocalMessage} from "../hooks/useSendLocalMessage";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
 import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
+import {ClientUserMessage} from "SendbirdUIKitGlobal";
+import {isNotLocalMessageCustomType} from "../utils";
 
 interface SuggestedReplyItemProps {
   isActive: boolean;
@@ -70,12 +72,18 @@ const SuggestedRepliesPanel = (props: Props) => {
   const [suggestedReplies, setSuggestedReplies] = useState<SuggestedReply[]>(SUGGESTED_REPLIES);
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
-  const { currentGroupChannel } = useChannelContext();
+  const { allMessages, currentGroupChannel } = useChannelContext();
   const channel: GroupChannel | undefined = currentGroupChannel;
+  const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
   const sendLocalMessage = useSendLocalMessage();
 
+
   useEffect(() => {
-    setSuggestedReplies(SUGGESTED_REPLIES);
+    if (lastMessage
+      && lastMessage.sender.userId === botUser.userId
+      && isNotLocalMessageCustomType(lastMessage.customType)) {
+      setSuggestedReplies(SUGGESTED_REPLIES);
+    }
   }, [channel]);
 
   const onClickSuggestedReply = (event: React.MouseEvent<HTMLDivElement>) => {

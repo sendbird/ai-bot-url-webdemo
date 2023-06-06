@@ -1,3 +1,5 @@
+import {LOCAL_MESSAGE_CUSTOM_TYPE} from "./const";
+
 export function uuid() {
   let d = new Date().getTime();
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -89,8 +91,8 @@ const parseCode = (code: string): CodeSnippetToken => {
 }
 
 export function MessageTextParser(inputString: string): Token[] {
-  // const snippetRegex = /(```[^`]+```)/g;
-  const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
+  const snippetRegex = /```(.*)```/g;
+  // const snippetRegex = /(```([\w]*)\n([\S\s]+?)\n```)/g;
   const parts = inputString.split(snippetRegex);
   console.log('## parts: ', parts);
 
@@ -107,4 +109,8 @@ export function MessageTextParser(inputString: string): Token[] {
     }
   });
   return result;
+}
+
+export function isNotLocalMessageCustomType(customType: string | undefined) {
+  return !customType || Object.values(LOCAL_MESSAGE_CUSTOM_TYPE).indexOf(customType) === -1;
 }
