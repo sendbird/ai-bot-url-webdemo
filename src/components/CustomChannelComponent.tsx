@@ -36,6 +36,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
   // const store = useSendbirdStateContext();
   // const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
   const {allMessages, currentGroupChannel} = useChannelContext();
+  console.log('## allMessages: ', allMessages);
   const channel: GroupChannel | undefined = currentGroupChannel;
   const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
   // console.log('#### allMessages: ', allMessages);

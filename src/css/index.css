@@ -14,10 +14,10 @@
     margin: 0 !important;
 }
 
-/*.sendbird-conversation {*/
-/*    height: 640px !important;*/
-/*}*/
+.sendbird-conversation {
+    height: 640px !important;
+}
 
-/*#root {*/
-/*    height: 640px !important;*/
-/*}*/
+#root {
+    height: 640px !important;
+}

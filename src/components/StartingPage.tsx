@@ -23,6 +23,8 @@ const Root = styled.div<StartingPageAnimatorProps>`
 
 const HeaderOne = styled.div`
   //font-weight: 600;
+  padding-top: 16px;
+
   font-size: 24px;
   line-height: 36px;
   color: #FFFFFF;
@@ -32,8 +34,8 @@ const HeaderOne = styled.div`
 
 const HeaderTwo = styled.div`
   font-weight: 700;
-  font-size: 32px;
-  line-height: 48px;
+  font-size: 27px;
+  margin-top: 8px;
   color: #FFFFFF;
   //margin-top: 8px;
 `;
@@ -51,8 +53,8 @@ export function StartingPage(props: Props) {
       </BackgroundContainer>
       <TitleContainer>
         <SendbirdLogo width={'100px'}/>
-        <HeaderOne>I'm Docs AI assistant.</HeaderOne>
-        <HeaderTwo>How can I help you?</HeaderTwo>
+        <HeaderOne>Meet Clark</HeaderOne>
+        <HeaderTwo>Your very own AI Assistant</HeaderTwo>
       </TitleContainer>
     </Root>
   );
