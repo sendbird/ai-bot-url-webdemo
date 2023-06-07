@@ -7,9 +7,9 @@ import {useGetHashedKey} from "./hooks/useGetHashedKey";
 import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
-  let hashedKey: string = useGetHashedKey(); // show loading if not there.
+  const hashedKey: string = useGetHashedKey(); // show loading if not there.
   const isHashedKeyGiven = !!hashedKey;
-  if (!isHashedKeyGiven) hashedKey = TEST_HASHED_KEY;
+  // if (!isHashedKeyGiven) hashedKey = TEST_HASHED_KEY;
   console.log('## isHashedKeyGiven: ', isHashedKeyGiven);
   console.log('## used hashedKey: ', hashedKey);
   if (!hashedKey) return <LoadingScreen/>;
