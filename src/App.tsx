@@ -4,11 +4,15 @@ import '@sendbird/uikit-react/dist/index.css';
 import './css/index.css';
 import CustomChannel from "./components/CustomChannel";
 import {useGetHashedKey} from "./hooks/useGetHashedKey";
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
-  const hashedKey: string = useGetHashedKey(); // show loading if not there.
-  // const hashedKey: string = TEST_HASHED_KEY;
-  console.log('## hashedKey: ', hashedKey);
+  let hashedKey: string = useGetHashedKey(); // show loading if not there.
+  const isHashedKeyGiven = !!hashedKey;
+  if (!isHashedKeyGiven) hashedKey = TEST_HASHED_KEY;
+  console.log('## isHashedKeyGiven: ', isHashedKeyGiven);
+  console.log('## used hashedKey: ', hashedKey);
+  if (!hashedKey) return <LoadingScreen/>;
 
   return <SBProvider
     appId={APP_ID}
@@ -18,6 +22,7 @@ function App() {
     customWebSocketHost={CUSTOM_WEBSOCKET_HOST}
   >
     <CustomChannel hashedKey={hashedKey}/>
+    <div id={'sb_chat_root_for_z_index'}/>
   </SBProvider>;
 }
 

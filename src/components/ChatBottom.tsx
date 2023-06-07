@@ -6,8 +6,8 @@ const Container = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  padding: 0 8px;
-  width: calc(100% - 16px);
+  padding: 0 4px;
+  width: calc(100% - 8px);
   min-height: 40px;
   display: flex;
   justify-content: center;

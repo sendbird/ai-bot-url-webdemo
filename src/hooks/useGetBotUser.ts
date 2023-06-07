@@ -22,7 +22,9 @@ export function useGetBotUser(currentUser: User, hashedKey: string): User {
           console.log('## useGetBotUserId fetched users: ', users);
           setBotUser(users[0]);
         }
-      })
+      }).catch((err) => {
+
+      });
     }
   }, [currentUser, hashedKey]);
   return botUser;

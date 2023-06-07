@@ -18,7 +18,7 @@ const Root = styled.div<StartingPageAnimatorProps>`
   opacity: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '1' : '0')};
   z-index: 20;
   width: 100%;
-  transition: all 0.5s ease;
+  transition: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? 'none' : 'all 0.5s ease')};
 `;
 
 const HeaderOne = styled.div`

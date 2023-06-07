@@ -47,14 +47,19 @@ export default function ParsedBotMessageBody(props: Props) {
 
   console.log('## sources: ', sources);
   if (tokens.length > 0) {
-    return <Root>
+    return <>
+      <Root>
+
         {
           tokens.map((token: Token, i) => {
             if (token.type === TokenType.string) {
               return <TextComponent key={'token' + i}>{token.value}</TextComponent>;
             }
             return (
-              <>{token.value}</>
+              <pre>
+      <code>{token.value}</code>
+    </pre>
+              // <>{token.value}</>
               // <CopyBlock
               //   key={'token' + i}
               //   text={token.value}
@@ -65,13 +70,14 @@ export default function ParsedBotMessageBody(props: Props) {
             )
           })
         }
-      {
-        sources.length > 0
-          ? <SourceContainer sources={sources}/>
-          : null
-      }
-      <BotMessageBottom/>
-    </Root>;
+        {
+          sources.length > 0
+            ? <SourceContainer sources={sources}/>
+            : null
+        }
+        <BotMessageBottom/>
+      </Root>
+      </>
   }
   return <Text>{message.message}</Text>;
 }

@@ -67,7 +67,7 @@ export default function SourceContainer(props: Props) {
           <SourceTitle href={source.source} id="openLinkText" target="_blank">{source.title}</SourceTitle>
       </div>
       <IconLink href={source.source} id="openLinkIcon" target="_blank">
-        <OpenLinkIcon width={'100%'} height={'100%'}/>
+        <OpenLinkIcon width={'15px'} height={'15px'}/>
       </IconLink>
     </SourceItem>
   </Root>
