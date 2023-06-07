@@ -1,6 +1,6 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
-// import {CopyBlock, irBlack } from "react-code-blocks";
+import {CopyBlock, irBlack } from "react-code-blocks";
 import BotMessageBottom from "./BotMessageBottom";
 import {Token, TokenType} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";
@@ -24,10 +24,7 @@ const Root = styled.div`
 const Text = styled.div`
   width: 100%;
   text-align: left;
-`;
-
-const TextComponent = styled.div`
-  white-space: pre-line;
+  word-break: break-word;
 `;
 
 type Props = {
@@ -47,26 +44,20 @@ export default function ParsedBotMessageBody(props: Props) {
 
   console.log('## sources: ', sources);
   if (tokens.length > 0) {
-    return <>
-      <Root>
-
+    return <Root>
         {
           tokens.map((token: Token, i) => {
             if (token.type === TokenType.string) {
-              return <TextComponent key={'token' + i}>{token.value}</TextComponent>;
+              return <Text key={'token' + i}>{token.value}</Text>;
             }
             return (
-              <pre>
-      <code>{token.value}</code>
-    </pre>
-              // <>{token.value}</>
-              // <CopyBlock
-              //   key={'token' + i}
-              //   text={token.value}
-              //   language={token.type}
-              //   theme={irBlack}
-              //   showLineNumbers={true}
-              // />
+              <CopyBlock
+                key={'token' + i}
+                text={token.value}
+                language={token.type}
+                theme={irBlack}
+                showLineNumbers={true}
+              />
             )
           })
         }
@@ -77,7 +68,6 @@ export default function ParsedBotMessageBody(props: Props) {
         }
         <BotMessageBottom/>
       </Root>
-      </>
   }
   return <Text>{message.message}</Text>;
 }

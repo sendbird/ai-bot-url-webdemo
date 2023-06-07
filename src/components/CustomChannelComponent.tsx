@@ -68,7 +68,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
         />;
       }}
       renderMessageInput={() => {
-        return <div>
+        return <div style={{  position: 'relative', zIndex: 50, backgroundColor: 'white' }}>
           {
             allMessages
             && allMessages.length > 2
@@ -76,7 +76,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
             && <SuggestedRepliesPanel botUser={botUser}/>
           }
           <CustomMessageInput/>
-          <ChatBottom/>
+          {/*<ChatBottom/>*/}
         </div>
       }}
       renderMessage={({message}) => {

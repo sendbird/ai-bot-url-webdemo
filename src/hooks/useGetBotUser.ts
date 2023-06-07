@@ -8,9 +8,8 @@ export function useGetBotUser(currentUser: User, hashedKey: string): User {
   const sb: SendbirdChat = store.stores.sdkStore.sdk;
 
   useEffect(() => {
-    console.log('## useGetBotUser hashedKey: ', hashedKey);
     if (currentUser && hashedKey) {
-      console.log('## useGetBotUser querying: ', hashedKey);
+      console.log('## useGetBotUser hashedKey: ', hashedKey);
 
       const query: ApplicationUserListQuery = sb.createApplicationUserListQuery({
         userIdsFilter: [hashedKey],
@@ -23,7 +22,7 @@ export function useGetBotUser(currentUser: User, hashedKey: string): User {
           setBotUser(users[0]);
         }
       }).catch((err) => {
-
+        console.log('## useGetBotUser error: ', err);
       });
     }
   }, [currentUser, hashedKey]);

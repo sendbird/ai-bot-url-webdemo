@@ -43,17 +43,16 @@ const InfoIconButton = styled.div`
 
 const InfoBox = styled.div`
   padding: 8px 12px;
-  //position: fixed;
   max-width: 300px;
   width: 100%;
-  //left: calc(50% - 150px);
-  //top: calc(100% + 12px);
   background: #000000;
   opacity: 0.8;
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.88);
   margin-top: 8px;
-  //z-index: 40;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
 `;
 
 export default function BotMessageBottom() {

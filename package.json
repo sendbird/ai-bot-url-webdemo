@@ -14,6 +14,7 @@
     "@sendbird/chat": "^4.9.0",
     "@sendbird/uikit-react": "^3.4.9",
     "react": "^18.2.0",
+    "react-code-blocks": "^0.0.9-0",
     "react-dom": "^18.2.0",
     "react-popper-tooltip": "^4.4.2",
     "styled-components": "^5.3.11",

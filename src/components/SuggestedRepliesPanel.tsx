@@ -41,19 +41,20 @@ const SuggestedReplyItem = styled.div<SuggestedReplyItemProps>`
 `;
 
 const Root = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 2px 24px 0px;
-  font-size: 15px;
-`;
-
-const Panel = styled.div`
   position: relative;
   z-index: 50;
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 8px 24px 0px;
+  font-size: 15px;
+  //width: calc(100%);
+`;
+
+const Panel = styled.div`
+  display: flex;
   height: 37px;
-  width: calc(100% - 48px);
+  width: calc(100%);
   justify-content: flex-end;
   align-items: center;
   overflow: hidden;
@@ -113,7 +114,7 @@ const SuggestedRepliesPanel = (props: Props) => {
     }) as UserMessage;
 
     sendLocalMessage(localMessage);
-    setSuggestedReplies(copied);
+    setSuggestedReplies([]);
   };
 
   return suggestedReplies && suggestedReplies.length > 0
