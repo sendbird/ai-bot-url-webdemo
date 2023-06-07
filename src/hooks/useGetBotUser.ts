@@ -8,7 +8,10 @@ export function useGetBotUser(currentUser: User, hashedKey: string): User {
   const sb: SendbirdChat = store.stores.sdkStore.sdk;
 
   useEffect(() => {
+    console.log('## useGetBotUser hashedKey: ', hashedKey);
     if (currentUser && hashedKey) {
+      console.log('## useGetBotUser querying: ', hashedKey);
+
       const query: ApplicationUserListQuery = sb.createApplicationUserListQuery({
         userIdsFilter: [hashedKey],
       });

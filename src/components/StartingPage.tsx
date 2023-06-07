@@ -44,7 +44,6 @@ interface Props {
 
 export function StartingPage(props: Props) {
   const { isStartingPage } = props;
-  console.log('## StartingPage: ', isStartingPage);
   return (
     <Root isStartingPage={isStartingPage}>
       <BackgroundContainer>

@@ -6,8 +6,9 @@ import CustomChannel from "./components/CustomChannel";
 import {useGetHashedKey} from "./hooks/useGetHashedKey";
 
 function App() {
-  const hashedKey: string = useGetHashedKey() ?? TEST_HASHED_KEY; // show loading if not there.
+  const hashedKey: string = useGetHashedKey(); // show loading if not there.
   // const hashedKey: string = TEST_HASHED_KEY;
+  console.log('## hashedKey: ', hashedKey);
 
   return <SBProvider
     appId={APP_ID}

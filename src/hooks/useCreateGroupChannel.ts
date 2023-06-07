@@ -12,6 +12,8 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
 
   function createAndSetNewChannel() {
     if (currentUser && botUser) {
+      console.log('## createAndSetNewChannel: ', channel);
+
       const params: GroupChannelCreateParams = {
         name: CREATE_GROUP_CHANNEL_PARAMS.name,
         invitedUserIds: [currentUser.userId, botUser.userId],
@@ -26,7 +28,9 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
   }
 
   useEffect(() => {
-    createAndSetNewChannel();
+    if (currentUser && botUser && sb) {
+      createAndSetNewChannel();
+    }
   }, [currentUser, botUser, sb]);
 
   return [channel, createAndSetNewChannel];
