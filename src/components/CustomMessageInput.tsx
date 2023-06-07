@@ -119,6 +119,7 @@ export default function CustomMessageInput() {
           onChange={handleMessageChange}
           onInput={throttledIncrement}
           rows={1}
+          placeholder={'Enter message'}
         />
         {
           showSendButton
