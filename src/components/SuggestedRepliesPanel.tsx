@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import styled  from 'styled-components'
-import {LOCAL_MESSAGE_CUSTOM_TYPE, SUGGESTED_REPLIES, SuggestedReply} from "../const";
+import {LOCAL_MESSAGE_CUSTOM_TYPE, SuggestedReply} from "../const";
 import {MessageType, SendingStatus, UserMessage} from "@sendbird/chat/message";
 import {ChannelType, User} from "@sendbird/chat";
 import {useSendLocalMessage} from "../hooks/useSendLocalMessage";

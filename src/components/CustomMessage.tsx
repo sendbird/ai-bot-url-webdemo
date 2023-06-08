@@ -1,6 +1,6 @@
 import {EveryMessage} from 'SendbirdUIKitGlobal';
 import typingIndicatorLogo from '../icons/message-typing-indicator.gif';
-import {FIRST_MESSAGE_TEXT, LOCAL_MESSAGE_CUSTOM_TYPE} from "../const";
+import {LOCAL_MESSAGE_CUSTOM_TYPE} from "../const";
 import BotMessageWithBodyInput from "./BotMessageWithBodyInput";
 import {MessageType, UserMessage} from "@sendbird/chat/message";
 import PendingMessage from "./PendingMessage";

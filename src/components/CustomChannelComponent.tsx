@@ -11,13 +11,14 @@ import ChannelUI from "@sendbird/uikit-react/Channel/components/ChannelUI";
 import CustomChannelHeader from "./CustomChannelHeader";
 import SuggestedRepliesPanel from "./SuggestedRepliesPanel";
 import CustomMessageInput from "./CustomMessageInput";
-import ChatBottom from "./ChatBottom";
 import CustomMessage from "./CustomMessage";
 import styled from "styled-components";
 import {StartingPage} from "./StartingPage";
+import ChannelHeader from "@sendbird/uikit-react/Channel/components/ChannelHeader"
+import ChatBottom from "./ChatBottom";
 
 const Root = styled.div`
-  height: 100vh;
+  height: 640px;
   font-family: 'Roboto', sans-serif;
   z-index: 0;
 `;
@@ -28,7 +29,7 @@ export interface StartingPageAnimatorProps {
 
 type CustomChannelComponentProps = {
   botUser: User;
-  createGroupChannel: () => void;
+  createGroupChannel?: () => void;
 }
 
 export function CustomChannelComponent(props: CustomChannelComponentProps) {
@@ -62,11 +63,13 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
     <StartingPage isStartingPage={allMessages.length === 1}/>
     <ChannelUI
       renderChannelHeader={() => {
-        return <CustomChannelHeader
-          channel={channel}
-          isTyping={activeSpinnerId > -1}
-          createGroupChannel={createGroupChannel}
-        />;
+        return createGroupChannel
+          ? <CustomChannelHeader
+            channel={channel}
+            isTyping={activeSpinnerId > -1}
+            createGroupChannel={createGroupChannel}
+          />
+          : <ChannelHeader/>;
       }}
       renderMessageInput={() => {
         return <div style={{  position: 'relative', zIndex: 50, backgroundColor: 'white' }}>
@@ -77,7 +80,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
             && <SuggestedRepliesPanel botUser={botUser}/>
           }
           <CustomMessageInput/>
-          {/*<ChatBottom/>*/}
+          <ChatBottom/>
         </div>
       }}
       renderMessage={({message}) => {
