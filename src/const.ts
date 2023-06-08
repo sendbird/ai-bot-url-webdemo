@@ -3,8 +3,8 @@ import {uuid} from './utils';
 export const USER_ID = uuid();
 export const NICKNAME = "Jake Sully";
 // get your app_id -> https://dashboard.sendbird.com/auth/signin
-export const WEB_DEMO_APP_ID = import.meta['env']['VITE_WEB_DEMO_APP_ID'];
-export const WIDGET_DEMO_APP_ID = import.meta['env']['VITE_WIDGET_DEMO_APP_ID'];
+export const WEB_DEMO_APP_ID = import.meta.env.VITE_WEB_DEMO_APP_ID;
+export const WIDGET_DEMO_APP_ID = import.meta.env.VITE_WIDGET_DEMO_APP_ID;
 
 export const HASHED_KEY_QUERY_PARAMETER_NAME = 'hashed_key'; // bot userId
 export const IS_WIDGET_PARAMETER_NAME = 'is_widget';
