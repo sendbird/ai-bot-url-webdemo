@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { ReactComponent as BackgroundImage } from '../icons/starting-page-background.svg';
 import { ReactComponent as SendbirdLogo } from '../icons/sendbird-logo-starting-page.svg';
 import {StartingPageAnimatorProps} from "./CustomChannelComponent";
+import {useContext} from "react";
+import {DemoConstant} from "../const";
+import {DemoStatesContext} from "../context/DemoStatesContext";
 
 const BackgroundContainer = styled.div<StartingPageAnimatorProps>`
   position: absolute;
@@ -46,6 +49,8 @@ interface Props {
 
 export function StartingPage(props: Props) {
   const { isStartingPage } = props;
+  const demoStates = useContext<DemoConstant>(DemoStatesContext);
+
   return (
     <Root isStartingPage={isStartingPage}>
       <BackgroundContainer>
@@ -53,8 +58,8 @@ export function StartingPage(props: Props) {
       </BackgroundContainer>
       <TitleContainer>
         <SendbirdLogo width={'100px'}/>
-        <HeaderOne>Meet Clark</HeaderOne>
-        <HeaderTwo>Your very own AI Assistant</HeaderTwo>
+        <HeaderOne>{demoStates.startingPageContent.headerOne}</HeaderOne>
+        <HeaderTwo>{demoStates.startingPageContent.headerTwo}</HeaderTwo>
       </TitleContainer>
     </Root>
   );
