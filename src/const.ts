@@ -70,13 +70,13 @@ export const DEMO_CONSTANTS = {
       },
       {
         title: 'Nope, still lost 💬',
-        text: 'I\'m sorry, we couldn\'t help you. Let us know how we can improve by talking to one of our teammates',
-        buttonText: 'Talk to an expert',
-        link: 'https://sendbird.com/contact-sales',
+        text: 'I\'m sorry, we couldn\'t help you. How about discussing it in Sendbird Community?',
+        buttonText: 'Join the Community',
+        link: 'https://community.sendbird.com/',
       },
     ],
     createGroupChannelParams: {
-      name: 'AI Assistant',
+      name: 'Docs Assistant',
       coverUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ix' +
         'lib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
     },
@@ -107,7 +107,7 @@ export const INITIAL_DEMO_STATE: DemoConstant = {
     },
   ],
   createGroupChannelParams: {
-    name: 'AI Assistant',
+    name: 'Clark the Assistant',
     coverUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ix' +
       'lib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
   },
