@@ -1,6 +1,6 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
-import {CopyBlock, irBlack } from "react-code-blocks";
+import {CodeBlock, CopyBlock, irBlack} from "react-code-blocks";
 import BotMessageBottom from "./BotMessageBottom";
 import {Token, TokenType} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";
@@ -27,6 +27,10 @@ const Text = styled.div`
   word-break: break-word;
 `;
 
+const BlockContainer = styled.div`
+  width: 100%;
+`;
+
 type Props = {
   message: UserMessage;
   tokens: Token[];
@@ -51,13 +55,16 @@ export default function ParsedBotMessageBody(props: Props) {
               return <Text key={'token' + i}>{token.value}</Text>;
             }
             return (
-              <CopyBlock
-                key={'token' + i}
-                text={token.value}
-                language={token.type}
-                theme={irBlack}
-                showLineNumbers={true}
-              />
+              <BlockContainer>
+                <CopyBlock
+                  key={'token' + i}
+                  text={token.value}
+                  language={token.type}
+                  theme={irBlack}
+                  showLineNumbers={true}
+                  codeBlock
+                />
+              </BlockContainer>
             )
           })
         }

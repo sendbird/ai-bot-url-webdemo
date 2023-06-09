@@ -12,7 +12,7 @@ const Root = styled.div`
 `;
 
 const BodyContainer = styled.div`
-  max-width: 600px;
+  max-width: 72%; // 600px;
   font-size: 14px;
   width: fit-content;
   font-weight: normal;

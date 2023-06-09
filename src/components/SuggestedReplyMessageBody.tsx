@@ -13,7 +13,6 @@ const Root = styled.div`
   &:hover {
     background-color: #e0e0e0;
   }
-  max-width: 240px;
 `;
 
 const ButtonContainer = styled.div`
@@ -29,7 +28,6 @@ const LinkButton = styled.a`
   justify-content: center;
   align-items: center;
   padding: 0px 12px;
-  width: 220px;
   height: 32px;
   background: #6210CC;
   border-radius: 16px;
@@ -37,14 +35,16 @@ const LinkButton = styled.a`
   cursor: pointer;
   margin: 4px 0;
   text-decoration: none;
+  width: 100%;
 `;
 
 const Text = styled.div`
-  width: 100%;
   text-align: left;
   white-space: pre-line;
   word-break: break-word;
   line-height: 1.43;
+  width: 100%;
+  max-width: 600px;
 `;
 
 type Props = {

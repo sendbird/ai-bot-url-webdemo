@@ -123,6 +123,7 @@ export default function CustomMessageInput() {
           onInput={throttledIncrement}
           rows={1}
           placeholder={'Enter message'}
+          autofocus='autofocus'
         />
         {
           showSendButton
