@@ -18,8 +18,7 @@ const InnerContainer = styled.div`
   font-size: 13px;
 `;
 
-const Highlighter = styled.div`
-  text-decoration: underline;
+const Highlighter = styled.a`
   color: white;
 `;
 
@@ -27,7 +26,11 @@ const Highlighter = styled.div`
 export default function ChatBottom() {
   return <Container>
     <InnerContainer>
-      Add an&nbsp;<Highlighter>AI chatbot</Highlighter>&nbsp;to your product by&nbsp;<SendbirdLogo width={'80px'}/>
+      Add an&nbsp;<Highlighter
+      href='https://sendbird.com/products/chatgpt-integration'
+      id="AI chatbot"
+      target="_blank"
+    >AI chatbot</Highlighter>&nbsp;to your product by&nbsp;<SendbirdLogo width={'80px'}/>
     </InnerContainer>
   </Container>;
 }

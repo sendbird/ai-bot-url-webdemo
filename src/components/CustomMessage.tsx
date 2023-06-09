@@ -22,7 +22,7 @@ type Props = {
 }
 
 const StartingBlock = styled.div`
-  height: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '98px' : '0')};
+  height: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '115px' : '0')};
   width: 100%;
   transition: height 0.5s ease;
 `;
@@ -57,10 +57,11 @@ export default function CustomMessage(props: Props) {
       <BotMessageWithBodyInput
         message={message}
         bodyComponent={
-          <CustomMessageBody style={{ maxWidth: '270px' }} message={(message as UserMessage).message}/>
+          <CustomMessageBody message={(message as UserMessage).message}/>
         }
         messageCount={allMessages.length}
         zIndex={30}
+        maxBodyWidth={'72%'}
       />
     </div>;
   }

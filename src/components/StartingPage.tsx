@@ -12,7 +12,7 @@ const BackgroundContainer = styled.div<StartingPageAnimatorProps>`
 
 const TitleContainer = styled.div`
   position: absolute;
-  padding: 24px;
+  padding: 32px;
 `;
 
 const Root = styled.div<StartingPageAnimatorProps>`
@@ -24,23 +24,40 @@ const Root = styled.div<StartingPageAnimatorProps>`
   transition: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? 'none' : 'all 0.5s ease')};
 `;
 
+
 const HeaderOne = styled.div`
   //font-weight: 600;
-  padding-top: 16px;
-
-  font-size: 24px;
-  line-height: 36px;
+  //font-size: 24px;
+  //line-height: 36px;
   color: #FFFFFF;
   opacity: 0.8;
-  margin-top: 24px;
+  margin-top: 18px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  font-family: 'Gellix', sans-serif;
+`;
+
+const HeaderOneForWebDemo = styled(HeaderOne)`
+  font-size: 20px;
+  line-height: 28px;
 `;
 
 const HeaderTwo = styled.div`
   font-weight: 700;
-  font-size: 27px;
-  margin-top: 8px;
+  //font-size: 27px;
+  margin-top: 2px;
+  font-family: 'Gellix', sans-serif;
   color: #FFFFFF;
   //margin-top: 8px;
+  font-size: 36px;
+  line-height: 48px;
+`;
+
+const HeaderTwoForWebDemo = styled(HeaderTwo)`
+  font-size: 32px;
+  line-height: 40px;
 `;
 
 interface Props {
@@ -50,17 +67,27 @@ interface Props {
 export function StartingPage(props: Props) {
   const { isStartingPage } = props;
   const demoStates = useContext<DemoConstant>(DemoStatesContext);
+  const isWebDemo: boolean = demoStates.name === 'webDemo';
+  console.log('## isWebDemo: ', isWebDemo);
 
   return (
     <Root isStartingPage={isStartingPage}>
       <BackgroundContainer>
         <BackgroundImage width={'400px'}/>
       </BackgroundContainer>
-      <TitleContainer>
-        <SendbirdLogo width={'100px'}/>
-        <HeaderOne>{demoStates.startingPageContent.headerOne}</HeaderOne>
-        <HeaderTwo>{demoStates.startingPageContent.headerTwo}</HeaderTwo>
-      </TitleContainer>
+      {
+        isWebDemo
+          ? <TitleContainer>
+            <SendbirdLogo width={'100px'}/>
+            <HeaderOneForWebDemo>{demoStates.startingPageContent.headerOne}</HeaderOneForWebDemo>
+            <HeaderTwoForWebDemo>{demoStates.startingPageContent.headerTwo}</HeaderTwoForWebDemo>
+          </TitleContainer>
+          : <TitleContainer>
+            <SendbirdLogo width={'100px'}/>
+            <HeaderOne>{demoStates.startingPageContent.headerOne}</HeaderOne>
+            <HeaderTwo>{demoStates.startingPageContent.headerTwo}</HeaderTwo>
+          </TitleContainer>
+      }
     </Root>
   );
-};
+}

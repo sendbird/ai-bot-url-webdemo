@@ -3,8 +3,8 @@ import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
 import {SendingStatus} from "@sendbird/chat/message";
 import {GroupChannel} from "@sendbird/chat/groupChannel";
 import {ClientUserMessage} from "SendbirdUIKitGlobal";
-import {useEffect, useState} from "react";
-import {USER_ID} from "../const";
+import {useContext, useEffect, useState} from "react";
+import {DemoConstant, USER_ID} from "../const";
 import {scrollUtil} from "../utils";
 import LoadingScreen from "./LoadingScreen";
 import ChannelUI from "@sendbird/uikit-react/Channel/components/ChannelUI";
@@ -16,6 +16,7 @@ import styled from "styled-components";
 import {StartingPage} from "./StartingPage";
 import ChannelHeader from "@sendbird/uikit-react/Channel/components/ChannelHeader"
 import ChatBottom from "./ChatBottom";
+import {DemoStatesContext} from "../context/DemoStatesContext";
 
 const Root = styled.div`
   height: 640px;
@@ -40,6 +41,8 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
   console.log('## allMessages: ', allMessages);
   const channel: GroupChannel | undefined = currentGroupChannel;
   const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
+  const demoStates = useContext<DemoConstant>(DemoStatesContext);
+  const isWebDemo: boolean = demoStates.name === 'webDemo';
   // console.log('#### allMessages: ', allMessages);
   const [activeSpinnerId, setActiveSpinnerId] = useState(-1);
   /**
@@ -80,7 +83,9 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
             && <SuggestedRepliesPanel botUser={botUser}/>
           }
           <CustomMessageInput/>
-          <ChatBottom/>
+          {
+            !isWebDemo && <ChatBottom/>
+          }
         </div>
       }}
       renderMessage={({message}) => {

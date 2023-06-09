@@ -25,8 +25,12 @@ const Sender = styled.div<StartingPageAnimatorProps>`
   margin: 0 0 4px 12px;
 `;
 
-const BodyContainer = styled.div`
-  max-width: 300px;
+interface BodyContainerProps {
+  maxWidth?: string;
+}
+
+const BodyContainer = styled.div<BodyContainerProps>`
+  max-width: ${(props: BodyContainerProps) => (props.maxWidth ?? '72%')};
   font-size: 14px;
   color: rgba(0, 0, 0, 0.88);
   width: fit-content;
@@ -39,7 +43,7 @@ const BodyContainer = styled.div`
 
 const SentTime = styled.div`
   width: fit-content;
-  color: rgba(0, 0, 0, 0.50);
+  color: rgba(0, 0, 0, 0.38);
   font-size: 12px;
   line-height: 1;
   margin-bottom: 6px;
@@ -50,13 +54,14 @@ type Props = {
   bodyComponent: ReactNode;
   messageCount: number;
   zIndex?: number;
+  maxBodyWidth?: string;
 }
 
 const ImageContainer = styled.div`
 `;
 
 export default function BotMessageWithBodyInput(props: Props) {
-  const { message, bodyComponent, messageCount, zIndex } = props;
+  const { message, bodyComponent, messageCount, maxBodyWidth, zIndex } = props;
 
   return <Root style={{ zIndex: zIndex ?? 0 }}>
     <ImageContainer>
@@ -64,7 +69,7 @@ export default function BotMessageWithBodyInput(props: Props) {
         height: "28px"
       }}/>
     </ImageContainer>
-    <BodyContainer>
+    <BodyContainer maxWidth={maxBodyWidth}>
       <Sender isStartingPage={messageCount === 1}>{message.sender.nickname}</Sender>
       {bodyComponent}
     </BodyContainer>

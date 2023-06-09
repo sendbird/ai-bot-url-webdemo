@@ -26,6 +26,9 @@ const InputComponent = styled.textarea<InputProps>`
   background: #EEEEEE;
   border-radius: 20px;
   height: fit-content;
+  ::placeholder {
+    color: rgba(0, 0, 0, 0.38);
+  }
 `;
 
 const InputContainer = styled.div`
