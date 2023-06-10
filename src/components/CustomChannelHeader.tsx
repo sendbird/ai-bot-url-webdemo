@@ -44,6 +44,10 @@ const RenewButton = styled.div`
   cursor: pointer;
 `;
 
+const RenewButtonContainer = styled.div`
+  margin-right: 32px;
+`;
+
 type Props = {
   channel: GroupChannel;
   isTyping: boolean;
@@ -67,9 +71,11 @@ export default function CustomChannelHeader(props: Props) {
         <TypingIndicator>{ isTyping ? 'Thinking...' : 'AI Chatbot' }</TypingIndicator>
       </div>
     </SubContainer>
-    <RenewButton onClick={onClickRenewButton}>
-      <div>Renew</div>
-      <RefreshIcon height='18px' width='18px'/>
-    </RenewButton>
+    <RenewButtonContainer>
+      <RenewButton onClick={onClickRenewButton}>
+        <div>Renew</div>
+        <RefreshIcon height='18px' width='18px'/>
+      </RenewButton>
+    </RenewButtonContainer>
   </Root>;
 }
