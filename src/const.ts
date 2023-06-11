@@ -41,7 +41,7 @@ export const DEMO_CONSTANTS = {
       },
       {
         title: 'Nope, still lost 💬',
-        text: 'I\'m sorry, we couldn\'t help you. Let us know how we can improve by talking to one of our teammates',
+        text: 'I\'m sorry, we couldn\'t help you. Let us know how we can improve by talking to one of our teammates.',
         buttonText: 'Talk to an expert',
         link: 'https://community.sendbird.com/',
       },

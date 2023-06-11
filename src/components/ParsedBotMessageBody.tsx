@@ -12,7 +12,7 @@ const Root = styled.div`
   &:hover {
     background-color: #e0e0e0;
   }
-  max-width: 600px;
+  //max-width: 600px;
   flex-direction: column;
   align-items: flex-start;
   padding: 8px 12px;

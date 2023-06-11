@@ -8,6 +8,7 @@ const Root = styled.div`
   justify-content: space-between;
   align-items: center;
   font-style: normal;
+  border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 16px 24px;
 `;
@@ -45,7 +46,22 @@ const RenewButton = styled.div`
 `;
 
 const RenewButtonContainer = styled.div`
-  margin-right: 32px;
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+`;
+
+const Delimiter = styled.div`
+  background: #CCCCCC;
+  width: 1px;
+  height: 20px;
+  margin: 0 12px;
+`;
+
+const EmptyContainer = styled.div`
+  width: 20px;
+  height: 20px;
 `;
 
 type Props = {
@@ -76,6 +92,8 @@ export default function CustomChannelHeader(props: Props) {
         <div>Renew</div>
         <RefreshIcon height='18px' width='18px'/>
       </RenewButton>
+      <Delimiter/>
+      <EmptyContainer/>
     </RenewButtonContainer>
   </Root>;
 }

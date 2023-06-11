@@ -30,10 +30,9 @@ interface BodyContainerProps {
 }
 
 const BodyContainer = styled.div<BodyContainerProps>`
-  max-width: ${(props: BodyContainerProps) => (props.maxWidth ?? '72%')};
   font-size: 14px;
   color: rgba(0, 0, 0, 0.88);
-  width: fit-content;
+  width: calc(100% - 95px);
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -54,22 +53,22 @@ type Props = {
   bodyComponent: ReactNode;
   messageCount: number;
   zIndex?: number;
-  maxBodyWidth?: string;
+  bodyStyle?: object;
 }
 
 const ImageContainer = styled.div`
 `;
 
 export default function BotMessageWithBodyInput(props: Props) {
-  const { message, bodyComponent, messageCount, maxBodyWidth, zIndex } = props;
+  const { message, bodyComponent, messageCount, zIndex, bodyStyle } = props;
 
-  return <Root style={{ zIndex: zIndex ?? 0 }}>
+  return <Root style={{ zIndex: (messageCount === 1 && zIndex) ? zIndex : 0 }}>
     <ImageContainer>
       <img src={botMessageImage} alt="botProfileImage" style={{
         height: "28px"
       }}/>
     </ImageContainer>
-    <BodyContainer maxWidth={maxBodyWidth}>
+    <BodyContainer style={bodyStyle}>
       <Sender isStartingPage={messageCount === 1}>{message.sender.nickname}</Sender>
       {bodyComponent}
     </BodyContainer>

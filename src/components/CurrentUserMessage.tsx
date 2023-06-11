@@ -12,7 +12,7 @@ const Root = styled.div`
 `;
 
 const BodyContainer = styled.div`
-  max-width: 72%; // 600px;
+  max-width: calc(100% - 90px); // 600px;
   font-size: 14px;
   width: fit-content;
   font-weight: normal;
@@ -23,7 +23,7 @@ const BodyContainer = styled.div`
 `;
 
 const SentTime = styled.div`
-  color: rgba(0, 0, 0, 0.50);
+  color: rgba(0, 0, 0, 0.38);
   font-size: 12px;
   line-height: 1;
   margin-bottom: 6px;

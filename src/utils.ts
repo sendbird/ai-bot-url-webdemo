@@ -19,7 +19,9 @@ export const scrollUtil = () => {
         scrollHeight,
         clientHeight,
       } = scrollDOM;
-      const isScrolledToEnd = (scrollTop + 200) > (scrollHeight - clientHeight);
+      // const isScrolledToEnd = (scrollTop + 200) > (scrollHeight - clientHeight);
+      const isScrolledToEnd = true;
+
       // console.warn({
       //   scrollTop,
       //   scrollHeight,
@@ -123,7 +125,6 @@ export function splitText(inputString: string) {
     }
   }
   result.push(currentWord);
-  console.log('## result: ', result);
   return result;
 }
 
@@ -139,7 +140,6 @@ export function MessageTextParser(inputString: string): Token[] {
   // debugger
   // const parts = inputString.split(snippetRegex);
   const parts = splitText(inputString);
-  console.log('## parts: ', parts);
   const result = parts.map((part) => {
     if (part.startsWith('```') && part.endsWith('```')) {
       // Code snippet part

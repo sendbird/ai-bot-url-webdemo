@@ -4,6 +4,7 @@ import { GroupChannel } from "@sendbird/chat/groupChannel";
 import { UserMessage } from "@sendbird/chat/message";
 import { useChannelContext } from "@sendbird/uikit-react/Channel/context"
 import { useCallback } from "react";
+import {scrollUtil} from "../utils";
 
 type OnMessageRecivedPayload = {
   channel: GroupChannel;
@@ -38,6 +39,7 @@ export function useSendLocalMessage() {
           message,
         },
       });
+      scrollUtil();
     }
   } , [currentGroupChannel, messagesDispatcher]);
   return useSendLocalMessage;

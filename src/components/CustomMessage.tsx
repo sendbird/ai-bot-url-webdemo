@@ -61,21 +61,24 @@ export default function CustomMessage(props: Props) {
         }
         messageCount={allMessages.length}
         zIndex={30}
-        maxBodyWidth={'72%'}
+        bodyStyle={{ maxWidth: '255px' }}
       />
     </div>;
   }
 
   // Sent by bot
+  // suggested message
   if (!isNotLocalMessageCustomType(message.customType)) {
     if (message.customType === LOCAL_MESSAGE_CUSTOM_TYPE.linkSuggestion) {
       return <BotMessageWithBodyInput
         message={message}
         bodyComponent={<SuggestedReplyMessageBody message={message}/>}
+        bodyStyle={{ maxWidth: '320px' }}
       />;
     }
   }
 
+  // Normal message
   const tokens: Token[] = MessageTextParser((message as UserMessage).message);
   console.log('## tokens: ', tokens);
     return <div>
@@ -86,9 +89,9 @@ export default function CustomMessage(props: Props) {
           tokens={tokens}
         />}
       />
-      <BotMessageWithBodyInput
-        message={message}
-        bodyComponent={<CustomMessageBody message={'Did that help?'}/>}
-      />
+      {/*<BotMessageWithBodyInput*/}
+      {/*  message={message}*/}
+      {/*  bodyComponent={<CustomMessageBody message={'Did that help?'}/>}*/}
+      {/*/>*/}
     </div>;
 }
