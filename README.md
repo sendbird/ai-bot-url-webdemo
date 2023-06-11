@@ -16,3 +16,10 @@ npm run deploy
 ```bash
 npm run dev
 ```
+## Test urls
+
+### Web demo link
+https://sendbird.github.io/ai-bot-url-webdemo/?hashed_key=f58aa9880d42652979ad0f040ff208386eb7d8f53978b8652da348d2395de95b
+
+### Widget demo link
+https://sendbird.github.io/ai-bot-url-webdemo/?hashed_key=ee54c144453b618f8d5f7a907230657f535d5c78cfd3591c1cc876826b8873a1&is_widget=true
