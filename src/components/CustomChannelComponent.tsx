@@ -19,7 +19,7 @@ import ChatBottom from "./ChatBottom";
 import {DemoStatesContext} from "../context/DemoStatesContext";
 
 const Root = styled.div`
-  height: 640px;
+  height: 100vh; // 640px;
   //height: 100%;
   font-family: 'Roboto', sans-serif;
   z-index: 0;
