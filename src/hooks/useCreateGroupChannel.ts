@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useCallback, useContext, useEffect, useState} from "react";
 import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {User} from "@sendbird/chat";
@@ -6,8 +6,9 @@ import {GroupChannelCreateParams} from "@sendbird/chat/lib/__definition";
 import {DemoConstant} from "../const";
 import {DemoStatesContext} from "../context/DemoStatesContext";
 
-export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupChannel | null, () => void] {
+export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupChannel | null, () => void, boolean] {
   const [channel, setChannel] = useState<GroupChannel | null>(null);
+  const [creating, setCreating] = useState<boolean>(false);
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
   const demoStates = useContext<DemoConstant>(DemoStatesContext);
@@ -16,8 +17,9 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
   const params = demoStates.createGroupChannelParams;
   const { name, coverUrl } = params;
 
-  function createAndSetNewChannel() {
+  const createAndSetNewChannel = useCallback(() => {
     if (currentUser && botUser) {
+      setCreating(true);
       console.log('## createAndSetNewChannel: ', channel);
 
       const params: GroupChannelCreateParams = {
@@ -29,9 +31,11 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
       sb.groupChannel.createChannel(params)
         .then((channel: GroupChannel) => {
           setChannel(channel);
+        }).finally(() => {
+          setCreating(false);
         });
     }
-  }
+  }, [currentUser?.userId, botUser?.userId]);
 
   useEffect(() => {
     if (currentUser && botUser && sb) {
@@ -39,5 +43,5 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
     }
   }, [currentUser, botUser, sb]);
 
-  return [channel, createAndSetNewChannel];
+  return [channel, createAndSetNewChannel, creating];
 }

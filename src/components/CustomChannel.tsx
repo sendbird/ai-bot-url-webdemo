@@ -16,12 +16,12 @@ export default function CustomChannel(props: CustomChannelProps) {
   const store = useSendbirdStateContext();
   const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
   const botUser: User = useGetBotUser(sb.currentUser, hashedKey);
-  const [channel, createGroupChannel]: [GroupChannel | null, () => void] = useCreateGroupChannel(sb.currentUser, botUser);
+  const [channel, createGroupChannel, creating]: [GroupChannel | null, () => void] = useCreateGroupChannel(sb.currentUser, botUser);
 
   // console.log('## currentUser: ', sb.currentUser);
   // console.log('## botUser: ', botUser);
   // console.log('## channel: ', channel);
-  if (!channel) return <LoadingScreen/>;
+  if (!channel || creating) return <LoadingScreen/>;
   return (
     <ChannelProvider channelUrl={channel?.url}>
       <CustomChannelComponent {...props} botUser={botUser} createGroupChannel={createGroupChannel} />
