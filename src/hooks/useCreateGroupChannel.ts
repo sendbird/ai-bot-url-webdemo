@@ -34,10 +34,11 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
   }
 
   useEffect(() => {
+    console.log('## useCreateGroupChannel: ', currentUser, botUser, sb);
     if (currentUser && botUser && sb) {
       createAndSetNewChannel();
     }
-  }, [currentUser, botUser, sb]);
+  }, [currentUser?.userId, botUser?.userId]);
 
   return [channel, createAndSetNewChannel];
 }
