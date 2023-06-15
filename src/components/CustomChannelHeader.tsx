@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { ReactComponent as RefreshIcon } from '../icons/refresh-icon.svg';
-import {GroupChannel} from "@sendbird/chat/groupChannel";
+import { GroupChannel } from "@sendbird/chat/groupChannel";
 import channelHeaderImage from '../icons/bot-message-image.png';
-import {useContext} from "react";
-import {DemoConstant} from "../const";
-import {DemoStatesContext} from "../context/DemoStatesContext";
+import { useContext } from "react";
+import { DemoConstant } from "../const";
+import { DemoStatesContext } from "../context/DemoStatesContext";
 
 const Root = styled.div`
   display: flex;
@@ -88,26 +88,28 @@ export default function CustomChannelHeader(props: Props) {
     // window.location.reload();
   }
   return <Root>
-    <SubContainer>
-      <img src={channelHeaderImage} alt="channelHeaderImage" style={{
-        height: "36px"
-      }}/>
-      <div>
-        <Title>{channel.name}</Title>
-        <TypingIndicator>{ isTyping ? 'Thinking...' : 'AI Chatbot' }</TypingIndicator>
-      </div>
-    </SubContainer>
-    <RenewButtonContainer>
-      <RenewButton onClick={onClickRenewButton}>
-        <div>Renew</div>
-        <RefreshIcon height='18px' width='18px'/>
-      </RenewButton>
-      {
-        !isWebDemo && <DelimiterContainer>
-          <Delimiter/>
-          <EmptyContainer/>
-        </DelimiterContainer>
-      }
-    </RenewButtonContainer>
+    <>
+      <SubContainer>
+        <img src={channelHeaderImage} alt="channelHeaderImage" style={{
+          height: "36px"
+        }} />
+        <div>
+          <Title>{channel.name}</Title>
+          <TypingIndicator>{isTyping ? 'Thinking...' : 'AI Chatbot'}</TypingIndicator>
+        </div>
+      </SubContainer>
+      <RenewButtonContainer>
+        <RenewButton onClick={onClickRenewButton}>
+          <div>Renew</div>
+          <RefreshIcon height='18px' width='18px' />
+        </RenewButton>
+        {
+          !isWebDemo && <DelimiterContainer>
+            <Delimiter />
+            <EmptyContainer />
+          </DelimiterContainer>
+        }
+      </RenewButtonContainer>
+    </>
   </Root>;
 }
