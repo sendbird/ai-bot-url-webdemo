@@ -6,7 +6,6 @@ import {ClientUserMessage} from "SendbirdUIKitGlobal";
 import {useContext, useEffect, useState} from "react";
 import {DemoConstant, USER_ID} from "../const";
 import {isSpecialMessage, scrollUtil} from "../utils";
-import LoadingScreen from "./LoadingScreen";
 import ChannelUI from "@sendbird/uikit-react/Channel/components/ChannelUI";
 import CustomChannelHeader from "./CustomChannelHeader";
 import SuggestedRepliesPanel from "./SuggestedRepliesPanel";
@@ -40,8 +39,9 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
   const {botUser, createGroupChannel} = props;
   // const store = useSendbirdStateContext();
   // const sb: SendbirdGroupChat = store.stores.sdkStore.sdk as SendbirdGroupChat;
-  const {allMessages, currentGroupChannel} = useChannelContext();
-  // console.log('## allMessages: ', allMessages);
+  const {allMessages, currentGroupChannel } = useChannelContext();
+
+  // console.log('## isLoading: ', loading);
   const channel: GroupChannel | undefined = currentGroupChannel;
   const lastMessage: ClientUserMessage = allMessages?.[allMessages?.length - 1] as ClientUserMessage;
   const demoStates = useContext<DemoConstant>(DemoStatesContext);
@@ -67,7 +67,9 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
 
   useEffect(() => {
     if (channel) {
-      setShowLoading(false);
+      setTimeout(() => {
+        setShowLoading(false);
+      }, 500);
     }
   }, [channel]);
 
@@ -84,6 +86,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
           />
           : <ChannelHeader/>;
       }}
+      renderPlaceholderLoader={() => <></>}
       renderMessageInput={() => {
         return <div style={{ position: 'relative', zIndex: 50, backgroundColor: 'white' }}>
           {

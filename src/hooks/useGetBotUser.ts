@@ -11,24 +11,21 @@ export function useGetBotUser(currentUser: User, hashedKey: string): User {
     // console.log('## useGetBotUser: ', { hashedKey, id: currentUser?.userId });
     if (currentUser && hashedKey) {
       // console.log('## useGetBotUser hashedKey: ', hashedKey);
-      // eslint-disable-next-line no-debugger
-      debugger;
       const query: ApplicationUserListQuery = sb.createApplicationUserListQuery({
         userIdsFilter: [hashedKey],
       });
-      console.log('## sb: ', sb.connectionState);
-
-      query.next().then((users: User[]) => {
-        if (users.length <= 0) {
-          console.log('## useGetBotUserId: ', users);
-          // console.log('## useGetBotUserId fetched 0 users!');
-        } else {
-          // console.log('## useGetBotUserId fetched users: ', users);
-          setBotUser(users[0]);
-        }
-      }).catch((err) => {
-        console.log('## useGetBotUser error: ', err);
-      });
+      setTimeout(() => {
+        query.next().then((users: User[]) => {
+          if (users.length <= 0) {
+            // console.log('## useGetBotUserId fetched 0 users!');
+          } else {
+            // console.log('## useGetBotUserId fetched users: ', users);
+            setBotUser(users[0]);
+          }
+        }).catch((err) => {
+          console.log('## useGetBotUser error: ', err);
+        });
+      }, 2000);
     }
   }, [currentUser?.userId, hashedKey]);
   return botUser;

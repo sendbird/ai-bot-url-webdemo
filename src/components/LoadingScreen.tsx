@@ -3,6 +3,7 @@ import { ReactComponent as SpinIcon } from '../icons/spin-icon.svg';
 
 import '../css/index.css';
 import {useLoadingState} from "../context/LoadingStateContext";
+import {useImageLoadingState} from "../context/ImageLoadingStateContext";
 
 const Container = styled.div`
   width: 100%;
@@ -12,6 +13,7 @@ const Container = styled.div`
   align-items: center;
   position: absolute;
   z-index: 100;
+  background-color: white;
 `;
 
 const IconContainer = styled.div`
@@ -24,14 +26,15 @@ const IconContainer = styled.div`
 `;
 
 interface LoadingScreenProps {
-  hashedKey: string;
+  hashedKey?: string;
 }
 
 export default function LoadingScreen(props: LoadingScreenProps) {
   const { hashedKey } = props;
   const { showLoading } = useLoadingState();
+  const { showImageLoading } = useImageLoadingState();
 
-  return (!hashedKey || showLoading) && <Container>
+  return (!hashedKey || showLoading || showImageLoading) && <Container>
     <IconContainer>
       <SpinIcon width='50px' height='50px'/>
     </IconContainer>

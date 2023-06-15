@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import { ReactComponent as SendbirdLogo } from '../icons/sendbird-logo-starting-page.svg';
 import {StartingPageAnimatorProps} from "./CustomChannelComponent";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {DemoConstant} from "../const";
 import {DemoStatesContext} from "../context/DemoStatesContext";
 import backgroundImage from '../icons/starting-page-bg-image.png';
+import backgroundImageSmall from '../icons/starting-page-background-small.png';
+
+import { ReactComponent as BackgroundImage } from '../icons/starting-page-bg-image-svg.svg';
+import {useLoadingState} from "../context/LoadingStateContext";
+import {useImageLoadingState} from "../context/ImageLoadingStateContext";
+
 
 
 const BackgroundContainer = styled.div<StartingPageAnimatorProps>`
@@ -80,6 +86,14 @@ export function StartingPage(props: Props) {
   const demoStates = useContext<DemoConstant>(DemoStatesContext);
   const isWebDemo: boolean = demoStates.name === 'webDemo';
   // console.log('## isWebDemo: ', isWebDemo);
+  const { setShowImageLoading } = useImageLoadingState();
+
+  useEffect(() => {
+    setShowImageLoading(false);
+    // setTimeout(() => {
+    //   setShowImageLoading(false);
+    // }, 500);
+  }, []);
 
   return (
     <Root isStartingPage={isStartingPage}>
@@ -87,6 +101,7 @@ export function StartingPage(props: Props) {
         <img src={backgroundImage} alt="backgroundImage" style={{
           height: '240px',
         }}/>
+        {/*<BackgroundImage width='743px' height='240px'/>*/}
       </BackgroundContainer>
       {
         isWebDemo
