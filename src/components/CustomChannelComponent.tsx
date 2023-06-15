@@ -17,6 +17,7 @@ import {StartingPage} from "./StartingPage";
 import ChannelHeader from "@sendbird/uikit-react/Channel/components/ChannelHeader"
 import ChatBottom from "./ChatBottom";
 import {DemoStatesContext} from "../context/DemoStatesContext";
+import {useLoadingState} from "../context/LoadingStateContext";
 
 const Root = styled.div`
   height: 100vh; // 640px;
@@ -47,6 +48,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
   const isWebDemo: boolean = demoStates.name === 'webDemo';
   // console.log('#### allMessages: ', allMessages);
   const [activeSpinnerId, setActiveSpinnerId] = useState(-1);
+  const { setShowLoading } = useLoadingState();
   /**
    * If the updated last message is sent by the current user, activate spinner for the sent message.
    * If the updated last message is pending or failed by the current user or sent by the bot, deactivate spinner.
@@ -63,7 +65,13 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
     }
   }, [lastMessage?.messageId]);
 
-  if (!channel) return <LoadingScreen/>;
+  useEffect(() => {
+    if (channel) {
+      setShowLoading(false);
+    }
+  }, [channel]);
+
+  // if (!channel) return <LoadingScreen/>;
   return <Root>
     <StartingPage isStartingPage={allMessages.length === 1}/>
     <ChannelUI
