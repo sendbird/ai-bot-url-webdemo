@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as RefreshIcon } from '../icons/refresh-icon.svg';
-import {GroupChannel} from "@sendbird/chat/groupChannel";
+import { GroupChannel } from "@sendbird/chat/groupChannel";
 import channelHeaderImage from '../icons/bot-message-image.png';
 import {useContext} from "react";
 import {DemoConstant} from "../const";

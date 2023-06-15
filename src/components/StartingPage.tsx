@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import { ReactComponent as SendbirdLogo } from '../icons/sendbird-logo-starting-page.svg';
-import {StartingPageAnimatorProps} from "./CustomChannelComponent";
-import {useContext} from "react";
-import {DemoConstant} from "../const";
-import {DemoStatesContext} from "../context/DemoStatesContext";
-import backgroundImage from '../icons/starting-page-bg-image.png';
-
+import { StartingPageAnimatorProps } from "./CustomChannelComponent";
+import type { DemoConstant } from "../const";
+import backgroundImage from '../icons/starting-page-bg-image.webp';
 
 const BackgroundContainer = styled.div<StartingPageAnimatorProps>`
   position: absolute;
@@ -73,11 +70,11 @@ export const HeaderOneContainer = styled.div`
 
 interface Props {
   isStartingPage: boolean;
+  demoStates: DemoConstant;
 }
 
 export function StartingPage(props: Props) {
-  const { isStartingPage } = props;
-  const demoStates = useContext<DemoConstant>(DemoStatesContext);
+  const { isStartingPage, demoStates } = props;
   const isWebDemo: boolean = demoStates.name === 'webDemo';
   // console.log('## isWebDemo: ', isWebDemo);
 
@@ -86,7 +83,7 @@ export function StartingPage(props: Props) {
       <BackgroundContainer>
         <img src={backgroundImage} alt="backgroundImage" style={{
           height: '240px',
-        }}/>
+        }} />
       </BackgroundContainer>
       {
         isWebDemo
@@ -110,3 +107,5 @@ export function StartingPage(props: Props) {
     </Root>
   );
 }
+
+export default StartingPage;

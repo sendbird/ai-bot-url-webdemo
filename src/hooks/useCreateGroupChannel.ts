@@ -35,14 +35,14 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
           setCreating(false);
         });
     }
-  }, [currentUser?.userId, botUser?.userId]);
+  }, [currentUser, botUser, name, coverUrl, sb]);
 
   useEffect(() => {
     // console.log('## useCreateGroupChannel: ', currentUser, botUser, sb);
     if (currentUser && botUser && sb) {
       createAndSetNewChannel();
     }
-  }, [currentUser?.userId, botUser?.userId]);
+  }, [currentUser, botUser, createAndSetNewChannel, sb]);
 
   return [channel, createAndSetNewChannel, creating];
 }
