@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { ReactComponent as SendbirdLogo } from '../icons/sendbird-logo-starting-page.svg';
-import {StartingPageAnimatorProps} from "./CustomChannelComponent";
-import {useContext} from "react";
-import {DemoConstant} from "../const";
-import {DemoStatesContext} from "../context/DemoStatesContext";
-import backgroundImage from '../icons/starting-page-bg-image.png';
-
+import { ReactComponent as SendbirdLogo } from "../icons/sendbird-logo-starting-page.svg";
+import { StartingPageAnimatorProps } from "./CustomChannelComponent";
+import { useContext, useEffect } from "react";
+import { DemoConstant } from "../const";
+import { DemoStatesContext } from "../context/DemoStatesContext";
+import backgroundImage from "../icons/starting-page-bg-image.png";
 
 const BackgroundContainer = styled.div<StartingPageAnimatorProps>`
   position: absolute;
@@ -19,22 +18,30 @@ const TitleContainer = styled.div`
 
 const Root = styled.div<StartingPageAnimatorProps>`
   position: relative;
-  top: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '0' : '-250px')};
-  opacity: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? '1' : '0')};
+  top: ${(props: StartingPageAnimatorProps) =>
+    props.isStartingPage ? "0" : "-250px"};
+  opacity: ${(props: StartingPageAnimatorProps) =>
+    props.isStartingPage ? "1" : "0"};
   z-index: 20;
   width: 100%;
-  transition: ${(props: StartingPageAnimatorProps) => (props.isStartingPage ? 'none' : 'all 0.5s ease')};
+  transition: ${(props: StartingPageAnimatorProps) =>
+    props.isStartingPage ? "none" : "all 0.5s ease"};
 `;
-
 
 const HeaderOne = styled.div`
   //font-weight: 600;
   //font-size: 24px;
   //line-height: 36px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 0.8;
   font-style: normal;
   font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  font-family: "Gellix", sans-serif;
+`;
+
+const HeaderOneForWebDemo = styled(HeaderOne)`
   font-size: 20px;
   line-height: 28px;
   font-family: 'Gellix', sans-serif;
@@ -44,8 +51,8 @@ const HeaderTwo = styled.div`
   font-weight: 700;
   //font-size: 27px;
   margin-top: 2px;
-  font-family: 'Gellix', sans-serif;
-  color: #FFFFFF;
+  font-family: "Gellix", sans-serif;
+  color: #ffffff;
   //margin-top: 8px;
   font-size: 32px;
   line-height: 40px;
@@ -73,39 +80,54 @@ export const HeaderOneContainer = styled.div`
 
 interface Props {
   isStartingPage: boolean;
+  setIsImg: any;
+  setRenderChat: any;
 }
 
 export function StartingPage(props: Props) {
-  const { isStartingPage } = props;
+  const { isStartingPage, setIsImg, setRenderChat } = props;
   const demoStates = useContext<DemoConstant>(DemoStatesContext);
-  const isWebDemo: boolean = demoStates.name === 'webDemo';
+  const isWebDemo: boolean = demoStates.name === "webDemo";
   // console.log('## isWebDemo: ', isWebDemo);
-
+  useEffect(() => {
+    const coverImage = new Image();
+    coverImage.src = backgroundImage;
+    coverImage.onload = () => {
+      setIsImg(true);
+      requestAnimationFrame(() => {
+        setRenderChat(true);
+      });
+    };
+  }, []);
   return (
     <Root isStartingPage={isStartingPage}>
       <BackgroundContainer>
-        <img src={backgroundImage} alt="backgroundImage" style={{
-          height: '240px',
-        }}/>
+        <img
+          src={backgroundImage}
+          alt="backgroundImage"
+          style={{
+            height: "240px",
+          }}
+        />
       </BackgroundContainer>
       {
         isWebDemo
-          ? <TitleContainer>
+          ? (<TitleContainer>
             <SendbirdLogo width={'100px'}/>
             <HeaderOneContainer>
               <HeaderOne>{demoStates.startingPageContent.headerOne}</HeaderOne>
               <BetaLogo>{ isWebDemo ? 'DEMO' : 'BETA' }</BetaLogo>
             </HeaderOneContainer>
             <HeaderTwo>{demoStates.startingPageContent.headerTwo}</HeaderTwo>
-          </TitleContainer>
-          : <TitleContainer>
+          </TitleContainer>)
+          : (<TitleContainer>
             <SendbirdLogo width={'100px'}/>
             <HeaderOneContainer style={{ alignItems: 'flex-end' }}>
               <HeaderOne>{demoStates.startingPageContent.headerOne}</HeaderOne>
               <BetaLogo style={{ marginBottom: '3px' }}>{ isWebDemo ? 'DEMO' : 'BETA' }</BetaLogo>
             </HeaderOneContainer>
             <HeaderTwo>{demoStates.startingPageContent.headerTwo}</HeaderTwo>
-          </TitleContainer>
+          </TitleContainer>)
       }
     </Root>
   );
