@@ -65,18 +65,16 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
       setActiveSpinnerId(-1);
     }
   }, [lastMessage?.messageId]);
-  const [isImg, setIsImg] = useState(false);
-  const [renderChat, setRenderChat] = useState(false);
-  console.log("img", isImg, renderChat);
+  const [isImgPainted, setIsImgPainted] = useState(false);
+
   if (!channel) return <LoadingScreen />;
   return (
     <Root>
       <StartingPage
         isStartingPage={allMessages.length === 1}
-        setIsImg={setIsImg}
-        setRenderChat={setRenderChat}
+        setIsImgPainted={setIsImgPainted}
       />
-      {renderChat && (
+      {isImgPainted && (
         <ChannelUI
           renderChannelHeader={() => {
             return createGroupChannel ? (

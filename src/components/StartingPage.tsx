@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as SendbirdLogo } from "../icons/sendbird-logo-starting-page.svg";
 import { StartingPageAnimatorProps } from "./CustomChannelComponent";
-import { useContext, useEffect } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import { DemoConstant } from "../const";
 import { DemoStatesContext } from "../context/DemoStatesContext";
 import backgroundImage from "../icons/starting-page-bg-image.png";
@@ -80,25 +80,14 @@ export const HeaderOneContainer = styled.div`
 
 interface Props {
   isStartingPage: boolean;
-  setIsImg: any;
-  setRenderChat: any;
+  setIsImgPainted: Dispatch<SetStateAction<boolean>>;
 }
 
 export function StartingPage(props: Props) {
-  const { isStartingPage, setIsImg, setRenderChat } = props;
+  const { isStartingPage, setIsImgPainted } = props;
   const demoStates = useContext<DemoConstant>(DemoStatesContext);
   const isWebDemo: boolean = demoStates.name === "webDemo";
-  // console.log('## isWebDemo: ', isWebDemo);
-  useEffect(() => {
-    const coverImage = new Image();
-    coverImage.src = backgroundImage;
-    coverImage.onload = () => {
-      setIsImg(true);
-      requestAnimationFrame(() => {
-        setRenderChat(true);
-      });
-    };
-  }, []);
+
   return (
     <Root isStartingPage={isStartingPage}>
       <BackgroundContainer>
@@ -108,6 +97,11 @@ export function StartingPage(props: Props) {
           style={{
             height: "240px",
           }}
+          onLoad={() =>
+            requestAnimationFrame(() => {
+              setTimeout(() => setIsImgPainted(true), 100);
+            })
+          }
         />
       </BackgroundContainer>
       {
