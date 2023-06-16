@@ -69,7 +69,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
     if (channel) {
       setTimeout(() => {
         setShowLoading(false);
-      }, 500);
+      }, 300);
     }
   }, [channel]);
 
