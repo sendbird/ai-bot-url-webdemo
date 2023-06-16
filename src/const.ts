@@ -17,6 +17,7 @@ export interface DemoConstant {
   suggestedReplies: SuggestedReply[];
   createGroupChannelParams: CreateGroupChannelParams;
   startingPageContent: StartingPageContent;
+  infoBox: string;
 }
 
 export interface SuggestedReply {
@@ -34,16 +35,16 @@ export const DEMO_CONSTANTS = {
     wsHost: `wss://ws-${WEB_DEMO_APP_ID}.sendbird.com`,
     suggestedReplies: [
       {
-        title: 'Problem solved! 👍',
-        text: 'Thank you for your feedback! You can also add your own AI chatbot using Sendbird.',
+        title: 'Yes, it was helpful! 👍',
+        text: 'Thanks for your feedback! You can also build your own AI chatbot in Sendbird.',
         buttonText: 'Try free trial',
         link: 'https://dashboard.sendbird.com/auth/signup',
       },
       {
-        title: 'Nope, still lost 💬',
+        title: 'No, I need more help. 💬',
         text: 'I\'m sorry, we couldn\'t help you. Let us know how we can improve by talking to one of our teammates.',
         buttonText: 'Talk to an expert',
-        link: 'https://community.sendbird.com/',
+        link: 'https://sendbird.com/contact-sales',
       },
     ],
     createGroupChannelParams: {
@@ -55,6 +56,7 @@ export const DEMO_CONSTANTS = {
       headerOne: 'Meet Clark',
       headerTwo: 'Your very own AI Assistant',
     },
+    infoBox: 'In this demo, the AI-generated responses may lack complete accuracy.',
   },
   widgetDemo: {
     name: 'widgetDemo',
@@ -63,27 +65,28 @@ export const DEMO_CONSTANTS = {
     wsHost: `wss://ws-${WIDGET_DEMO_APP_ID}.sendbird.com`,
     suggestedReplies: [
       {
-        title: 'Problem solved! 👍',
-        text: 'Thank you for your feedback! You can also add your own AI chatbot using Sendbird.',
+        title: 'Yes, it was helpful! 👍',
+        text: 'Thanks for your feedback! You can also build your own AI chatbot in Sendbird.',
         buttonText: 'Try free trial',
         link: 'https://dashboard.sendbird.com/auth/signup',
       },
       {
-        title: 'Nope, still lost 💬',
-        text: 'I\'m sorry, we couldn\'t help you. How about discussing it in Sendbird Community?',
-        buttonText: 'Join the Community',
+        title: 'No, I need more help. 💬',
+        text: 'I\'m sorry to hear that we weren\'t able to assist you. You might find additional help on our community site.',
+        buttonText: 'Visit our Community',
         link: 'https://community.sendbird.com/',
       },
     ],
     createGroupChannelParams: {
-      name: 'Docs Assistant',
+      name: 'Docs AI Assistant',
       coverUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ix' +
         'lib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
     },
     startingPageContent: {
       headerOne: 'I\'m Docs AI Assistant',
-      headerTwo: 'How can I help you?',
+      headerTwo: 'Ask us anything about Sendbird Docs!',
     },
+    infoBox: 'In this beta version, the AI-generated responses may lack complete accuracy.',
   },
 };
 
@@ -94,14 +97,14 @@ export const INITIAL_DEMO_STATE: DemoConstant = {
   wsHost: `wss://ws-${WEB_DEMO_APP_ID}.sendbird.com`,
   suggestedReplies: [
     {
-      title: 'Problem solved! 👍',
-      text: 'Thank you for your feedback! You can also add your own AI chatbot using Sendbird.',
+      title: 'Yes, it was helpful! 👍',
+      text: 'Thanks for your feedback! You can also build your own AI chatbot in Sendbird.',
       buttonText: 'Try free trial',
       link: 'https://dashboard.sendbird.com/auth/signup',
     },
     {
-      title: 'Nope, still lost 💬',
-      text: 'I\'m sorry, we couldn\'t help you. Let us know how we can improve by talking to one of our teammates',
+      title: 'No, I need more help. 💬',
+      text: 'I\'m sorry, we couldn\'t help you. Let us know how we can improve by talking to one of our teammates.',
       buttonText: 'Talk to an expert',
       link: 'https://sendbird.com/contact-sales',
     },
@@ -115,7 +118,8 @@ export const INITIAL_DEMO_STATE: DemoConstant = {
     headerOne: 'Meet Clark',
     headerTwo: 'Your very own AI Assistant',
   },
-}
+  infoBox: 'In this demo, the AI-generated responses may lack complete accuracy.',
+};
 
 export interface CreateGroupChannelParams {
   name: string;
@@ -134,10 +138,14 @@ export interface StartingPageContent {
 
 export const SPECIAL_MESSAGE_LIST = [
   'How can I assist you',
+  'How can I help you',
   'Can you clarify',
   'That\'s not a question I can answer unfortunately',
   'Try again',
   'I couldn\'t find the answer to your question',
   'Can you try again?',
   'I\'m sorry, I couldn\'t understand your question',
+  'That\'s not a valid question',
+  'Is there a specific question you have',
+  'I\'m here to help you with any questions you have',
 ];

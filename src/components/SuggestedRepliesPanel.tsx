@@ -17,6 +17,7 @@ interface SuggestedReplyItemProps {
 const SuggestedReplyItem = styled.div<SuggestedReplyItemProps>`
   white-space: nowrap;
   height: calc(100% - 8px);
+  font-size: 12px;
   padding: 3px 14px;
   display: flex;
   align-items: center;
