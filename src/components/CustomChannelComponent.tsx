@@ -77,7 +77,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
   }
 
   return <Root>
-    {channel && botUser && allMessages &&
+    {channel && botUser && allMessages && allMessages.length > 0 &&
       <Suspense fallback={<LoadingScreen />}>
         <StartingPage isStartingPage={allMessages.length === 1} demoStates={demoStates} />
         <ChannelUI
