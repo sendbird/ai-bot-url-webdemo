@@ -22,6 +22,7 @@
   },
   "include": [
     "src",
+    "./src/custom.d.ts",
     "node_modules/@sendbird/uikit-react/index.d.ts",
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
