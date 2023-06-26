@@ -15,7 +15,7 @@ export const scrollUtil = () => {
     //console.warn(scrollDOM);
     if (scrollDOM) {
       const {
-        scrollTop,
+        // scrollTop,
         scrollHeight,
         clientHeight,
       } = scrollDOM;
@@ -174,7 +174,7 @@ export function replaceTextExtractsForWebDemo(input: string): string {
 
 export function replaceUrl(input: string): string {
   const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/ig;
-  return input.replace(urlRegex, function(url, i) {
+  return input.replace(urlRegex, function(url) {
     return `<a href="${url}" target="_blank">${url}</a>`;
   });
 }
