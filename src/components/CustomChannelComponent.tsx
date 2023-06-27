@@ -71,7 +71,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
         setShowLoading(false);
       }, 500);
     }
-  }, [channel, setShowLoading]);
+  }, [channel]);
 
   // if (!channel) return <LoadingScreen/>;
   return <Root>
