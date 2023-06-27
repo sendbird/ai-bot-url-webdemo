@@ -27,12 +27,16 @@ interface Props {
   data: string;
 }
 
+type SourceUrl = {
+  source_url: string;
+};
+
 export default function CustomMessageBody(props: Props) {
   const { message, data } = props;
   let extraStr = '';
 
   if (data) {
-    const obj: object = JSON.parse(data);
+    const obj: SourceUrl = JSON.parse(data);
     const sourceUrl: string = obj['source_url'];
     if (sourceUrl) {
       const anchor = `<a href="${sourceUrl}" target="_blank">${sourceUrl}</a>`;
@@ -41,6 +45,7 @@ export default function CustomMessageBody(props: Props) {
   }
 
   return <Root>
+    {/* fixme: must sanitize message before dangerouslySettingInnerHTML*/}
     <Text dangerouslySetInnerHTML={{ __html: message + '.' + extraStr }}/>
   </Root>;
 }
