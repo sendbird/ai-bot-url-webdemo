@@ -10,7 +10,7 @@ import {useImageLoadingState} from "../context/ImageLoadingStateContext";
 
 
 
-const BackgroundContainer = styled.div<StartingPageAnimatorProps>`
+const BackgroundContainer = styled.div`
   position: absolute;
 `;
 
