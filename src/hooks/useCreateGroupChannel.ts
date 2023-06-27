@@ -6,7 +6,7 @@ import {GroupChannelCreateParams} from "@sendbird/chat/groupChannel";
 import {DemoConstant} from "../const";
 import {DemoStatesContext} from "../context/DemoStatesContext";
 
-export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupChannel | null, () => void, boolean] {
+export function useCreateGroupChannel(currentUser: User|null, botUser: User): [GroupChannel | null, () => void, boolean] {
   const [channel, setChannel] = useState<GroupChannel | null>(null);
   const [creating, setCreating] = useState<boolean>(false);
   const store = useSendbirdStateContext();
