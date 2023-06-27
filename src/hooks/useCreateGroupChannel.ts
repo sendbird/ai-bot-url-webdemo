@@ -2,7 +2,7 @@ import {useCallback, useContext, useEffect, useState} from "react";
 import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {User} from "@sendbird/chat";
-import {GroupChannelCreateParams} from "@sendbird/chat/lib/__definition";
+import {GroupChannelCreateParams} from "@sendbird/chat/groupChannel";
 import {DemoConstant} from "../const";
 import {DemoStatesContext} from "../context/DemoStatesContext";
 
