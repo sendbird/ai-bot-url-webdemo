@@ -71,14 +71,14 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
         setShowLoading(false);
       }, 500);
     }
-  }, [channel]);
+  }, [channel, setShowLoading]);
 
   // if (!channel) return <LoadingScreen/>;
   return <Root>
     <StartingPage isStartingPage={allMessages.length === 1}/>
     <ChannelUI
       renderChannelHeader={() => {
-        return createGroupChannel
+        return (channel && createGroupChannel)
           ? <CustomChannelHeader
             channel={channel}
             isTyping={activeSpinnerId > -1}

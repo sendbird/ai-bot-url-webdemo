@@ -3,6 +3,7 @@ import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateConte
 import SendbirdChat, {ApplicationUserListQuery, User} from "@sendbird/chat";
 
 export function useGetBotUser(currentUser: User, hashedKey: string): User {
+  // @ts-expect-error botUser -> null, Fixing it need a lot of rewrite
   const [botUser, setBotUser] = useState<User>(null);
   const store = useSendbirdStateContext();
   const sb: SendbirdChat = store.stores.sdkStore.sdk;

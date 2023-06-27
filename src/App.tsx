@@ -12,11 +12,12 @@ import {LoadingStateProvider} from "./context/LoadingStateContext";
 import {ImageLoadingStateProvider} from "./context/ImageLoadingStateContext";
 
 function App() {
-  const [hashedKey, isWidget]: [string, boolean] = useGetHashedKey(); // show loading if not there.
+  const [hashedKey, isWidget]: [string, boolean|null] = useGetHashedKey(); // show loading if not there.
   // if (!isHashedKeyGiven) hashedKey = TEST_HASHED_KEY;
-  // console.log('## used hashedKey: ', hashedKey);
-  // console.log('## isWidget: ', isWidget);
-  const initialState: DemoConstant = ( isWidget) ? DEMO_CONSTANTS.widgetDemo : DEMO_CONSTANTS.webDemo;
+  // -------------------------------
+  // @fixme -> initialState si DEMO_CONSTANTS.webDemo when isWidget is null
+  // this is unexpected behavior. should be fixed.
+  const initialState: DemoConstant = (isWidget) ? DEMO_CONSTANTS.widgetDemo : DEMO_CONSTANTS.webDemo;
 
   if (isWidget === null) return null;
 

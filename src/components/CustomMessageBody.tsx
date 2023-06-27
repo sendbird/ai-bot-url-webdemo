@@ -24,7 +24,7 @@ const Text = styled.div`
 
 interface Props {
   message: string;
-  data: string;
+  data?: string;
 }
 
 type SourceUrl = {

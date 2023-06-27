@@ -53,7 +53,7 @@ const SentTime = styled.div`
 type Props = {
   message: UserMessage;
   bodyComponent: ReactNode;
-  messageCount: number;
+  messageCount?: number;
   zIndex?: number;
   bodyStyle?: object;
 }
