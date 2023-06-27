@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {UserMessage} from "@sendbird/chat/message";
 
 const Root = styled.div`
   display: flex;
@@ -40,7 +39,7 @@ export default function CustomMessageBody(props: Props) {
       extraStr = ` I can answer your questions based on ${anchor}. Ask away!`;
     }
   }
-  
+
   return <Root>
     <Text dangerouslySetInnerHTML={{ __html: message + '.' + extraStr }}/>
   </Root>;

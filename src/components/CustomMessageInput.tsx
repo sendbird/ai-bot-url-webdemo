@@ -94,15 +94,16 @@ export default function CustomMessageInput() {
         message,
       };
       sendUserMessage(currentGroupChannel, params)
-        .onPending((message) => {
+        .onPending(() => {
+          // @fixme: probably dont need to set this on both pending and succeeded
           // console.log('## onPending', message);
           setMessage('');
         })
-        .onSucceeded((message) => {
+        .onSucceeded(() => {
           // console.log('## onSucceeded', message);
           setMessage('');
         })
-        .onFailed((error) => {
+        .onFailed(() => {
           // console.log('## onFailed', error);
         });
     }

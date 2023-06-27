@@ -1,6 +1,6 @@
 import styled from "styled-components";
 // Ref: https://github.com/rajinwonderland/react-code-blocks#-demo
-import {CodeBlock, CopyBlock, irBlack} from "react-code-blocks";
+import {CopyBlock, irBlack} from "react-code-blocks";
 import BotMessageBottom from "./BotMessageBottom";
 import {Token, TokenType} from "../utils";
 import {UserMessage} from "@sendbird/chat/message";

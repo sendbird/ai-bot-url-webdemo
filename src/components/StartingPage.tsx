@@ -4,13 +4,8 @@ import {StartingPageAnimatorProps} from "./CustomChannelComponent";
 import {useContext, useEffect} from "react";
 import {DemoConstant} from "../const";
 import {DemoStatesContext} from "../context/DemoStatesContext";
-import backgroundImage from '../icons/starting-page-bg-image.png';
 import backgroundImageWebp from '../icons/starting-page-bg-image.webp';
 
-import backgroundImageSmall from '../icons/starting-page-background-small.png';
-
-import { ReactComponent as BackgroundImage } from '../icons/starting-page-bg-image-svg.svg';
-import {useLoadingState} from "../context/LoadingStateContext";
 import {useImageLoadingState} from "../context/ImageLoadingStateContext";
 
 
