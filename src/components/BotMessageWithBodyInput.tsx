@@ -7,7 +7,7 @@ import {StartingPageAnimatorProps} from "./CustomChannelComponent";
 import {DemoConstant} from "../const";
 import {DemoStatesContext} from "../context/DemoStatesContext";
 
-const Root = styled.div<StartingPageAnimatorProps>`
+const Root = styled.div`
   display: flex;
   align-items: flex-end;
   margin-bottom: 6px;
