@@ -5,7 +5,6 @@ import {useGetBotUser} from "../hooks/useGetBotUser";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {ChannelProvider} from "@sendbird/uikit-react/Channel/context";
 import {CustomChannelComponent} from "./CustomChannelComponent";
-import * as React from "react";
 
 type CustomChannelProps = {
   hashedKey: string;
