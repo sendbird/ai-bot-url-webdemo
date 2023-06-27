@@ -78,7 +78,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
     <StartingPage isStartingPage={allMessages.length === 1}/>
     <ChannelUI
       renderChannelHeader={() => {
-        return createGroupChannel
+        return (channel && createGroupChannel)
           ? <CustomChannelHeader
             channel={channel}
             isTyping={activeSpinnerId > -1}
