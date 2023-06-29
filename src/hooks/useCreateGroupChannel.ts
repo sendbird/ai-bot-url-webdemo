@@ -2,11 +2,11 @@ import {useCallback, useContext, useEffect, useState} from "react";
 import {GroupChannel, SendbirdGroupChat} from "@sendbird/chat/groupChannel";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import {User} from "@sendbird/chat";
-import {GroupChannelCreateParams} from "@sendbird/chat/lib/__definition";
+import {GroupChannelCreateParams} from "@sendbird/chat/groupChannel";
 import {DemoConstant} from "../const";
 import {DemoStatesContext} from "../context/DemoStatesContext";
 
-export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupChannel | null, () => void, boolean] {
+export function useCreateGroupChannel(currentUser: User|null, botUser: User): [GroupChannel | null, () => void, boolean] {
   const [channel, setChannel] = useState<GroupChannel | null>(null);
   const [creating, setCreating] = useState<boolean>(false);
   const store = useSendbirdStateContext();
@@ -35,13 +35,19 @@ export function useCreateGroupChannel(currentUser: User, botUser: User): [GroupC
           setCreating(false);
         });
     }
+  // we dont want to watchout for change of whole objects
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser?.userId, botUser?.userId]);
 
   useEffect(() => {
     // console.log('## useCreateGroupChannel: ', currentUser, botUser, sb);
     if (currentUser && botUser && sb) {
+      // fixme: dont need to move this to an outer function,
+      // it causes scope snapshot issues
+      // this case is okay because there are only setters inside createAndSetNewChannel
       createAndSetNewChannel();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser?.userId, botUser?.userId]);
 
   return [channel, createAndSetNewChannel, creating];

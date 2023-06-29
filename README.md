@@ -44,9 +44,9 @@ VITE_WIDGET_DEMO_APP_ID=
 
 ### How to deploy to netlify
 Go to branch (main for prod and preprod for preprod)
-Env variables are already set in netlify
-Prod: https://app.netlify.com/sites/sendbird-chat-ai-bot-demo/overview
-Preprod: https://app.netlify.com/sites/sendbird-chat-ai-bot-demo-preprod/overview
+Env variables are already set in netlify:
+- Prod: https://app.netlify.com/sites/sendbird-chat-ai-bot-demo/overview
+- Preprod: https://app.netlify.com/sites/sendbird-chat-ai-bot-demo-preprod/overview
 
 ## Services that use this repo
 * Prod:

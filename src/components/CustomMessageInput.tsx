@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import useSendbirdStateContext from "@sendbird/uikit-react/useSendbirdStateContext";
 import sendbirdSelectors from "@sendbird/uikit-react/sendbirdSelectors";
 import { useChannelContext } from "@sendbird/uikit-react/Channel/context";
@@ -75,13 +75,13 @@ export default function CustomMessageInput() {
     }
   }, 10);
 
-  function handleMessageChange(event) {
+  function handleMessageChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = event.target.value;
     setMessage(value);
     setShowSendButton(value.length > 0 ? true : false);
   }
 
-  function onPressEnter(event) {
+  function onPressEnter(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (!event.shiftKey && event.charCode === 13) {
       event.preventDefault();
       sendInputAsUserMessage();
@@ -94,15 +94,16 @@ export default function CustomMessageInput() {
         message,
       };
       sendUserMessage(currentGroupChannel, params)
-        .onPending((message) => {
+        .onPending(() => {
+          // @fixme: probably dont need to set this on both pending and succeeded
           // console.log('## onPending', message);
           setMessage('');
         })
-        .onSucceeded((message) => {
+        .onSucceeded(() => {
           // console.log('## onSucceeded', message);
           setMessage('');
         })
-        .onFailed((error) => {
+        .onFailed(() => {
           // console.log('## onFailed', error);
         });
     }
@@ -112,16 +113,16 @@ export default function CustomMessageInput() {
       <InnerContainer>
 
       <InputComponent
-          isActive={showSendButton}
-          onKeyPress={onPressEnter}
-          ref={inputRef}
-          value={message}
-          onChange={handleMessageChange}
-          onInput={throttledIncrement}
-          rows={1}
-          placeholder={'Enter message'}
-          autoFocus={true}
-        />
+        isActive={showSendButton}
+        onKeyPress={onPressEnter}
+        ref={inputRef}
+        value={message}
+        onChange={handleMessageChange}
+        onInput={throttledIncrement}
+        rows={1}
+        placeholder={'Enter message'}
+        autoFocus={true}
+      />
         {
           showSendButton
           && <Button>
