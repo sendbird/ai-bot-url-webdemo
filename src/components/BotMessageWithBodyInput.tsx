@@ -73,7 +73,7 @@ export default function BotMessageWithBodyInput(props: Props) {
       }}/>
     </ImageContainer>
     <BodyContainer style={bodyStyle ?? {}}>
-      <Sender isStartingPage={messageCount === 1}>{ isWebDemo ? 'Clark the Assistant' : 'Docs AI Assistant'}</Sender>
+      <Sender isStartingPage={messageCount === 1}>{ isWebDemo ? 'SmartAssistant' : 'Docs AI Assistant'}</Sender>
       {bodyComponent}
     </BodyContainer>
     <SentTime>
