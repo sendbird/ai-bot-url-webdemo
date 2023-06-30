@@ -110,13 +110,13 @@ export const INITIAL_DEMO_STATE: DemoConstant = {
     },
   ],
   createGroupChannelParams: {
-    name: 'Clark the Assistant',
+    name: 'SmartAssistant',
     coverUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ix' +
       'lib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
   },
   startingPageContent: {
-    headerOne: 'Meet Clark',
-    headerTwo: 'Your very own AI Assistant',
+    headerOne: 'SmartAssistant',
+    headerTwo: 'AI-powered knowledge chatbot',
   },
   infoBox: 'In this demo, the AI-generated responses may lack complete accuracy.',
 };

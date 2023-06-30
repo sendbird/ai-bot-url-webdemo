@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {UserMessage} from "@sendbird/chat/message";
 
 const Root = styled.div`
   display: flex;
@@ -25,23 +24,28 @@ const Text = styled.div`
 
 interface Props {
   message: string;
-  data: string;
+  data?: string;
 }
+
+type SourceUrl = {
+  source_url: string;
+};
 
 export default function CustomMessageBody(props: Props) {
   const { message, data } = props;
   let extraStr = '';
 
   if (data) {
-    const obj: object = JSON.parse(data);
+    const obj: SourceUrl = JSON.parse(data);
     const sourceUrl: string = obj['source_url'];
     if (sourceUrl) {
       const anchor = `<a href="${sourceUrl}" target="_blank">${sourceUrl}</a>`;
       extraStr = ` I can answer your questions based on ${anchor}. Ask away!`;
     }
   }
-  
+
   return <Root>
+    {/* fixme: must sanitize message before dangerouslySettingInnerHTML*/}
     <Text dangerouslySetInnerHTML={{ __html: message + '.' + extraStr }}/>
   </Root>;
 }

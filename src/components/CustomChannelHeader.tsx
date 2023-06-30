@@ -32,13 +32,6 @@ const Title = styled.div`
   color: rgba(0, 0, 0, 0.88);
 `;
 
-const TypingIndicator = styled.div`
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
-  color: rgba(0, 0, 0, 0.38);
-`;
-
 const RenewButton = styled.div`
   display: flex;
   gap: 2px;
@@ -65,18 +58,6 @@ const RenewButtonContainer = styled.div`
   width: fit-content;
   align-items: center;
   gap: 6px;
-`;
-
-const DelimiterContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Delimiter = styled.div`
-  background: #CCCCCC;
-  width: 1px;
-  height: 20px;
-  margin: 0 12px;
 `;
 
 const EmptyContainer = styled.div`

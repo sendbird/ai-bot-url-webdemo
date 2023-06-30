@@ -1,7 +1,14 @@
 import {createContext, ReactElement, useState} from "react";
 import * as React from "react";
 
-export const LoadingStateContext = createContext({ showLoading: true, setShowLoading: null });
+export const LoadingStateContext = createContext<{
+  showLoading: boolean;
+  setShowLoading: (showLoading: boolean) => void;
+}>({
+  showLoading: true,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setShowLoading: () => {},
+});
 interface LoadingStateProviderProps {
   children: ReactElement;
 }

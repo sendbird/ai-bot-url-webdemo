@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {HASHED_KEY_QUERY_PARAMETER_NAME, IS_WIDGET_PARAMETER_NAME} from "../const";
 
-export function useGetHashedKey(): [string, boolean] {
+export function useGetHashedKey(): [string, boolean|null] {
   const [hashedKey, setHashedKey] = useState<string>('');
-  const [isWidget, setIsWidget] = useState<boolean>(null);
+  const [isWidget, setIsWidget] = useState<boolean|null>(null);
 
   function setHashedKeyFromCurrentUrl(): void {
     const urlParams: URLSearchParams = new URLSearchParams(window.location.search);
@@ -12,6 +12,7 @@ export function useGetHashedKey(): [string, boolean] {
 
     // console.log('## parsedHashedKey: ', parsedHashedKey);
     setIsWidget(parsedIsWidget);
+    // @ts-expect-error parsedHashedKey -> null
     setHashedKey(parsedHashedKey);
   }
   useEffect(() => {
