@@ -165,8 +165,8 @@ export function replaceTextExtractsForWidgetDemo(input: string): string {
 }
 
 export function replaceTextExtractsForWebDemo(input: string): string {
-  const searchText = "Text extracts";
-  const replaceText = "website";
+  const searchText = "Clark";
+  const replaceText = "SmartAssistant";
   const regex = new RegExp(searchText, "gi");
   return input.replace(regex, replaceText);
 }
