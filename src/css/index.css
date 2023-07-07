@@ -1,3 +1,6 @@
+.sb-msg--bot {
+    border: 1px solid red;
+}
 .sendbird-message-content-menu__reaction-menu {
     display: none;
 }
