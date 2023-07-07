@@ -21,7 +21,7 @@ export default function CustomChannel(props: CustomChannelProps) {
   // console.log('## botUser: ', botUser);
   // console.log('## channel: ', channel);
   return channel && !creating &&
-    <ChannelProvider channelUrl={channel?.url}>
+    <ChannelProvider channelUrl={channel?.url} scrollBehavior="smooth">
       <CustomChannelComponent {...props} botUser={botUser} createGroupChannel={createGroupChannel}/>
     </ChannelProvider>;
 }
