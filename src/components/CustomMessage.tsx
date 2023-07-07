@@ -19,8 +19,9 @@ import CurrentUserMessage from "./CurrentUserMessage";
 import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
 import {StartingPageAnimatorProps} from "./CustomChannelComponent";
 import styled from "styled-components";
-import {useContext} from "react";
+import {useContext, useEffect, useRef} from "react";
 import {DemoStatesContext} from "../context/DemoStatesContext";
+import {useThrottle} from "../hooks/useThrottle";
 
 type Props = {
   message: EveryMessage;
@@ -46,6 +47,40 @@ export default function CustomMessage(props: Props) {
   const firstMessageId = firstMessage?.messageId ?? -1;
   const demoStates = useContext<DemoConstant>(DemoStatesContext);
   const isWebDemo: boolean = demoStates.name === 'webDemo';
+  const isBotMessage: boolean = (message as UserMessage).sender.userId === botUser.userId;
+  const isLastBotMessage: boolean = isBotMessage && allMessages[allMessages.length - 1].messageId === message.messageId;
+  const lastMessageRef = useRef<HTMLDivElement>(null);
+
+  const throttledScrollIntoView = useThrottle(
+    (element: HTMLDivElement) => {
+      element.scrollIntoView({ behavior: "smooth", block: "end" });
+    },
+    30
+  );
+
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const newHeight = entry.contentRect.height;
+        try {
+          console.log(`New height: ${newHeight}px`);
+          if (lastMessageRef?.current) {
+            throttledScrollIntoView(lastMessageRef.current);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+    if (isLastBotMessage && lastMessageRef?.current) {
+      const targetNode = lastMessageRef?.current;
+      // create mutation observer
+      observer.observe(targetNode);
+    }
+    return () => {
+      observer.disconnect();
+    }
+  }, [isLastBotMessage]);
 
   // Sent by current user
   if ((message as UserMessage).sender.userId !== botUser.userId) {
@@ -98,7 +133,9 @@ export default function CustomMessage(props: Props) {
     }
   });
 
-  return <div>
+  return <div
+    ref={lastMessageRef}
+  >
     <BotMessageWithBodyInput
       message={message as UserMessage}
       bodyComponent={<ParsedBotMessageBody
