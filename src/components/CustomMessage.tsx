@@ -56,7 +56,7 @@ export default function CustomMessage(props: Props) {
         const newHeight = entry.contentRect.height;
         try {
           console.log(`New height: ${newHeight}px`);
-          lastMessageRef?.current?.scrollIntoView({behavior: 'smooth'});
+          lastMessageRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
         } catch (e) {
           console.error(e);
         }
