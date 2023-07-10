@@ -3,7 +3,7 @@ import {useChannelContext} from "@sendbird/uikit-react/Channel/context";
 import {SendingStatus} from "@sendbird/chat/message";
 import {GroupChannel} from "@sendbird/chat/groupChannel";
 import {ClientUserMessage} from "SendbirdUIKitGlobal";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState, useMemo} from "react";
 import {DemoConstant, USER_ID} from "../const";
 import {isSpecialMessage, scrollUtil} from "../utils";
 import ChannelUI from "@sendbird/uikit-react/Channel/components/ChannelUI";
@@ -35,6 +35,10 @@ type CustomChannelComponentProps = {
   createGroupChannel?: () => void;
 }
 
+type MessageMeta = {
+  stream: boolean;
+}
+
 export function CustomChannelComponent(props: CustomChannelComponentProps) {
   const {botUser, createGroupChannel} = props;
   // const store = useSendbirdStateContext();
@@ -49,6 +53,16 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
   // console.log('#### allMessages: ', allMessages);
   const [activeSpinnerId, setActiveSpinnerId] = useState(-1);
   const { setShowLoading } = useLoadingState();
+
+  const messageMeta = useMemo(() => {
+    let messageMeta: MessageMeta | null;
+    try {
+      messageMeta = lastMessage?.data ? JSON.parse(lastMessage.data) : null;
+    } catch (error) {
+      messageMeta = null;
+    }
+    return messageMeta;
+  }, [lastMessage?.data]);
   /**
    * If the updated last message is sent by the current user, activate spinner for the sent message.
    * If the updated last message is pending or failed by the current user or sent by the bot, deactivate spinner.
@@ -94,6 +108,7 @@ export function CustomChannelComponent(props: CustomChannelComponentProps) {
             && allMessages.length > 2
             && lastMessage.sender.userId === botUser.userId
             && !isSpecialMessage(lastMessage.message)
+            && !messageMeta?.stream
             && <SuggestedRepliesPanel botUser={botUser}/>
           }
           <CustomMessageInput/>
