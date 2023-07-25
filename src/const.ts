@@ -13,7 +13,7 @@ export const WIDGET_DEMO_APP_ID = import.meta.env.VITE_WIDGET_DEMO_APP_ID;
 export const HASHED_KEY_QUERY_PARAMETER_NAME = 'hashed_key'; // bot userId
 export const IS_WIDGET_PARAMETER_NAME = 'is_widget';
 
-interface SuggestedReply {
+export interface SuggestedReply {
   title: string;
   text: string;
   buttonText: string;
@@ -29,10 +29,9 @@ export interface DemoConstant {
   appId: string;
   apiHost: string;
   wsHost: string;
-  suggestedMessageContent: SuggestedMessageContent[];
+  suggestedMessageContent: SuggestedMessageContent;
   createGroupChannelParams: CreateGroupChannelParams;
   startingPageContent: StartingPageContent;
-  infoBox: string;
   botNickName: string;
   replacementTextList: string[][];
   messageBottomContent: {
@@ -157,10 +156,34 @@ export const LOCAL_MESSAGE_CUSTOM_TYPE = {
   confirmation: 'confirmation',
 };
 
-export interface StartingPageContent {
+
+interface StartingPageContent {
+  headerContent: StartingPageHeaderContent;
+  messageContent: StartingMessageContent;
+  logoContent: StringPageLogoContent;
+  backGroundContent: BackGroundContent;
+}
+
+interface BackGroundContent {
+  Component: React.FC;
+  height: string;
+}
+
+interface StringPageLogoContent {
+  Component: React.FC;
+  width: string;
+}
+
+interface StartingPageHeaderContent {
   headerOne: string;
   headerTwo: string;
 }
+
+interface StartingMessageContent {
+  header: string;
+  body: string;
+}
+
 
 export const SPECIAL_MESSAGE_LIST = [
   'How can I assist you',
