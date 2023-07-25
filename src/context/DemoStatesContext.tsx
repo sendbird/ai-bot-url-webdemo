@@ -1,5 +1,5 @@
 import {createContext} from "react";
-import {DemoConstant, INITIAL_DEMO_STATE} from "../const";
+import {DemoConstant, DEMO_CONSTANTS} from "../const";
 
-const initialState: DemoConstant = INITIAL_DEMO_STATE;
+const initialState: DemoConstant = DEMO_CONSTANTS.webDemo;
 export const DemoStatesContext = createContext<DemoConstant>(initialState);

@@ -1,15 +1,8 @@
-import {
-  NICKNAME,
-  USER_ID,
-  DEMO_CONSTANTS, DemoConstant
-} from "./const";
-import SBProvider from "@sendbird/uikit-react/SendbirdProvider";
-import CustomChannel from "./components/CustomChannel";
+import { DEMO_CONSTANTS, DemoConstant } from "./const";
 import {useGetHashedKey} from "./hooks/useGetHashedKey";
-import LoadingScreen from "./components/LoadingScreen";
-import {DemoStatesContext} from "./context/DemoStatesContext";
-import {LoadingStateProvider} from "./context/LoadingStateContext";
-import {ImageLoadingStateProvider} from "./context/ImageLoadingStateContext";
+
+import { Chat as ChatAiWidget } from "@sendbird/chat-ai-widget";
+import "@sendbird/chat-ai-widget/dist/style.css";
 
 function App() {
   const [hashedKey, isWidget]: [string, boolean|null] = useGetHashedKey(); // show loading if not there.
@@ -21,25 +14,21 @@ function App() {
 
   if (isWidget === null) return null;
 
-  return <DemoStatesContext.Provider value={initialState}>
-    <LoadingStateProvider>
-      <ImageLoadingStateProvider>
-        <SBProvider
-          appId={initialState.appId}
-          userId={USER_ID}
-          nickname={NICKNAME}
-          customApiHost={initialState.apiHost}
-          customWebSocketHost={initialState.wsHost}
-        >
-          <>
-            <LoadingScreen hashedKey={hashedKey}/>
-            <CustomChannel hashedKey={hashedKey}/>
-            <div id={'sb_chat_root_for_z_index'}/>
-          </>
-        </SBProvider>
-      </ImageLoadingStateProvider>
-    </LoadingStateProvider>
-  </DemoStatesContext.Provider>;
+  return (
+    <ChatAiWidget
+      applicationId={initialState.appId}
+      botId={hashedKey}
+      botNickName={initialState.botNickName}
+      suggestedMessageContent={initialState.suggestedMessageContent}
+      createGroupChannelParams={initialState.createGroupChannelParams}
+      startingPageContent={initialState.startingPageContent}
+      replacementTextList={initialState.replacementTextList}
+      messageBottomContent={initialState.messageBottomContent}
+      customBetaMarkText={isWidget ? 'BETA' : 'DEMO'}
+      instantConnect={true}
+      showChatBottom={false}
+    />
+  );
 }
 
 export default App;
