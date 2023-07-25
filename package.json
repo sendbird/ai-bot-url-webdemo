@@ -11,7 +11,7 @@
     "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
-    "@sendbird/chat-ai-widget": "^1.0.3-rc-3",
+    "@sendbird/chat-ai-widget": "^1.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vite-plugin-svgr": "^3.2.0"
