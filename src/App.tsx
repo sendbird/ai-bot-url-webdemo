@@ -26,7 +26,6 @@ function App() {
       messageBottomContent={initialState.messageBottomContent}
       customBetaMarkText={isWidget ? 'BETA' : 'DEMO'}
       instantConnect={true}
-      showChatBottom={false}
     />
   );
 }
