@@ -27,6 +27,7 @@ function App() {
       messageBottomContent={initialState.messageBottomContent}
       customBetaMarkText={isWidget ? 'BETA' : 'DEMO'}
       instantConnect={true}
+      customRefreshComponent={initialState.customRefreshComponent}
     />
   );
 }

@@ -24,6 +24,15 @@ interface SuggestedMessageContent {
   replyContents: SuggestedReply[];
   messageFilterList: string[];
 }
+
+interface CustomRefreshComponent {
+  icon: React.FC;
+  width: string;
+  height: string;
+  onClick: () => void;
+  style: React.CSSProperties;
+}
+
 export interface DemoConstant {
   name: string;
   appId: string;
@@ -34,6 +43,7 @@ export interface DemoConstant {
   startingPageContent: StartingPageContent;
   botNickName: string;
   replacementTextList: string[][];
+  customRefreshComponent?: Partial<CustomRefreshComponent>;
   messageBottomContent: {
     text: string;
     infoIconText: string;
@@ -110,6 +120,12 @@ export const DEMO_CONSTANTS = {
       },
     },
     replacementTextList: [['Clark', 'SmartAssistant']],
+    customRefreshComponent: {
+      style: {
+        position: 'relative' as React.CSSProperties['position'],
+        right: 0,
+      },
+    },
     ...commonConstants,
   },
   widgetDemo: {
@@ -151,12 +167,6 @@ export interface CreateGroupChannelParams {
   coverUrl: string;
 }
 
-export const LOCAL_MESSAGE_CUSTOM_TYPE = {
-  linkSuggestion: 'linkSuggestion',
-  confirmation: 'confirmation',
-};
-
-
 interface StartingPageContent {
   headerContent: StartingPageHeaderContent;
   messageContent: StartingMessageContent;
@@ -184,17 +194,3 @@ interface StartingMessageContent {
   body: string;
 }
 
-
-export const SPECIAL_MESSAGE_LIST = [
-  'How can I assist you',
-  'How can I help you',
-  'Can you clarify',
-  'That\'s not a question I can answer unfortunately',
-  'Try again',
-  'I couldn\'t find the answer to your question',
-  'Can you try again?',
-  'I\'m sorry, I couldn\'t understand your question',
-  'That\'s not a valid question',
-  'Is there a specific question you have',
-  'I\'m here to help you with any questions you have',
-];
